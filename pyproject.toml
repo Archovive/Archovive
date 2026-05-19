@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "archovive"
+version = "1.0.0"
+description = "Archovive v1 — Sovereign Architecture Truth System (public product)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "archovive-core>=4.0.0",
+]
+
+[project.scripts]
+archovive = "archovive_os.cli.entrypoints:main_archovive"
+archovive-cli = "archovive_os.cli.entrypoints:main_cli"
+archovive-attestation = "archovive_os.cli.entrypoints:main_attestation"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["archovive_os*"]

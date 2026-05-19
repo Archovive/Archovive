@@ -1,0 +1,25 @@
+# Sovereign kits & attestations (never commit)
+sovereign-kit/
+demo-kit/
+attest.json
+attest.md
+attest.pdf
+BUNDLE_MANIFEST.json
+health_certificate_v2.json
+spec_v4.json
+ledger.jsonl
+zkap_attestation.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Secrets
+*.pem
+*.key
+.env
+.env.*

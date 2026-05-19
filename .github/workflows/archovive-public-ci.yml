@@ -1,0 +1,133 @@
+name: archovive-public-ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  boundary-check:
+    name: boundary-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare Repo A tree (monorepo split)
+        if: hashFiles('scripts/split_archovive_repos.sh') != ''
+        run: |
+          bash scripts/split_archovive_repos.sh "${{ runner.temp }}/archovive-public"
+          echo "REPO_A_ROOT=${{ runner.temp }}/archovive-public" >> "$GITHUB_ENV"
+
+      - name: Use checkout as Repo A (public remote)
+        if: hashFiles('scripts/split_archovive_repos.sh') == ''
+        run: echo "REPO_A_ROOT=${{ github.workspace }}" >> "$GITHUB_ENV"
+
+      - name: cleanup_repo_a.sh
+        working-directory: ${{ env.REPO_A_ROOT }}
+        run: bash scripts/cleanup_repo_a.sh .
+
+      - name: verify_repo_a_boundary.sh
+        working-directory: ${{ env.REPO_A_ROOT }}
+        run: bash scripts/verify_repo_a_boundary.sh .
+
+  product-smoke:
+    name: product-smoke
+    runs-on: ubuntu-latest
+    needs: [boundary-check]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Prepare Repo A + install (monorepo)
+        if: hashFiles('scripts/split_archovive_repos.sh') != ''
+        run: |
+          bash scripts/split_archovive_repos.sh "${{ runner.temp }}/archovive-public"
+          echo "REPO_A_ROOT=${{ runner.temp }}/archovive-public" >> "$GITHUB_ENV"
+          pip install -e "archovive_engine[dev]"
+          pip install -e archovive_core --no-deps
+          pip install "${{ runner.temp }}/archovive-public"
+
+      - name: Install archovive-core (private registry)
+        if: hashFiles('scripts/split_archovive_repos.sh') == ''
+        env:
+          ARCHOVIVE_CORE_INDEX_URL: ${{ secrets.ARCHOVIVE_CORE_INDEX_URL }}
+        run: |
+          if [[ -z "${ARCHOVIVE_CORE_INDEX_URL:-}" ]]; then
+            echo "::error::Set repository secret ARCHOVIVE_CORE_INDEX_URL for public CI product-smoke."
+            exit 1
+          fi
+          pip install "archovive-core>=4.0.0" --extra-index-url "$ARCHOVIVE_CORE_INDEX_URL"
+          pip install .
+          echo "REPO_A_ROOT=${{ github.workspace }}" >> "$GITHUB_ENV"
+
+      - name: archovive-cli bootstrap
+        run: archovive-cli bootstrap --json | python -c "import json,sys; d=json.load(sys.stdin); assert d['status']=='PASS', d"
+
+      - name: archovive-cli simulate
+        run: archovive-cli simulate --json | python -c "import json,sys; d=json.load(sys.stdin); assert d['status']=='PASS' and d.get('replay_match'), d"
+
+      - name: archovive-cli analyze + attestation export
+        run: |
+          # synthetic target — public repo root is not an architecture compile target
+          archovive-cli analyze synthetic://public-ci-smoke --out attest.json --no-bootstrap || true
+          test -s attest.json
+          archovive-attestation export attest.json --md-only --json \
+            | python -c "import json,sys; d=json.load(sys.stdin); assert d['status']=='PASS', d"
+
+  pdf-gate:
+    name: pdf-gate
+    runs-on: ubuntu-latest
+    needs: [product-smoke]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install pandoc + TeX (minimal)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra
+
+      - name: Prepare Repo A + install (monorepo)
+        if: hashFiles('scripts/split_archovive_repos.sh') != ''
+        run: |
+          bash scripts/split_archovive_repos.sh "${{ runner.temp }}/archovive-public"
+          pip install -e "archovive_engine[dev]"
+          pip install -e archovive_core --no-deps
+          pip install "${{ runner.temp }}/archovive-public"
+
+      - name: Install archovive-core (private registry)
+        if: hashFiles('scripts/split_archovive_repos.sh') == ''
+        env:
+          ARCHOVIVE_CORE_INDEX_URL: ${{ secrets.ARCHOVIVE_CORE_INDEX_URL }}
+        run: |
+          pip install "archovive-core>=4.0.0" --extra-index-url "$ARCHOVIVE_CORE_INDEX_URL"
+          pip install .
+
+      - name: PDF export gate
+        run: |
+          archovive-cli analyze synthetic://public-ci-smoke --out attest.json --no-bootstrap || true
+          test -s attest.json
+          archovive-attestation export attest.json --pdf --json \
+            | python -c "import json,sys; d=json.load(sys.stdin); assert d['status']=='PASS', d"
+          test -s attest.pdf
+          test "$(wc -c < attest.pdf)" -gt 0
+          python -c "import hashlib; h=hashlib.sha256(open('attest.pdf','rb').read()).hexdigest(); print(f'attest.pdf sha256: {h}')"
