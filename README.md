@@ -1,4 +1,4 @@
-# Archovive CLI (Open Core)
+# Archovive (Open Core CLI)
 
 Public surface for **Archovive v3** — policy packs, normative specs, fleet helper, and documentation.
 
@@ -19,8 +19,8 @@ The **analysis engine** (hypergraph, regulatory evaluation, Brain/Vault, attesta
 
 ```bash
 # 1) Clone this repo
-git clone https://github.com/archovive/archovive-cli.git
-cd archovive-cli
+git clone https://github.com/archovive/archovive.git
+cd archovive
 
 # 2) Obtain the licensed engine bundle (private / commercial distribution)
 #    Extract archovive_product_bundle_v3.tar.gz somewhere, then:
@@ -47,15 +47,14 @@ See `docs/COMPILER_SPEC_V1.md` and `MANIFEST.json`.
 
 | Repository | Visibility | Role |
 |------------|------------|------|
-| [**archovive-cli**](https://github.com/archovive/archovive-cli) | **Public** | This repo — policy packs, specs, CLI wrappers |
+| [**archovive**](https://github.com/archovive/archovive) | **Public** | **This repo** — Open Core CLI (policy packs, specs, wrappers) |
 | [**archovive-core**](https://github.com/archovive/archovive-core) | **Private** | Deterministic engine (hypergraph, regulatory, attestation) |
-| [**archovive**](https://github.com/archovive/archovive) | Public (legacy) | Historical product surface / CI badges |
 
 Licensed customers receive the full product bundle tarball; `ARCHOVIVE_ENGINE_ROOT` points at that install or a private `archovive-core` checkout.
 
 ## License
 
-- **This repo (`archovive-cli`):** MIT (`LICENSE`) — policy packs, specs, CLI wrappers, docs.
+- **This repo (`archovive`):** MIT (`LICENSE`) — policy packs, specs, CLI wrappers, docs.
 - **Engine (`archovive-core`):** Proprietary — private org repo, not in this tree.
 
 ## What is NOT in this repo (by design)
