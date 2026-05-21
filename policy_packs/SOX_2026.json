@@ -1,0 +1,30 @@
+{
+  "schema_version": "policy_pack_v1",
+  "pack_id": "SOX_2026",
+  "framework": "SOX",
+  "description": "SOX ITGC \u2014 financial-system architecture thresholds",
+  "rules": [
+    {
+      "rule_id": "sox_coupling_max",
+      "control_id": "SOX-ITGC-25.2-coupling",
+      "kind": "threshold",
+      "metric": "coupling_ratio",
+      "max": 8.0
+    },
+    {
+      "rule_id": "sox_instability_max",
+      "control_id": "SOX-ITGC-25.3-instability",
+      "kind": "threshold",
+      "metric": "instability",
+      "max": 0.85
+    },
+    {
+      "rule_id": "sox_crossings_max",
+      "control_id": "SOX-ITGC-25.4-boundary",
+      "kind": "threshold",
+      "metric": "team_boundary_crossings",
+      "max": 500
+    }
+  ],
+  "policy_version": "2026.1.4"
+}

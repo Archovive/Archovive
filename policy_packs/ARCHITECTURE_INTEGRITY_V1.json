@@ -1,0 +1,40 @@
+{
+  "schema_version": "policy_pack_v1",
+  "pack_id": "ARCHITECTURE_INTEGRITY_V1",
+  "framework": "ARCHITECTURE",
+  "description": "Auditor-facing integrity: stale Python modules without companion tests (12-month anchor)",
+  "rules": [
+    {
+      "rule_id": "stale_untested_py_module",
+      "control_id": "ARCH-12.4-untested-stale-module",
+      "kind": "dsl",
+      "dsl": {
+        "select": {
+          "path_suffix": ".py",
+          "entity_type": "file"
+        },
+        "where": {
+          "not": {
+            "exists": {
+              "companion_glob": "**/test_*.py"
+            }
+          }
+        },
+        "assert": {
+          "threshold": {
+            "metric": "age_days",
+            "max": 365
+          }
+        }
+      }
+    },
+    {
+      "rule_id": "global_coupling_floor",
+      "control_id": "ARCH-25.2-coupling-floor",
+      "kind": "threshold",
+      "metric": "coupling_ratio",
+      "max": 20.0
+    }
+  ],
+  "policy_version": "2026.1.4"
+}

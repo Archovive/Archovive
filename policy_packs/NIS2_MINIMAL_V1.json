@@ -1,0 +1,33 @@
+{
+  "schema_version": "policy_pack_v1",
+  "pack_id": "NIS2_MINIMAL_V1",
+  "framework": "NIS2",
+  "description": "M2 minimal NIS2 \u2014 boundary crossings and instability ceiling",
+  "rules": [
+    {
+      "rule_id": "NIS2-BC-001",
+      "control_id": "NIS2-boundary-crossings",
+      "kind": "dsl",
+      "severity": "high",
+      "dsl": {
+        "assert": {
+          "boundary_crosses": {
+            "max": 50
+          }
+        }
+      }
+    },
+    {
+      "rule_id": "NIS2-INST-002",
+      "control_id": "NIS2-instability-ceiling",
+      "kind": "dsl",
+      "severity": "medium",
+      "dsl": {
+        "rule_type": "instability_max",
+        "max_instability": 0.35,
+        "path_contains": "api/"
+      }
+    }
+  ],
+  "policy_version": "2026.1.4"
+}

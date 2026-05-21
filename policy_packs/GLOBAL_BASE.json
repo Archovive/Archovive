@@ -1,0 +1,30 @@
+{
+  "schema_version": "policy_pack_v1",
+  "pack_id": "GLOBAL_BASE",
+  "framework": "GLOBAL",
+  "description": "Global architecture floor \u2014 coupling, instability, boundary crossings",
+  "rules": [
+    {
+      "rule_id": "global_coupling_max",
+      "control_id": "GLOBAL-ICT-25.2-coupling",
+      "kind": "threshold",
+      "metric": "coupling_ratio",
+      "max": 15.0
+    },
+    {
+      "rule_id": "global_instability_max",
+      "control_id": "GLOBAL-ICT-25.3-instability",
+      "kind": "threshold",
+      "metric": "instability",
+      "max": 0.98
+    },
+    {
+      "rule_id": "global_crossings_max",
+      "control_id": "GLOBAL-ICT-25.4-boundary",
+      "kind": "threshold",
+      "metric": "team_boundary_crossings",
+      "max": 2000
+    }
+  ],
+  "policy_version": "2026.1.4"
+}

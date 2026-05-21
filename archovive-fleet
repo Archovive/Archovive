@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Fleet helper — requires licensed engine at ARCHOVIVE_ENGINE_ROOT.
+set -euo pipefail
+CLI_ROOT="$(cd "$(dirname "$0")" && pwd)"
+ENGINE_ROOT="${ARCHOVIVE_ENGINE_ROOT:-}"
+LIST="${1:-repos.txt}"
+FLEET_ROOT="${ARCHOVIVE_FLEET_OUT:-${CLI_ROOT}/fleet_runs}"
+
+if [[ -z "${ENGINE_ROOT}" || ! -x "${ENGINE_ROOT}/bin/archovive" ]]; then
+  echo "archovive-fleet: set ARCHOVIVE_ENGINE_ROOT to licensed product bundle" >&2
+  exit 1
+fi
+
+mkdir -p "${FLEET_ROOT}"
+[[ -f "${LIST}" ]] || { echo "usage: ./archovive-fleet <repos.txt>" >&2; exit 2; }
+
+SUMMARY="${FLEET_ROOT}/fleet_summary.json"
+echo '{"repos":[]}' > "${SUMMARY}.tmp"
+while IFS= read -r repo || [[ -n "${repo}" ]]; do
+  [[ -z "${repo}" || "${repo}" =~ ^# ]] && continue
+  name="$(basename "$(cd "${repo}" && pwd)")"
+  echo "==> ${name}"
+  out="${FLEET_ROOT}/${name}"
+  mkdir -p "${out}"
+  ec=0
+  ( cd "${repo}" && ARCHOVIVE_ENGINE_ROOT="${ENGINE_ROOT}" "${ENGINE_ROOT}/bin/archovive" run ) || ec=$?
+  for f in ARCHOVIVE_OUTPUT.md repro.json drift_matrix.json attestation.json compliance_report.json; do
+    [[ -f "${repo}/${f}" ]] && cp "${repo}/${f}" "${out}/" 2>/dev/null || true
+  done
+  python3 - <<PY "${SUMMARY}.tmp" "${name}" "${ec}" "${repo}"
+import json, sys
+path, name, ec, repo = sys.argv[1:5]
+doc = json.load(open(path))
+doc["repos"].append({"name": name, "path": repo, "exit_code": int(ec)})
+json.dump(doc, open(path, "w"), indent=2)
+PY
+done < "${LIST}"
+mv "${SUMMARY}.tmp" "${SUMMARY}"
+echo "fleet summary: ${SUMMARY}"

@@ -1,0 +1,7 @@
+{
+  "product_version": "3.0.0",
+  "bundle_version": "v3",
+  "bundle_hash": "41507088c1eeaf7a7120f51a049a3703ecab85feee9e815e8395a84e943d5e84",
+  "build_integrity_hash": "5d8b501dc129fdd0aa72c683bc3764b60cf83ce8fad20416b721c36c6471067f",
+  "distribution": "open-core-cli-only"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "policy_pack_v1",
+  "pack_id": "DORA_2026",
+  "framework": "DORA",
+  "description": "DORA ICT risk \u2014 stricter coupling and boundary controls",
+  "rules": [
+    {
+      "rule_id": "dora_coupling_max",
+      "control_id": "DORA-ICT-25.2-coupling",
+      "kind": "threshold",
+      "metric": "coupling_ratio",
+      "max": 6.0
+    },
+    {
+      "rule_id": "dora_instability_max",
+      "control_id": "DORA-ICT-25.3-instability",
+      "kind": "threshold",
+      "metric": "instability",
+      "max": 0.75
+    },
+    {
+      "rule_id": "dora_crossings_max",
+      "control_id": "DORA-ICT-25.4-boundary",
+      "kind": "threshold",
+      "metric": "team_boundary_crossings",
+      "max": 300
+    }
+  ],
+  "policy_version": "2026.1.4"
+}

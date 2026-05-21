@@ -1,0 +1,65 @@
+{
+  "schema_version": "policy_pack_v1",
+  "pack_id": "DORA_MINIMAL_V1",
+  "framework": "DORA",
+  "description": "M2 minimal DORA \u2014 critical path isolation, layer integrity, fanout, sensitive reachability",
+  "rules": [
+    {
+      "rule_id": "DORA-CP-001",
+      "control_id": "DORA-ICT-critical-path-isolation",
+      "kind": "dsl",
+      "severity": "critical",
+      "dsl": {
+        "rule_type": "forall_not_reachable",
+        "source_select": {
+          "path_contains": "critical"
+        },
+        "target_select": {
+          "path_contains": "external"
+        },
+        "max_hops": 24
+      }
+    },
+    {
+      "rule_id": "DORA-LB-002",
+      "control_id": "DORA-ICT-layer-boundary",
+      "kind": "dsl",
+      "severity": "high",
+      "dsl": {
+        "rule_type": "layer_crosses",
+        "semantic_layer": "domain",
+        "allowed_layers": [
+          "domain",
+          "infrastructure"
+        ]
+      }
+    },
+    {
+      "rule_id": "DORA-UF-003",
+      "control_id": "DORA-ICT-uncontrolled-fanout",
+      "kind": "dsl",
+      "severity": "medium",
+      "dsl": {
+        "rule_type": "fanout_max",
+        "max_fanout": 12
+      }
+    },
+    {
+      "rule_id": "DORA-SR-004",
+      "control_id": "DORA-ICT-sensitive-reachability",
+      "kind": "dsl",
+      "severity": "critical",
+      "dsl": {
+        "rule_type": "forall_not_reachable",
+        "source_select": {
+          "path_contains": "public"
+        },
+        "target_select": {
+          "path_contains": "sensitive"
+        },
+        "max_hops": 24
+      }
+    }
+  ],
+  "policy_version": "2026.1.4"
+}

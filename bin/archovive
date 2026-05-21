@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Archovive Open-Core CLI — delegates to licensed engine bundle (no engine in this repo).
+set -euo pipefail
+CLI_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ENGINE_ROOT="${ARCHOVIVE_ENGINE_ROOT:-}"
+
+if [[ -z "${ENGINE_ROOT}" || ! -x "${ENGINE_ROOT}/bin/archovive" ]]; then
+  echo "archovive: Open-Core CLI only — analysis engine not installed." >&2
+  echo "  Set ARCHOVIVE_ENGINE_ROOT to your licensed Archovive product bundle path," >&2
+  echo "  or contact your vendor for archovive_product_bundle_v3." >&2
+  echo "  This repository ships: policy packs, specs, docs, fleet helper." >&2
+  exit 1
+fi
+
+export ARCHOVIVE_REPO="${ENGINE_ROOT}"
+exec "${ENGINE_ROOT}/bin/archovive" "$@"

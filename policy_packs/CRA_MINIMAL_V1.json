@@ -1,0 +1,53 @@
+{
+  "schema_version": "policy_pack_v1",
+  "pack_id": "CRA_MINIMAL_V1",
+  "policy_version": "2026.1.4",
+  "framework": "CRA",
+  "description": "CRA minimal + Annex IV disclosure and SBOM-reachability stubs",
+  "rules": [
+    {
+      "rule_id": "CRA-SR-001",
+      "control_id": "CRA-security-reachability",
+      "kind": "dsl",
+      "severity": "critical",
+      "dsl": {
+        "rule_type": "forall_not_reachable",
+        "source_select": { "path_contains": "public" },
+        "target_select": { "path_contains": "security" },
+        "max_hops": 24
+      }
+    },
+    {
+      "rule_id": "CRA-FO-002",
+      "control_id": "CRA-fanout-limit",
+      "kind": "dsl",
+      "severity": "medium",
+      "dsl": {
+        "rule_type": "fanout_max",
+        "max_fanout": 10
+      }
+    },
+    {
+      "rule_id": "CRA-ANNEX-IV-VULN-001",
+      "control_id": "CRA-ANNEX-IV-vulnerability-disclosure",
+      "kind": "dsl",
+      "severity": "high",
+      "dsl": {
+        "rule_type": "forall_not_reachable",
+        "source_select": { "path_contains": "vuln" },
+        "target_select": { "path_contains": "security" },
+        "max_hops": 12
+      }
+    },
+    {
+      "rule_id": "CRA-ANNEX-IV-SBOM-001",
+      "control_id": "CRA-ANNEX-IV-sbom-reachability",
+      "kind": "dsl",
+      "severity": "medium",
+      "dsl": {
+        "rule_type": "fanout_max",
+        "max_fanout": 15
+      }
+    }
+  ]
+}
