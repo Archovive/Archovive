@@ -19,7 +19,7 @@ The **analysis engine** (hypergraph, regulatory evaluation, Brain/Vault, attesta
 
 ```bash
 # 1) Clone this repo
-git clone https://github.com/YOURORG/archovive-cli.git
+git clone https://github.com/archovive/archovive-cli.git
 cd archovive-cli
 
 # 2) Obtain the licensed engine bundle (private / commercial distribution)
@@ -43,10 +43,20 @@ cd examples/sample_project
 
 See `docs/COMPILER_SPEC_V1.md` and `MANIFEST.json`.
 
+## GitHub layout (`archovive` org)
+
+| Repository | Visibility | Role |
+|------------|------------|------|
+| [**archovive-cli**](https://github.com/archovive/archovive-cli) | **Public** | This repo — policy packs, specs, CLI wrappers |
+| [**archovive-core**](https://github.com/archovive/archovive-core) | **Private** | Deterministic engine (hypergraph, regulatory, attestation) |
+| [**archovive**](https://github.com/archovive/archovive) | Public (legacy) | Historical product surface / CI badges |
+
+Licensed customers receive the full product bundle tarball; `ARCHOVIVE_ENGINE_ROOT` points at that install or a private `archovive-core` checkout.
+
 ## License
 
-- **This repo:** MIT (`LICENSE`) — policy packs, specs, CLI wrappers, docs.
-- **Engine:** Proprietary — contact vendor for `archovive_product_bundle_v3`.
+- **This repo (`archovive-cli`):** MIT (`LICENSE`) — policy packs, specs, CLI wrappers, docs.
+- **Engine (`archovive-core`):** Proprietary — private org repo, not in this tree.
 
 ## What is NOT in this repo (by design)
 
