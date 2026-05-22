@@ -1,66 +1,83 @@
-# Archovive (Open Core CLI)
+# Archovive — Deterministic Architecture Governance (Open Core)
 
-Public surface for **Archovive v3** — policy packs, normative specs, fleet helper, and documentation.
+Public **CLI surface**, **policy packs**, **normative specs**, and **documentation**.
 
-The **analysis engine** (hypergraph, regulatory evaluation, Brain/Vault, attestation pipeline) is **not** in this repository. It ships as a separate licensed product bundle.
+The deterministic **engine**, Evidence Camera runtime, SBOM pipeline, verify chain, and **`archovive_product_bundle_v4.zip`** are built from **[Archovive-core](https://github.com/Archovive/Archovive-core)** (private). This repository is **MIT open-core** — not the engine.
 
-## What is included (MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+---
+
+## Two ways to use the CLI
+
+| Mode | When |
+|------|------|
+| **With product bundle** | Set `ARCHOVIVE_ENGINE_ROOT` to extracted `archovive_product_bundle_v4/` → `bin/archovive` delegates to the real engine |
+| **Docs-only (this repo)** | `pip install -e .` or `python3 -m archovive.cli.cli_main --help` — help, cameras docs, `doctor`; `run` points to bundle |
+
+```bash
+export ARCHOVIVE_ENGINE_ROOT=/path/to/archovive_product_bundle_v4
+bin/archovive run          # full engine
+```
+
+Without the bundle:
+
+```bash
+pip install -e .
+archovive --help
+archovive doctor
+```
+
+---
+
+## What this repository contains (MIT)
 
 | Path | Purpose |
 |------|---------|
-| `bin/archovive` | CLI wrapper (delegates to licensed engine) |
-| `archovive-fleet` | Multi-repo orchestration helper |
-| `policy_packs/` | DORA / NIS2 / CRA / SOX JSON packs + `.sig` |
-| `docs/` | Compiler spec, annotation schema, example output, positioning |
-| `tools/render_dashboard.py` | Offline HTML dashboard from report JSON |
-| `examples/sample_project/` | Minimal Git repo for trying the CLI |
+| `archovive/cli/` | v4 CLI router (help + stubs) |
+| `bin/archovive` | Shell wrapper → bundle or public router |
+| `policy_packs/` | DORA / NIS2 / CRA / SOX JSON + signatures |
+| `docs/` | INSTALL, OUTPUTS, CAMERAS, MCP, SBOM, DRIFT, compiler spec |
+| `archovive-fleet` | Multi-repo helper |
+| `tools/render_dashboard.py` | Offline HTML from report JSON |
+| `examples/sample_project/` | Minimal sample repo |
 
-## Quick start
+## What is **not** here
 
-```bash
-# 1) Clone this repo
-git clone https://github.com/archovive/archovive.git
-cd archovive
+Engine, IR compiler, gov slice, vault, evidence implementation, benchmarks, bundle build scripts → **Archovive-core**.
 
-# 2) Obtain the licensed engine bundle (private / commercial distribution)
-#    Extract archovive_product_bundle_v3.tar.gz somewhere, then:
-export ARCHOVIVE_ENGINE_ROOT=/path/to/archovive_product_bundle_v3
+---
 
-# 3) Install engine + validate open-core artifacts
-./install_archovive.sh
+## Product bundle (pilot)
 
-# 4) Run analysis on the sample project
-cd examples/sample_project
-../../bin/archovive run
+```text
+archovive_product_bundle_v4.zip  →  archovive_product_bundle_v4/
 ```
 
-## Commands (via licensed engine)
+See [docs/INSTALL.md](docs/INSTALL.md). Optional `benchmarks/` JSON evidence inside the ZIP.
 
-- `archovive run` — full M1–M5 pipeline (tier-dependent)
-- `archovive doctor` — environment check
-- `archovive verify` — attestation verification
-- `archovive sbom` / `archovive diff` / `archovive init --wizard`
+---
 
-See `docs/COMPILER_SPEC_V1.md` and `MANIFEST.json`.
+## Documentation
 
-## GitHub layout (`archovive` org)
+| Doc | Topic |
+|-----|--------|
+| [docs/INSTALL.md](docs/INSTALL.md) | Bundle install |
+| [docs/OUTPUTS.md](docs/OUTPUTS.md) | Artefacts & license tiers |
+| [docs/CAMERAS.md](docs/CAMERAS.md) | Operator / Machine / Evidence |
+| [docs/MCP.md](docs/MCP.md) | MCP (in bundle) |
+| [docs/SBOM.md](docs/SBOM.md) | `file_hashes` |
+| [docs/DRIFT.md](docs/DRIFT.md) | `unmeasured` / `null` |
+| [docs/COMPILER_SPEC_V1.md](docs/COMPILER_SPEC_V1.md) | Normative spec |
 
-| Repository | Visibility | Role |
-|------------|------------|------|
-| [**archovive**](https://github.com/archovive/archovive) | **Public** | **This repo** — Open Core CLI (policy packs, specs, wrappers) |
-| [**archovive-core**](https://github.com/archovive/archovive-core) | **Private** | Deterministic engine (hypergraph, regulatory, attestation) |
+---
 
-Licensed customers receive the full product bundle tarball; `ARCHOVIVE_ENGINE_ROOT` points at that install or a private `archovive-core` checkout.
+## Open-core model
 
-## License
+```text
+Archovive (public)        →  CLI + policy packs + docs
+Archovive-core (private)  →  Engine + OS + product bundle + benchmarks
+```
 
-- **This repo (`archovive`):** MIT (`LICENSE`) — policy packs, specs, CLI wrappers, docs.
-- **Engine (`archovive-core`):** Proprietary — private org repo, not in this tree.
-
-## What is NOT in this repo (by design)
-
-- `archovive_os/` engine source, hypergraph, regulatory engine, Brain/Vault
-- `power_test/`, golden graph truth, enterprise slices
-- Internal build pipelines
-
-That IP remains in the private monorepo and licensed tarball only.
+[SECURITY.md](SECURITY.md)

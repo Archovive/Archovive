@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
-# Archovive Open-Core CLI — delegates to licensed engine bundle (no engine in this repo).
+# Archovive Open-Core CLI — delegates to product bundle or shows v4 help/stubs.
 set -euo pipefail
 CLI_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-ENGINE_ROOT="${ARCHOVIVE_ENGINE_ROOT:-}"
+ENGINE_ROOT="${ARCHOVIVE_ENGINE_ROOT:-${ARCHOVIVE_REPO:-}}"
 
-if [[ -z "${ENGINE_ROOT}" || ! -x "${ENGINE_ROOT}/bin/archovive" ]]; then
-  echo "archovive: Open-Core CLI only — analysis engine not installed." >&2
-  echo "  Set ARCHOVIVE_ENGINE_ROOT to your licensed Archovive product bundle path," >&2
-  echo "  or contact your vendor for archovive_product_bundle_v3." >&2
-  echo "  This repository ships: policy packs, specs, docs, fleet helper." >&2
-  exit 1
+if [[ -n "${ENGINE_ROOT}" && -x "${ENGINE_ROOT}/bin/archovive" ]]; then
+  export ARCHOVIVE_REPO="${ENGINE_ROOT}"
+  exec "${ENGINE_ROOT}/bin/archovive" "$@"
 fi
 
-export ARCHOVIVE_REPO="${ENGINE_ROOT}"
-exec "${ENGINE_ROOT}/bin/archovive" "$@"
+# No engine: run public Python router (help, doctor, bundle pointer)
+export PYTHONPATH="${CLI_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
+if command -v python3 >/dev/null 2>&1; then
+  exec python3 -m archovive.cli.cli_main "$@"
+fi
+
+echo "archovive: Python 3 required for public CLI" >&2
+exit 1

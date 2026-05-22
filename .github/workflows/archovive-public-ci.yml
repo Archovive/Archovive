@@ -1,0 +1,41 @@
+name: archovive-public-ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  boundary-and-cli:
+    name: boundary-and-cli
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install public package
+        run: pip install -e .
+
+      - name: Public repo boundary
+        run: bash scripts/verify_public_boundary.sh
+
+      - name: CLI help smoke
+        run: |
+          archovive --help
+          archovive --version
+          archovive doctor
+          archovive evidence --help
+          archovive camera operator --help
+          archovive mcp --help
+
+      - name: Engine commands show bundle message
+        run: |
+          archovive run 2>&1 | grep -q "product bundle"
+          archovive evidence flask 2>&1 | grep -q "product bundle"

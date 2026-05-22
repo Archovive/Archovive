@@ -1,0 +1,1 @@
+"""Archovive public CLI package."""

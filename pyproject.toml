@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "archovive"
+version = "4.1.0"
+description = "Archovive open-core CLI and documentation (engine in product bundle)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+archovive-public = "archovive.cli.entrypoints:main_archovive"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["archovive*"]
