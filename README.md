@@ -9,25 +9,24 @@ The deterministic **engine**, Evidence Camera runtime, SBOM pipeline, verify cha
 
 ---
 
-## Two ways to use the CLI
+## Quick start (pilot)
+
+```bash
+git clone https://github.com/Archovive/Archovive.git
+cd archovive
+# Place archovive_product_bundle_v4.zip in this directory
+./install_archovive.sh
+source ./archovive.env
+archovive --help
+archovive run /path/to/your-repo
+```
 
 | Mode | When |
 |------|------|
-| **With product bundle** | Set `ARCHOVIVE_ENGINE_ROOT` to extracted `archovive_product_bundle_v4/` → `bin/archovive` delegates to the real engine |
-| **Docs-only (this repo)** | `pip install -e .` or `python3 -m archovive.cli.cli_main --help` — help, cameras docs, `doctor`; `run` points to bundle |
+| **After `./install_archovive.sh`** | `ARCHOVIVE_ENGINE_ROOT` → `archovive_product_bundle_v4/`; full engine |
+| **Without ZIP** | `archovive --help` / `doctor` only; `run` points to the bundle |
 
-```bash
-export ARCHOVIVE_ENGINE_ROOT=/path/to/archovive_product_bundle_v4
-bin/archovive run          # full engine
-```
-
-Without the bundle:
-
-```bash
-pip install -e .
-archovive --help
-archovive doctor
-```
+See `docs/INSTALL.md`.
 
 ---
 
