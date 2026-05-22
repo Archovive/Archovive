@@ -21,7 +21,21 @@ Pilot archives use the **same** zip name and top-level folder as this document: 
 | Git | Recommended for analysis root detection |
 | Disk | ~700 MB free for venv |
 
-## Install
+## Install (open-core repo + bundle ZIP)
+
+Clone this repository, place `archovive_product_bundle_v4.zip` in the repo root, then:
+
+```bash
+git clone https://github.com/Archovive/Archovive.git
+cd archovive
+# copy archovive_product_bundle_v4.zip here (from Archovive-core release)
+./install_archovive.sh
+source ./archovive.env
+```
+
+The script unpacks `archovive_product_bundle_v4/`, sets `ARCHOVIVE_ENGINE_ROOT`, runs the bundle venv installer, and links `~/.local/bin/archovive`.
+
+## Install (bundle only)
 
 ```bash
 unzip archovive_product_bundle_v4.zip
