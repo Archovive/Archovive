@@ -54,32 +54,17 @@ Das ist keine Ersetzung für SAST oder GRC-Tools. Es ist die **Lücke dazwischen
 
 ## 30-Sekunden-Demo (Beispiel-Output)
 
-```bash
-archovive simulate
+```text
+$ archovive simulate
+
+ARCHOVIVE GATE — DORA Boundary Crossing
+Verdict: POLICY_VIOLATION
+graph_hash: fee879ce…c734aa
+replay_hash: 3e700b6a…d3b9736
+Exit Code: 2
 ```
 
-```
-=== Archovive Simulate (OSS demo) ===
-Version .............. 5.0.0
-Repository ............. demo-fintech
-Modules .............. 12
-
-[1/4] Architecture graph
-  coupling_index ....... 0.833
-  boundary_crossings ... 1
-
-[2/4] Drift matrix
-  drift_status ......... unmeasured
-
-[3/4] Policy evaluation
-  [FAIL] DORA_2026 :: dora_crossings_max
-
-[4/4] Verdict
-  verdict .............. POLICY_VIOLATION
-  replay_hash .......... 3e700b6addb40128…
-```
-
-Das Demo-Repo ist eine absichtlich fehlerhafte Fintech-Microservice-Struktur: die API-Schicht greift direkt auf `payments.ledger` zu — ein **Schichtverstoß**, den DORA-Regeln blockieren würden.
+Das Demo-Repo ist eine absichtlich fehlerhafte Fintech-Microservice-Struktur — Details in [examples/demo-fintech](../../examples/demo-fintech/README.md).
 
 ---
 

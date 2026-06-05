@@ -40,12 +40,11 @@ Docs: docs/01-intro/ · Enterprise bundle: {BUNDLE_ZIP} — docs/07-enterprise/"
 
 SIMULATE_HELP = """\
 Usage:
-  archovive simulate [--json] [--repo PATH]
+  archovive simulate [--json] [--verbose] [--repo PATH]
 
-Runs the OSS demo on examples/demo-fintech (intentional DORA violation).
-Shows graph metrics, drift matrix, policy verdict, replay hash.
-
-  archovive simulate --json     Machine-readable output"""
+Default output matches README (product gate format).
+  archovive simulate --verbose   Full graph, drift, and policy detail
+  archovive simulate --json      Machine-readable"""
 
 CI_HELP = """\
 Usage:

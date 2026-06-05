@@ -1,19 +1,19 @@
 # Simulate — OSS Demo Engine
 
-Dieses Modul implementiert die **30-Sekunden-Demo** ohne Enterprise-Bundle.
+Canonical product output is defined in **`format.py`** — README and CLI share the same lines.
 
-| Datei | Rolle |
-|-------|--------|
-| `engine.py` | Graph-Analyse + Policy-Auswertung |
-| `runner.py` | CLI-Formatierung für `archovive simulate` |
+```text
+ARCHOVIVE GATE — DORA Boundary Crossing
+Verdict: POLICY_VIOLATION
+graph_hash: fee879ce…c734aa
+replay_hash: 3e700b6a…d3b9736
+Exit Code: 2
+```
 
-**Demo-Fixture:** `examples/demo-fintech/` (12 Module, absichtlicher DORA-Verstoß)
+| File | Role |
+|------|------|
+| `format.py` | Product gate format (single source of truth) |
+| `engine.py` | Graph analysis + policy evaluation |
+| `runner.py` | CLI (`--verbose` for full walkthrough) |
 
-**Dokumentation:** [docs/02-simulate/README.md](../docs/02-simulate/README.md)
-
-**Gepinnte Hashes (v5.0.0):**
-
-- `graph_hash`: `fee879ce6ea2d29634bde4f5f2d738e37a0bf409fb200d1d52009c1cd0c734aa`
-- `replay_hash`: `3e700b6addb401281165f88810f6ade7f93cc7cf9f0ff985bd0390c79d3b9736`
-
-Enterprise-Vollanalyse: `archovive run` mit frozen Bundle → [docs/07-enterprise](../docs/07-enterprise/README.md)
+**Fixture:** `examples/demo-fintech/` · **Docs:** [docs/02-simulate](../docs/02-simulate/README.md)

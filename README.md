@@ -11,13 +11,11 @@ Archovive beantwortet eine Frage — mit reproduzierbarem Beweis:
 ```text
 $ archovive simulate
 
-ARCHOVIVE GATE — demo-fintech v5.0.0
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-VERDICT       POLICY_VIOLATION
-Policy        DORA_2026
-Finding       layer boundary breach — API imports payments.ledger directly
-Exit Code     2
-replay_hash   3e700b6a…d3b9736  ✓ pinned (v5.0.0)
+ARCHOVIVE GATE — DORA Boundary Crossing
+Verdict: POLICY_VIOLATION
+graph_hash: fee879ce…c734aa
+replay_hash: 3e700b6a…d3b9736
+Exit Code: 2
 ```
 
 Kein Bundle. Kein Account. Das ist die Demo auf `examples/demo-fintech` — **3 absichtliche Architektur-Verstöße** in einer fiktiven Payments-API.

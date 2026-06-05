@@ -8,16 +8,9 @@ Für **Entwickler, Gründer und Evaluatoren**, die Archovive nicht glauben, sond
 
 ## Was passiert bei `simulate`?
 
-Archovive analysiert das Demo-Repository `examples/demo-fintech` — ein kleines, aber realistisches Multi-Service-Layout (API, Payments, Notifications, Shared Layer). Die Analyse läuft **lokal**, in wenigen Sekunden, und liefert:
+Archovive analysiert das Demo-Repository `examples/demo-fintech` — NovaPay, eine fiktive Payments-API mit absichtlichen Schichtverstößen. Die Analyse läuft **lokal**, in wenigen Sekunden.
 
-| Phase | Was du siehst |
-|-------|----------------|
-| **Architecture graph** | Module, Kopplung, Schicht-Grenzverletzungen |
-| **Drift matrix** | Ob eine Baseline existiert (beim ersten Lauf: `unmeasured`) |
-| **Policy evaluation** | DORA / NIS2 / GLOBAL — PASS oder FAIL pro Regel |
-| **Verdict** | Gesamtentscheidung + Replay-Hash |
-
-Der OSS-Demo zeigt bewusst einen **FAIL** — so siehst du, wie ein Blocker in CI aussehen würde.
+Standard-Ausgabe = **Produkt-Gate-Format** (identisch mit README). Mit `--verbose` siehst du Graph-Metriken, Drift und einzelne Policy-Regeln.
 
 ---
 
@@ -30,8 +23,6 @@ git clone https://github.com/Archovive/Archovive.git
 cd Archovive
 bash dist/install.sh
 ```
-
-`install.sh` installiert die OSS-CLI und startet automatisch `archovive simulate`.
 
 ### Option B — Manuell
 
@@ -48,9 +39,10 @@ archovive simulate
 ## Befehle
 
 ```bash
-archovive simulate              # Menschenlesbare Ausgabe
-archovive simulate --json       # Maschinenlesbar (CI, jq, Audit-Tools)
-archovive simulate --repo PATH  # Anderes Repo (OSS — vereinfachte Analyse)
+archovive simulate              # Gate-Format (wie README)
+archovive simulate --verbose    # Volle Analyse
+archovive simulate --json       # Maschinenlesbar
+archovive simulate --repo PATH  # Anderes Repo
 ```
 
 Leerer Aufruf `archovive` ohne Argumente startet ebenfalls **simulate**.
@@ -59,51 +51,19 @@ Leerer Aufruf `archovive` ohne Argumente startet ebenfalls **simulate**.
 
 ## Beispiel-Output (v5.0.0, gepinnt)
 
-```
-=== Archovive Simulate (OSS demo) ===
-Version .............. 5.0.0
-Repository ............. demo-fintech
-Modules .............. 12
+Identisch mit [README](../../README.md#was-du-bekommst):
 
-[1/4] Architecture graph
-  graph_hash ........... fee879ce6ea2d296…
-  coupling_index ....... 0.833
-  boundary_crossings ... 1
-  instability (pay) .... 0.667
+```text
+$ archovive simulate
 
-[2/4] Drift matrix
-  drift_status ......... unmeasured
-  drift_score .......... None
-
-[3/4] Policy evaluation
-  [PASS] GLOBAL_BASE :: global_coupling_max (value=0.833, threshold=1.2)
-  [FAIL] DORA_2026 :: dora_crossings_max (value=1, threshold=0)
-  [PASS] NIS2_MINIMAL_V1 :: nis2_instability_ceiling (value=0.667, threshold=0.8)
-
-[4/4] Verdict
-  verdict .............. POLICY_VIOLATION
-  replay_hash .......... 3e700b6addb40128…
-  exit_code ............ 2
-
-Detected: DORA_2026 violation — dora_crossings_max (boundary_crossings=1).
+ARCHOVIVE GATE — DORA Boundary Crossing
+Verdict: POLICY_VIOLATION
+graph_hash: fee879ce…c734aa
+replay_hash: 3e700b6a…d3b9736
+Exit Code: 2
 ```
 
-**Warum FAIL?** In `services/api/routes.py` importiert die API-Schicht direkt `payments.ledger` — ein verbotener Querschnitt zwischen Präsentations- und Kern-Domain.
-
----
-
-## Demo-Repository im Detail
-
-```
-examples/demo-fintech/
-  services/api/          ← HTTP-Schicht (sollte nicht in Ledger greifen)
-  services/payments/     ← Zahlungsdomäne
-  services/notifications/
-  shared/                ← Querschnitts-Config & Logging
-  tests/
-```
-
-Das Repo ist **Absicht**, kein Produktionscode. Es existiert, damit du Output mit Dokumentation vergleichen kannst.
+**Warum FAIL?** `services/api/routes.py` importiert `payments.ledger` direkt — layer boundary breach (DORA_2026).
 
 ---
 
@@ -113,8 +73,7 @@ Das Repo ist **Absicht**, kein Produktionscode. Es existiert, damit du Output mi
 |---|-------------------|----------------------|
 | Zielgruppe | Evaluierung, Demos | Production CI/CD |
 | Repo | Demo oder `--repo` | Beliebiges Repository |
-| Tiefe | Vereinfachter Graph | Voller Hypergraph, Polyglot |
-| Artefakte | Terminal / JSON | MD, JSON, Attestation, SBOM |
+| Output | Gate-Format + optional `--verbose` | Volle Artefakte + Attestation |
 | Bundle nötig? | Nein | Ja |
 
 ---
