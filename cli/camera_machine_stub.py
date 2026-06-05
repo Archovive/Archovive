@@ -1,7 +1,7 @@
 """Camera B — Machine Lens (stub; engine in product bundle)."""
 from __future__ import annotations
 
-from archovive._bundle import require_engine
+from cli._bundle import require_engine
 
 MACHINE_HELP = """\
 Camera B — Machine Lens (IR, anchors, replay)

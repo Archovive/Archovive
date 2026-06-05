@@ -1,7 +1,7 @@
 """Camera C — Evidence Lens (stub; runs in product bundle / MCP)."""
 from __future__ import annotations
 
-from archovive._bundle import require_engine
+from cli._bundle import require_engine
 
 EVIDENCE_HELP = """\
 Camera C — Evidence Lens (audit / supply chain)

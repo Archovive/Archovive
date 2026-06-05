@@ -1,33 +1,97 @@
-# 08 — Pricing & Tiers
+# Kapitel 08 — Pricing & Tiers
 
-*Indikativ — nicht vertraglich. Details: enterprise@archovive.com*
+## Für wen ist dieses Kapitel?
 
-## OSS (dieses Repo)
+Für **Budget-Entscheider, Einkauf und Gründer**, die verstehen wollen, was kostenlos ist, was skaliert und **warum** Enterprise mehr kostet als ein Scanner-Abo.
+
+*Indikativ — nicht vertraglich. Verbindliche Angebote: **enterprise@archovive.com***
+
+---
+
+## Value Proposition
+
+Archovive liefert **deterministische, offline-fähige Architektur-Evidence** — ohne Code zu ändern, ohne Daten in die Cloud zu senden.
+
+| Outcome | Nutzen |
+|---------|--------|
+| **CI-Gates** | Objektive Exit Codes statt Meinungs-Diskussionen |
+| **Audit-Evidence** | Signierte Attestations statt manueller Reviews |
+| **Regulatory Bridge** | DORA/NIS2/CRA-Regeln auf Graph-Ebene — nicht nur Checklisten |
+
+**Moat:** Regulatorische Policy Packs → Graph-Invarianten. SAST kennt keine Gesetze. GRC kompiliert kein Repository.
+
+---
+
+## OSS (dieses Repository)
 
 | | |
 |---|---|
-| **Preis** | Kostenlos |
-| **Enthält** | `simulate`, `ci check`, Docs, Demo-Repo |
-| **Ziel** | Sofort Ergebnis sehen, CI-Pattern lernen |
+| **Preis** | **Kostenlos** (MIT) |
+| **Enthält** | `simulate`, `ci check`, Demo-Repo, Story-Docs |
+| **Limit** | Vereinfachte Analyse, kein voller Hypergraph, keine Attestations |
+| **Ideal für** | Evaluierung, Developer Adoption, CI-Pattern lernen |
+
+```bash
+bash dist/install.sh && archovive simulate
+```
+
+---
 
 ## Team / CI
 
 | | |
 |---|---|
-| **Preis** | Kostenlos für OSS; **€49/Dev/Monat** kommerziell |
-| **Enthält** | Drift + Repro, CI Exit Codes |
-| **Ziel** | Platform Engineering |
+| **Preis** | **Kostenlos** für Open Source; **€49 / Dev / Monat** kommerziell (KMU) |
+| **Enthält** | `repro.json`, `drift_matrix.json`, CI Exit Codes |
+| **Ideal für** | Platform Engineering, Scale-ups, Monorepo-Teams |
+| **Schmerz** | „Wir wissen nicht, ob die Architektur noch stimmt" |
+
+Kein CISO nötig. Ein DevOps-Lead reicht als Champion.
+
+---
 
 ## Enterprise / Gov
 
 | | |
 |---|---|
-| **Preis** | **€2.500 / zertifiziertes Repository / Jahr** |
-| **Enthält** | Attestations, Compliance, Vault, Live-Dispatch |
-| **Ziel** | Regulierte Unternehmen, Audit-Kanäle |
+| **Preis** | **€2.500 / zertifiziertes Repository / Jahr** (unbegrenzte Attestations) |
+| **Enthält** | Attestations, Compliance Reports, Vault, Transparency Log, Live-Dispatch |
+| **Ideal für** | Regulierte Unternehmen, Banken, Audit-Kanäle |
+| **Schmerz** | DORA/NIS2/CRA-Deadline, Audit-Vorbereitung, Release-Governance |
+
+Pricing-Dimensionen (Enterprise-Verhandlung): Repo-Anzahl, CI-Seats, Support-SLA, Signing Key Ceremony.
+
+---
 
 ## SLA
 
-Keine Latenz-SLA. **Funktionale Determinismus-SLA:** gleicher Repo-Stand → gleicher `replay_hash`.
+| | OSS | Enterprise |
+|---|-----|------------|
+| **Latenz** | Keine Garantie | Keine Latenz-SLA |
+| **Determinismus** | Demo-gepinnt | **Funktionale SLA:** gleicher Stand → gleicher `replay_hash` |
+| **Support** | Community / Docs | enterprise@archovive.com |
 
-→ Zurück zu [01 — Intro](../01-intro/README.md)
+---
+
+## Segment-Matrix
+
+| Segment | Tier | Einstiegs-Kapitel |
+|---------|------|-------------------|
+| Developer / Evaluator | OSS | 01, 02 |
+| Platform Engineering | Team/CI | 03 |
+| CRA/NIS2 Vendor | Gov | 04, 05 |
+| Air-gap / Behörde | Enterprise | 06, 07 |
+| Bank / DORA | Enterprise | 07 |
+| Audit-Boutique | Gov (pro Mandant) | 05, 07 |
+
+---
+
+## Nächste Schritte
+
+1. **Noch unsicher?** → [02 — Simulate](../02-simulate/README.md)
+2. **CI einbinden?** → [03 — CI](../03-ci/README.md)
+3. **Enterprise-Pilot?** → enterprise@archovive.com
+
+---
+
+**Nächstes Kapitel:** [01 — Intro](../01-intro/README.md) — zurück zum Einstieg (oder Demo starten: `archovive simulate`).

@@ -4,18 +4,18 @@ from __future__ import annotations
 import shutil
 import sys
 
-from archovive._bundle import require_engine
-from archovive.cli.camera_evidence_stub import run_evidence_stub
-from archovive.cli.camera_operator import print_operator_help
-from archovive.cli.mcp_client import print_mcp_help
-from archovive.cli.product_ux import (
+from cli._bundle import require_engine
+from cli.camera_evidence_stub import run_evidence_stub
+from cli.camera_operator import print_operator_help
+from cli.mcp_client import print_mcp_help
+from cli.product_ux import (
     print_command_help,
     print_top_help,
     print_version,
     strip_help_flags,
     wants_help,
 )
-from archovive.simulate.runner import run_simulate_cli
+from simulate.runner import run_simulate_cli
 
 
 def _apply_run_flags(argv: list[str]) -> list[str]:
@@ -59,7 +59,7 @@ def _dispatch_help(argv: list[str]) -> bool:
             elif sub == "evidence":
                 run_evidence_stub(["--help"])
             else:
-                from archovive.cli.camera_machine_stub import print_machine_help
+                from cli.camera_machine_stub import print_machine_help
 
                 print_machine_help()
             return True
@@ -138,7 +138,7 @@ def main(argv: list[str] | None = None) -> int:
                 return 0
             require_engine("camera operator")
         if sub == "machine":
-            from archovive.cli.camera_machine_stub import run_machine_stub
+            from cli.camera_machine_stub import run_machine_stub
 
             return run_machine_stub(rest)
         if sub == "evidence":

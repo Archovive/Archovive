@@ -14,11 +14,11 @@ dependencies = []
 dev = ["pytest>=7.0"]
 
 [project.scripts]
-archovive = "archovive.cli.cli_main:main"
+archovive = "cli.cli_main:main"
 
 [tool.setuptools.packages.find]
 where = [".."]
-include = ["archovive*"]
+include = ["cli*", "simulate*"]
 
 [tool.pytest.ini_options]
-testpaths = ["../archovive/tests"]
+testpaths = ["../cli/tests"]

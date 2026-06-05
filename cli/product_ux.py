@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from archovive._bundle import BUNDLE_DIR, BUNDLE_ZIP
+from cli._bundle import BUNDLE_DIR, BUNDLE_ZIP
 
 CLI_VERSION = "5.0.0"
 ENGINE_VERSION = "5.0.0 (enterprise bundle)"

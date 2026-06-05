@@ -5,8 +5,8 @@ import io
 from contextlib import redirect_stdout
 from pathlib import Path
 
-from archovive.cli.cli_main import main
-from archovive.simulate.engine import PINNED_GRAPH_HASH, PINNED_REPLAY_HASH, analyze_repo
+from cli.cli_main import main
+from simulate.engine import PINNED_GRAPH_HASH, PINNED_REPLAY_HASH, analyze_repo
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 

@@ -1,34 +1,88 @@
-# 01 — Was ist Archovive?
+# Kapitel 01 — Was ist Archovive?
+
+## Für wen ist dieses Kapitel?
+
+Für **alle**, die in unter einer Minute verstehen wollen, was Archovive leistet — ohne Installationsanleitung, ohne Engine-Details, ohne Compliance-Fachjargon.
+
+---
 
 ## Das Problem
 
-Software-Teams verlieren den Überblick:
+Software-Teams stehen vor drei Lücken, die weder SAST noch GRC allein schließen:
 
-- **Drift** — die Architektur weicht vom Soll ab, niemand merkt es vor dem Release
-- **Evidence** — Auditoren wollen Beweise, nicht PowerPoints
-- **Compliance** — DORA, NIS2, CRA verlangen nachweisbare Software-Governance
+### 1. Drift
+Die implementierte Architektur weicht vom Soll ab — oft unbemerkt bis kurz vor dem Release. Code-Reviews sehen Dateien, nicht **Struktur**. Monorepos wachsen, Grenzen verschwimmen.
 
-Scanner finden Bugs in Zeilen. GRC-Tools kennen Gesetze. **Niemand verbindet beides reproduzierbar.**
+### 2. Evidence
+Auditoren, Regulatoren und Kunden verlangen **nachweisbare** Artefakte: Was wurde geprüft? Gegen welche Regeln? Mit welchem Ergebnis? Wer hat wann zugestimmt? Screenshots und Word-Dokumente reichen nicht.
+
+### 3. Compliance
+DORA, NIS2, CRA und SOX verlangen **Software-Governance** — nicht nur IT-Sicherheit auf Einzelzeilen-Ebene. Gesetze kennen Architektur-Schichten. Scanner kennen Gesetze nicht.
+
+---
 
 ## Die Lösung
 
-Archovive ist eine **local-first Governance Engine**:
+**Archovive** ist eine **local-first Governance Engine**:
 
-1. Repository → Architektur-Graph
-2. Graph → Drift & Policy-Regeln
-3. Ergebnis → **Verdict + tamper-evident Hashes**
+1. **Repository einlesen** → Architektur-Graph (Module, Abhängigkeiten, Schichten)
+2. **Graph auswerten** → Drift gegen Baseline, Policy-Regeln (DORA, NIS2, …)
+3. **Ergebnis materialisieren** → Verdict, Hashes, Evidence-Paket
 
-Alles on-prem. Kein Cloud-Upload. Gleicher Input → gleicher Output.
+Alles **on-prem**. Kein Code-Upload in die Cloud. Kein Telemetry.  
+Gleicher Repository-Stand → gleicher Output (**Determinismus**).
 
-## Für wen?
+---
 
-| Segment | Einstieg |
-|---------|----------|
-| Platform Engineering | Kapitel 03 — CI-Gate |
-| Regulierte Industrie (CRA/NIS2) | Kapitel 04 — Evidence |
-| Behörden / Air-gap | Kapitel 06 |
-| Enterprise / Banken | Kapitel 07 |
+## Was Archovive nicht ist
 
-## Nächster Schritt
+- Kein Cloud-SaaS-Scanner
+- Kein Ersatz für Zeile-für-Zeile-Bugfinding (SAST)
+- Keine Checklisten-App ohne Code-Anbindung
+- Keine generische KI-Suche — `ask`/`chat` im Enterprise-Produkt sind **deterministische Governance-Oberflächen** auf demselben Kernel
 
-→ [02 — Simulate](../02-simulate/README.md): Ergebnis in 30 Sekunden sehen.
+---
+
+## 30-Sekunden-Demo (Beispiel-Output)
+
+```bash
+archovive simulate
+```
+
+```
+=== Archovive Simulate (OSS demo) ===
+Version .............. 5.0.0
+Repository ............. demo-fintech
+Modules .............. 12
+
+[1/4] Architecture graph
+  coupling_index ....... 0.833
+  boundary_crossings ... 1
+
+[2/4] Drift matrix
+  drift_status ......... unmeasured
+
+[3/4] Policy evaluation
+  [FAIL] DORA_2026 :: dora_crossings_max
+
+[4/4] Verdict
+  verdict .............. POLICY_VIOLATION
+  replay_hash .......... 3e700b6addb40128…
+```
+
+Das Demo-Repo ist eine absichtlich fehlerhafte Fintech-Microservice-Struktur: die API-Schicht greift direkt auf `payments.ledger` zu — ein **Schichtverstoß**, den DORA-Regeln blockieren würden.
+
+---
+
+## Wer profitiert wann?
+
+| Rolle | Typischer Einstieg |
+|-------|-------------------|
+| Entwickler / Tech Lead | Kapitel 02 — Simulate |
+| Platform / DevOps | Kapitel 03 — CI-Gate |
+| Compliance / GRC | Kapitel 04–05 — Governance & Evidence |
+| CISO / Enterprise | Kapitel 07 — Enterprise-Bundle |
+
+---
+
+**Nächstes Kapitel:** [02 — Simulate](../02-simulate/README.md) — Demo in 30 Sekunden auf deinem Rechner ausführen.

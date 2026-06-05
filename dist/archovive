@@ -7,7 +7,7 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 case "${1:-}" in
   simulate|ci|""|--help|-h|--version|-V)
     export PYTHONPATH="${REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
-    exec python3 -m archovive.cli.cli_main "$@"
+    exec python3 -m cli.cli_main "$@"
     ;;
 esac
 
@@ -28,7 +28,7 @@ fi
 
 export PYTHONPATH="${REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
 if command -v python3 >/dev/null 2>&1; then
-  exec python3 -m archovive.cli.cli_main "$@"
+  exec python3 -m cli.cli_main "$@"
 fi
 
 echo "archovive: run dist/install.sh or install enterprise bundle — docs/02-simulate" >&2

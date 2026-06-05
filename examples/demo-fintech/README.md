@@ -1,9 +1,27 @@
-# Demo fintech microservice (OSS simulate fixture)
+# Demo-Fintech — OSS Simulate Fixture
 
-Small multi-service Python layout with **intentional** architecture violations:
+Absichtlich fehlerhafte Microservice-Struktur für `archovive simulate`.
 
-- API layer imports `payments.ledger` directly (DORA boundary crossing)
-- High coupling between `api`, `payments`, and `notifications`
-- Use with: `archovive simulate` or `archovive ci check --repo examples/demo-fintech`
+## Struktur
 
-This is not production code — it exists so you see a real verdict in 30 seconds.
+```
+services/api/           HTTP-Schicht
+services/payments/      Zahlungsdomäne (Ledger, Processor)
+services/notifications/ Ops-Benachrichtigungen
+shared/                 Config & Logging
+tests/                  Smoke-Test
+```
+
+## Der absichtliche Verstoß
+
+`services/api/routes.py` importiert `payments.ledger` direkt — die API-Schicht sollte nicht auf Ledger-Interna zugreifen. Das triggert **DORA_2026 :: dora_crossings_max**.
+
+## Ausführen
+
+```bash
+archovive simulate
+archovive simulate --repo examples/demo-fintech
+archovive ci check --repo examples/demo-fintech   # Exit 2
+```
+
+Dokumentation: [docs/02-simulate/README.md](../../docs/02-simulate/README.md)

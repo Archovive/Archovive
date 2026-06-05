@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import sys
 
-from archovive.cli.cli_main import main
+from cli.cli_main import main
 
 
 def main_archovive() -> None:
@@ -18,6 +18,6 @@ def main_cli() -> None:
 
 
 def main_attestation() -> None:
-    from archovive._bundle import require_engine
+    from cli._bundle import require_engine
 
     require_engine("attestation")

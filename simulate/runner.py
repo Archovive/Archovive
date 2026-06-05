@@ -5,7 +5,7 @@ import json
 import sys
 from pathlib import Path
 
-from archovive.simulate.engine import DEFAULT_REPO, DEMO_VERSION, analyze_repo
+from simulate.engine import DEFAULT_REPO, DEMO_VERSION, analyze_repo
 
 
 def _default_demo_path() -> Path:
