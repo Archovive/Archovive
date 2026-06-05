@@ -54,13 +54,4 @@ jobs:
           grep -q 'bundle_sha256' RELEASE.lock.json
 
       - name: Policy pack registry paths
-        run: |
-          python3 -c "
-import json
-reg = json.load(open('policy_packs/registry.json'))
-for p in reg.get('packs', []):
-    path = p.get('path', '')
-    assert not path.startswith('golden/'), path
-    assert path.startswith('policy_packs/'), path
-print('registry OK')
-"
+        run: bash scripts/verify_policy_registry.sh
