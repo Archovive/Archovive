@@ -5,40 +5,20 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "archovive"
 version = "5.0.0"
-description = "Archovive v5 — core truth engine + runtime + evidence (standalone)"
+description = "Archovive public installer and CLI router (open-core)"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "archovive-engine==5.0.0",
-    "archovive-os==5.0.0",
-    "archovive-evidence==5.0.0",
-]
+dependencies = []
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=7.0",
-    "httpx>=0.27.0",
-    "cryptography>=42.0.0",
-    "ruff>=0.8.0",
-    "archovive-test-engine==5.0.0",
-]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+archovive = "archovive.cli.cli_main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["archovive*"]
 
 [tool.pytest.ini_options]
-testpaths = [
-    "packages/archovive_test_engine/tests",
-    "packages/archovive_evidence/tests",
-]
-markers = [
-    "inventory: module and artifact presence",
-    "surfaces: CLI, MCP, REST equivalence",
-    "tiers: product tier matrix",
-    "enterprise: enterprise feature matrix",
-    "performance: timing budgets",
-    "parity: capability loss detection",
-]
-
-[tool.uv.sources]
-archovive-engine = { path = "packages/archovive_engine", editable = true }
-archovive-os = { path = "packages/archovive_runtime", editable = true }
-archovive-evidence = { path = "packages/archovive_evidence", editable = true }
-archovive-test-engine = { path = "packages/archovive_test_engine", editable = true }
+testpaths = ["archovive/tests"]

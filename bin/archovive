@@ -1,19 +1,27 @@
 #!/usr/bin/env bash
-# Archovive Open-Core CLI — delegates to product bundle or shows v4 help/stubs.
+# Archovive public CLI — delegates to frozen enterprise bundle when installed.
 set -euo pipefail
 CLI_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-ENGINE_ROOT="${ARCHOVIVE_ENGINE_ROOT:-${ARCHOVIVE_REPO:-}}"
+BUNDLE_ROOT="${ARCHOVIVE_BUNDLE_ROOT:-}"
 
-if [[ -n "${ENGINE_ROOT}" && -x "${ENGINE_ROOT}/bin/archovive" ]]; then
-  export ARCHOVIVE_REPO="${ENGINE_ROOT}"
-  exec "${ENGINE_ROOT}/bin/archovive" "$@"
+# install_archovive.sh sets ARCHOVIVE_BUNDLE_ROOT; legacy compat:
+if [[ -z "${BUNDLE_ROOT}" && -n "${ARCHOVIVE_ENGINE_ROOT:-}" ]]; then
+  BUNDLE_ROOT="${ARCHOVIVE_ENGINE_ROOT}"
 fi
 
-# No engine: run public Python router (help, doctor, bundle pointer)
+if [[ -z "${BUNDLE_ROOT}" && -d "${CLI_ROOT}/archovive-enterprise-5.0.0" ]]; then
+  BUNDLE_ROOT="${CLI_ROOT}/archovive-enterprise-5.0.0"
+fi
+
+if [[ -n "${BUNDLE_ROOT}" && -x "${BUNDLE_ROOT}/bin/archovive" ]]; then
+  export ARCHOVIVE_BUNDLE_ROOT="${BUNDLE_ROOT}"
+  exec "${BUNDLE_ROOT}/bin/archovive" "$@"
+fi
+
 export PYTHONPATH="${CLI_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
 if command -v python3 >/dev/null 2>&1; then
   exec python3 -m archovive.cli.cli_main "$@"
 fi
 
-echo "archovive: Python 3 required for public CLI" >&2
+echo "archovive: install enterprise bundle first — see docs/INSTALL.md" >&2
 exit 1

@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Fleet helper — requires licensed engine at ARCHOVIVE_ENGINE_ROOT.
+# Fleet helper — requires licensed bundle at ARCHOVIVE_BUNDLE_ROOT.
 set -euo pipefail
 CLI_ROOT="$(cd "$(dirname "$0")" && pwd)"
-ENGINE_ROOT="${ARCHOVIVE_ENGINE_ROOT:-}"
+ENGINE_ROOT="${ARCHOVIVE_BUNDLE_ROOT:-}"
 LIST="${1:-repos.txt}"
 FLEET_ROOT="${ARCHOVIVE_FLEET_OUT:-${CLI_ROOT}/fleet_runs}"
 
 if [[ -z "${ENGINE_ROOT}" || ! -x "${ENGINE_ROOT}/bin/archovive" ]]; then
-  echo "archovive-fleet: set ARCHOVIVE_ENGINE_ROOT to licensed product bundle" >&2
+  echo "archovive-fleet: set ARCHOVIVE_BUNDLE_ROOT to archovive-enterprise-5.0.0" >&2
   exit 1
 fi
 
@@ -23,7 +23,7 @@ while IFS= read -r repo || [[ -n "${repo}" ]]; do
   out="${FLEET_ROOT}/${name}"
   mkdir -p "${out}"
   ec=0
-  ( cd "${repo}" && ARCHOVIVE_ENGINE_ROOT="${ENGINE_ROOT}" "${ENGINE_ROOT}/bin/archovive" run ) || ec=$?
+  ( cd "${repo}" && ARCHOVIVE_BUNDLE_ROOT="${ENGINE_ROOT}" "${ENGINE_ROOT}/bin/archovive" run ) || ec=$?
   for f in ARCHOVIVE_OUTPUT.md repro.json drift_matrix.json attestation.json compliance_report.json; do
     [[ -f "${repo}/${f}" ]] && cp "${repo}/${f}" "${out}/" 2>/dev/null || true
   done

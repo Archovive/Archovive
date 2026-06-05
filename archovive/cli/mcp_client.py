@@ -5,9 +5,9 @@ MCP_HELP = """\
 Archovive MCP (product bundle)
 
 The MCP server is not started from this public repository.
-After installing archovive_product_bundle_v4, configure your MCP client, e.g.:
+After installing archovive-enterprise-5.0.0, configure your MCP client, e.g.:
 
-  command: <bundle>/.venv/bin/python3
+  command: <bundle>/bin/archovive-mcp
   module:  archovive_os.mcp.server
   env:     ARCHOVIVE_REPO=<absolute bundle path>
 

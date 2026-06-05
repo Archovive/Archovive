@@ -1,7 +1,7 @@
 # Cameras overview
 
 Archovive presents the same analysis data in three deterministic perspectives.  
-**Execution** requires `archovive_product_bundle_v4` (engine in [Archovive-core](https://github.com/Archovive/Archovive-core)).
+**Execution** requires `archovive-enterprise-5.0.0` (engine in [Archovive-core](https://github.com/Archovive/Archovive-core)).
 
 | Camera | Lens | Audience | Primary artefacts |
 |--------|------|----------|-------------------|

@@ -2,22 +2,16 @@
   "schema_id": "archovive_product_manifest_v5",
   "version": "5.0.0",
   "tier": "enterprise",
-  "bundle_layout": "archovive-enterprise-5.0.0/bin|share|scripts|metadata",
-  "commands": ["archovive", "archovive-mcp"],
+  "bundle_layout": "archovive-enterprise-5.0.0/{bin,share,scripts,metadata,libexec}",
+  "cli_commands": ["archovive", "archovive-mcp", "ask", "chat", "governance", "doctor", "gate"],
   "docs": [
     "docs/README.md",
-    "docs/LEXIKON.md",
-    "docs/ENTERPRISE.md",
+    "docs/INSTALL.md",
     "docs/RELEASE_NOTES_v5.0.0.md"
   ],
-  "profiles": [
-    "deploy/profiles/personal.yml",
-    "deploy/profiles/team.yml",
-    "deploy/profiles/enterprise.yml"
-  ],
   "release_assets": [
-    "archovive-enterprise-5.0.0.zip",
-    "archovive-enterprise-5.0.0.zip.sha256",
-    "archovive.slsa.provenance.json"
+    "releases/archovive-enterprise-5.0.0.zip",
+    "releases/archovive-enterprise-5.0.0.zip.sha256",
+    "releases/archovive.slsa.provenance.json"
   ]
 }

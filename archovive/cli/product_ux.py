@@ -8,8 +8,8 @@ from pathlib import Path
 
 from archovive._bundle import BUNDLE_DIR
 
-CLI_VERSION = "4.1"
-ENGINE_VERSION = "3.0.0 (product bundle)"
+CLI_VERSION = "5.0.0"
+ENGINE_VERSION = "5.0.0 (frozen bundle)"
 
 EXIT_CODES_HELP = """\
 Exit codes:
@@ -144,7 +144,7 @@ def print_version() -> None:
     if bh:
         lines.append(f"bundle hash: {bh}")
     else:
-        lines.append("bundle: not detected — install archovive_product_bundle_v4")
+        lines.append("bundle: not detected — install archovive-enterprise-5.0.0")
     print("\n".join(lines))
 
 

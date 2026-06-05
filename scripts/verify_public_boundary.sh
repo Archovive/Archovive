@@ -12,7 +12,6 @@ FORBIDDEN=(
   archovive_os/pipe
   gov
   benchmarks
-  product_bundle
   polyglot_ir.py
   sbom_evidence.py
   evidence.py

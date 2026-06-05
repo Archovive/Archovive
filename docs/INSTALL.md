@@ -1,129 +1,89 @@
-# Installation — Archovive product bundle v4
+# Installation — Archovive Enterprise v5
 
-Technical install and run reference for pilots. Detail: `docs/` (pipeline, artefacts, MCP, troubleshooting).
-
-## Footprint
-
-| Stage | Disk |
-|-------|------|
-| Zip download | ~0.5–0.7 MB (`archovive_product_bundle_v4.zip`, product + optional `benchmarks/`) |
-| Extracted | ~10 MB (product); +benchmark JSONs if present |
-| After `./install_archovive.sh` | **~500–700 MB** (local `.venv`) |
-
-Pilot archives use the **same** zip name and top-level folder as this document: `archovive_product_bundle_v4.zip` → `archovive_product_bundle_v4/`.
+Customer install for the frozen offline bundle (`archovive_product_bundle_v3` layout).
 
 ## Requirements
 
 | Requirement | Detail |
 |-------------|--------|
-| OS | Linux, macOS, or WSL2 |
-| Python | **3.11+** |
-| Git | Recommended for analysis root detection |
-| Disk | ~700 MB free for venv |
+| OS | Linux x86_64 (glibc 2.31+), WSL2 |
+| Python | **Not required** (frozen binaries) |
+| Tools | `unzip`, `sha256sum` (recommended) |
+| Disk | ~200 MB extract + XDG config/cache |
 
-## Install (open-core repo + bundle ZIP)
-
-Clone this repository, place `archovive_product_bundle_v4.zip` in the repo root, then:
+## Quick install (this repository)
 
 ```bash
 git clone https://github.com/Archovive/Archovive.git
-cd archovive
-# copy archovive_product_bundle_v4.zip here (from Archovive-core release)
+cd Archovive
+
+# From GitHub Release v5.0.0 — place beside install_archovive.sh:
+#   archovive-enterprise-5.0.0.zip
+#   archovive-enterprise-5.0.0.zip.sha256
+#   archovive.slsa.provenance.json
+
+sha256sum -c archovive-enterprise-5.0.0.zip.sha256   # optional
 ./install_archovive.sh
 source ./archovive.env
+
+archovive --version
+archovive doctor
+./archovive-enterprise-5.0.0/scripts/setup_license.sh   # copies license to XDG
+archovive ask "why blocked?"
 ```
 
-The script unpacks `archovive_product_bundle_v4/`, sets `ARCHOVIVE_ENGINE_ROOT`, runs the bundle venv installer, and links `~/.local/bin/archovive`.
+## Bundle layout (v3)
 
-## Install (bundle only)
+```text
+archovive-enterprise-5.0.0/
+├── bin/           archovive, archovive-mcp (wrappers)
+├── libexec/       PyInstaller runtime (read-only)
+├── share/         docs, legal, examples, templates
+├── scripts/       install.sh, verify_signature.sh, setup_license.sh
+└── metadata/      build_manifest.json, sha256.txt, provenance
+```
+
+## Production install (`/opt`)
 
 ```bash
-unzip archovive_product_bundle_v4.zip
-cd archovive_product_bundle_v4
-./install_archovive.sh
+unzip archovive-enterprise-5.0.0.zip
+cd archovive-enterprise-5.0.0
+sudo ./scripts/install.sh                    # default: /opt/archovive-enterprise-5.0.0
+sudo ./scripts/verify_signature.sh
+source /etc/archovive/archovive.env
+archovive doctor
 ```
 
-| Flag | Effect |
-|------|--------|
-| `--minimal-venv` | Smaller venv; **no MCP** / trust extras |
-| `--global-link` | Symlink `archovive` to `~/.local/bin` or `/usr/local/bin` |
+## Environment (XDG-separated)
 
-## License tier
+| Variable | Purpose |
+|----------|---------|
+| `ARCHOVIVE_BUNDLE_ROOT` | Immutable install (set by wrappers) |
+| `ARCHOVIVE_CONFIG` | `$XDG_CONFIG_HOME/archovive` |
+| `ARCHOVIVE_CACHE` | `$XDG_CACHE_HOME/archovive` |
+| `ARCHOVIVE_STATE` | `$XDG_DATA_HOME/archovive` |
+| `ARCHOVIVE_REPO` | Target repository under analysis |
 
-Default: **`ci`** in `archovive_license.json` at **bundle root**.
+## MCP (IDE)
 
-| Tier | Enable |
-|------|--------|
-| **gov** (full artefacts) | `cp licenses/archovive_license_gov.json archovive_license.json` |
-| One-shot | `export ARCHOVIVE_LICENSE_TIER=gov` |
-
-Artefact list: `docs/OUTPUTS.md`.
-
-## CLI
-
-Run from your project directory (not from **bundle root**):
-
-```bash
-cd /path/to/your/git-project
-/path/to/archovive_product_bundle_v4/bin/archovive run
-echo exit=$?
+```json
+{
+  "mcpServers": {
+    "archovive": {
+      "command": "/opt/archovive-enterprise-5.0.0/bin/archovive-mcp",
+      "env": { "ARCHOVIVE_REPO": "/path/to/your-repo" }
+    }
+  }
+}
 ```
 
-| Exit | Meaning |
-|------|---------|
-| 0 | Pass |
-| 1 | Drift |
-| 2 | Policy / regulatory |
-| 3 | Engine error |
-| 4 | Misuse (e.g. run inside bundle root) |
+## Troubleshooting
 
-Further commands: `init`, `verify`, `doctor`, `diff`, `sbom` — see `MANIFEST.json` → `cli_commands`.
+See `docs/TROUBLESHOOTING.md` (in repo) or `share/docs/TROUBLESHOOTING.md` (inside bundle).
 
-## CI
+## Breaking changes (v4 → v5)
 
-Templates in `ci/`:
-
-| Platform | File |
-|----------|------|
-| GitHub Actions | `ci/archovive-run.yml` |
-| GitLab | `ci/archovive-gitlab-ci.yml` |
-| Jenkins | `ci/archovive-jenkins.groovy` |
-| Azure Pipelines | `ci/archovive-azure-pipelines.yml` |
-
-```bash
-CI=true /path/to/archovive_product_bundle_v4/bin/archovive run
-```
-
-## MCP (MCP-compatible client)
-
-1. Full install (not `--minimal-venv`).
-2. Stdio server setup: `docs/MCP_QUICKSTART.md`.
-3. Tool API: `docs/MCP_PROMPT.md`.
-
-`.cursor/mcp.json` is a **format example only**. Set `command` to `.venv/bin/python3` and `ARCHOVIVE_REPO` to the absolute **bundle root**.
-
-## Environment variables
-
-See `docs/ENVIRONMENT_VARIABLES.md`.
-
-Minimal exports:
-
-```bash
-export ARCHOVIVE_REPO="/absolute/path/to/archovive_product_bundle_v4"
-export ARCHOVIVE_COMPILE=runtime
-```
-
-## Developer documentation
-
-| Doc | Topic |
-|-----|--------|
-| `docs/ARCHITECTURE.md` | Package layout |
-| `docs/PIPELINE.md` | M1–M5 phases |
-| `docs/OUTPUTS.md` | Output artefacts |
-| `docs/TROUBLESHOOTING.md` | Common fixes |
-| `docs/MCP_QUICKSTART.md` | MCP setup |
-| `docs/MCP_PROMPT.md` | Tool parameters |
-
-## Validation record
-
-`test_nachweise/` — tier runs, visible output previews, release lock.
+- Zip: `archovive_product_bundle_v4.zip` → `archovive-enterprise-5.0.0.zip`
+- No Python venv — frozen `bin/archovive`
+- `ARCHOVIVE_ENGINE_ROOT` → `ARCHOVIVE_BUNDLE_ROOT`
+- License: `share/legal/archovive_license.json` + `setup_license.sh`

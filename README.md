@@ -54,11 +54,12 @@ Engine source, runtime monorepo, benchmarks, bundle build scripts → **Archoviv
 ## Product bundle (v5 stable)
 
 ```text
-archovive-enterprise-5.0.0.zip  →  archovive/
-  archovive              # frozen CLI binary
-  archovive-mcp          # MCP server
-  archovive_license.json # signed entitlement
-  wheels/                # reproducible wheels
+archovive-enterprise-5.0.0.zip  →  archovive-enterprise-5.0.0/
+  bin/         archovive, archovive-mcp (XDG-aware wrappers)
+  libexec/     PyInstaller runtime (read-only)
+  share/       docs, legal, examples, templates
+  scripts/     install.sh, verify_signature.sh, setup_license.sh
+  metadata/    build_manifest.json, sha256.txt, provenance
 ```
 
 Truth surfaces (must match): `ask` = `chat` = `governance decide`

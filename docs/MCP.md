@@ -1,6 +1,6 @@
 # MCP integration
 
-The MCP **server** ships in `archovive_product_bundle_v4`, not in this public repository.
+The MCP **server** ships in `archovive-enterprise-5.0.0`, not in this public repository.
 
 ## Tools (product bundle)
 
@@ -17,10 +17,10 @@ The MCP **server** ships in `archovive_product_bundle_v4`, not in this public re
 {
   "mcpServers": {
     "archovive": {
-      "command": "/path/to/archovive_product_bundle_v4/.venv/bin/python3",
+      "command": "/path/to/archovive-enterprise-5.0.0/bin/archovive-mcp",
       "args": ["-m", "archovive_os.mcp.server"],
       "env": {
-        "ARCHOVIVE_REPO": "/path/to/archovive_product_bundle_v4",
+        "ARCHOVIVE_REPO": "/path/to/archovive-enterprise-5.0.0",
         "ARCHOVIVE_COMPILE": "runtime"
       }
     }
