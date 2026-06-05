@@ -1,0 +1,31 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://archovive.dev/slsa/reproducible-build/v1",
+      "externalParameters": {
+        "git_sha": "unknown"
+      },
+      "internalParameters": {},
+      "resolvedDependencies": []
+    },
+    "runDetails": {
+      "builder": {
+        "id": "https://github.com/archovive/archovive/actions/workflows/archovive-supply-chain.yml"
+      },
+      "metadata": {
+        "invocationId": "unknown",
+        "startedOn": "2026-06-05T09:46:18Z"
+      }
+    }
+  },
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "ced22f46cf573b4d971648852a70fc4f6bbe6e887794175d7304a2eda8516ef4"
+      },
+      "name": "archovive"
+    }
+  ]
+}

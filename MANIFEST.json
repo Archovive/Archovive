@@ -2,7 +2,22 @@
   "schema_id": "archovive_product_manifest_v5",
   "version": "5.0.0",
   "tier": "enterprise",
-  "commands": ["archovive", "archovive-mcp", "archovive-attestation"],
-  "docs": ["docs/README.md", "docs/LEXIKON.md", "docs/ENTERPRISE.md"],
-  "profiles": ["deploy/profiles/personal.yml", "deploy/profiles/team.yml", "deploy/profiles/enterprise.yml"]
+  "bundle_layout": "archovive-enterprise-5.0.0/bin|share|scripts|metadata",
+  "commands": ["archovive", "archovive-mcp"],
+  "docs": [
+    "docs/README.md",
+    "docs/LEXIKON.md",
+    "docs/ENTERPRISE.md",
+    "docs/RELEASE_NOTES_v5.0.0.md"
+  ],
+  "profiles": [
+    "deploy/profiles/personal.yml",
+    "deploy/profiles/team.yml",
+    "deploy/profiles/enterprise.yml"
+  ],
+  "release_assets": [
+    "archovive-enterprise-5.0.0.zip",
+    "archovive-enterprise-5.0.0.zip.sha256",
+    "archovive.slsa.provenance.json"
+  ]
 }
