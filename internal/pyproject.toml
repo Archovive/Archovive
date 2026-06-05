@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "archovive"
 version = "5.0.0"
-description = "Archovive public installer and CLI router (open-core)"
-readme = "README.md"
+description = "Archovive OSS CLI — simulate demo and open-core router"
+readme = "PACKAGE.md"
 requires-python = ">=3.11"
 dependencies = []
 
@@ -17,8 +17,8 @@ dev = ["pytest>=7.0"]
 archovive = "archovive.cli.cli_main:main"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = [".."]
 include = ["archovive*"]
 
 [tool.pytest.ini_options]
-testpaths = ["archovive/tests"]
+testpaths = ["../archovive/tests"]

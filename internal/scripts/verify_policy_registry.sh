@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
-# Ensure open-core policy pack registry uses repo-relative paths.
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "${ROOT}"
 
 python3 <<'PY'
 import json
 from pathlib import Path
 
-reg = json.loads(Path("policy_packs/registry.json").read_text(encoding="utf-8"))
+reg = json.loads(Path("internal/policy_packs/registry.json").read_text(encoding="utf-8"))
 for pack in reg.get("packs", []):
     path = str(pack.get("path", ""))
     if path.startswith("golden/"):

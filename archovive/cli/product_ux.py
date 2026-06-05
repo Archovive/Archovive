@@ -1,151 +1,101 @@
 """
-Product CLI UX (v5.0.0) — help text and version display (public repo, no engine).
+Product CLI UX (v5.0.0) — OSS funnel + bundle router.
 """
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
-from archovive._bundle import BUNDLE_DIR
+from archovive._bundle import BUNDLE_DIR, BUNDLE_ZIP
 
 CLI_VERSION = "5.0.0"
-ENGINE_VERSION = "5.0.0 (frozen bundle)"
+ENGINE_VERSION = "5.0.0 (enterprise bundle)"
 
 EXIT_CODES_HELP = """\
 Exit codes:
   0  PASS
   1  Drift violation
-  2  Regulatory/Policy violation
+  2  Policy / regulatory violation
   3  Engine error
-  4  Misuse (running inside bundle)"""
+  4  Misuse"""
 
 TOP_LEVEL_HELP = f"""\
-Archovive v{CLI_VERSION} — deterministic architecture analysis (public CLI)
+Archovive v{CLI_VERSION} — local-first architecture governance
 
-Usage:
-  archovive run              Analyse repository (requires product bundle engine)
-  archovive verify           Re-verify attestation (requires product bundle)
-  archovive init             Initialize project baseline (requires product bundle)
-  archovive doctor           Lightweight environment check (public)
-  archovive diff             Compare two analysis runs (requires product bundle)
-  archovive sbom             Emit SBOM (requires product bundle)
-  archovive evidence         Evidence Camera — help only in this repo; data in bundle
-  archovive camera evidence  Same
+Try it now (no bundle required):
+  archovive simulate          30s demo — drift + policy verdict
+  archovive ci check            CI gate on demo repo (exit 2 on violation)
+
+Production (your repositories):
+  archovive run                 Full analysis (enterprise bundle)
+  archovive gate                Release decision
+  archovive verify              Attestation verify
 
 Options:
-  --help                     Show this message
-  --version                  Show version
+  --help, --version
 
 {EXIT_CODES_HELP}
 
-This repository is CLI + docs only. Install {BUNDLE_DIR}/ from {BUNDLE_DIR}.zip — see docs/INSTALL.md."""
+Docs: docs/01-intro/ · Enterprise bundle: {BUNDLE_ZIP} — docs/07-enterprise/"""
+
+SIMULATE_HELP = """\
+Usage:
+  archovive simulate [--json] [--repo PATH]
+
+Runs the OSS demo on examples/demo-fintech (intentional DORA violation).
+Shows graph metrics, drift matrix, policy verdict, replay hash.
+
+  archovive simulate --json     Machine-readable output"""
+
+CI_HELP = """\
+Usage:
+  archovive ci check [--repo PATH] [--json]
+
+CI gate for the demo repository. Exit 2 on policy violation (same as production gate).
+Wire into GitHub Actions — see docs/03-ci/"""
 
 RUN_HELP = f"""\
 Usage:
   archovive run [options]
 
-Description:
-  Execute full analysis pipeline (Compiler → M1 → M2 → M4 → M3 → Verify → M5).
-  Requires the product bundle engine (not shipped in this public repository).
-
-Options:
-  --compact, --core-view, --relax, --help
-
-See docs/OUTPUTS.md and docs/INSTALL.md."""
+Full deterministic pipeline on your repository.
+Requires enterprise bundle ({BUNDLE_DIR}/). See docs/07-enterprise/."""
 
 VERIFY_HELP = """\
 Usage:
   archovive verify [path] [--json]
 
-Requires product bundle. See docs/INSTALL.md."""
+Requires enterprise bundle. See docs/04-governance/."""
 
 INIT_HELP = """\
 Usage:
-  archovive init [path] [--wizard]
+  archovive init [path]
 
-Requires product bundle. See docs/INSTALL.md."""
+Requires enterprise bundle."""
 
 DOCTOR_HELP = """\
 Usage:
   archovive doctor
 
-Public repo: checks Python 3.11+ and Git only.
-Full doctor (license, venv, policy packs) requires product bundle install."""
+Checks Python 3.11+ and git. Full doctor requires enterprise bundle."""
 
 DIFF_HELP = """\
 Usage:
-  archovive diff <old_dir> <new_dir>
+  archovive diff <old> <new>
 
-Requires product bundle."""
+Requires enterprise bundle."""
 
 SBOM_HELP = """\
 Usage:
-  archovive sbom [--out=PATH]
+  archovive sbom
 
-Requires product bundle. See docs/SBOM.md."""
+Requires enterprise bundle. See docs/04-governance/."""
 
 EVIDENCE_HELP = """\
 Usage:
-  archovive evidence [--json] [--global] [REPO]
-  archovive camera evidence --repo NAME [--global] [--json]
+  archovive evidence [--help]
 
-Evidence Camera (C) runs in the product bundle / MCP server.
-This repo documents the schema; see docs/CAMERAS.md and bundle benchmarks/."""
-
-COMMAND_HELP: dict[str, str] = {
-    "run": RUN_HELP,
-    "verify": VERIFY_HELP,
-    "init": INIT_HELP,
-    "doctor": DOCTOR_HELP,
-    "diff": DIFF_HELP,
-    "sbom": SBOM_HELP,
-    "evidence": EVIDENCE_HELP,
-}
-
-
-def _product_root() -> Path | None:
-    import os
-
-    if os.environ.get("ARCHOVIVE_REPO"):
-        return Path(os.environ["ARCHOVIVE_REPO"]).resolve()
-    cur = Path.cwd().resolve()
-    for _ in range(16):
-        if (cur / BUNDLE_DIR / "MANIFEST.json").is_file():
-            return cur / BUNDLE_DIR
-        if (cur / "MANIFEST.json").is_file() and (cur / "packages" / "archovive_os").is_dir():
-            return cur
-        if cur.parent == cur:
-            break
-        cur = cur.parent
-    return None
-
-
-def read_bundle_hash() -> str | None:
-    root = _product_root()
-    if root is None:
-        return None
-    manifest = root / "MANIFEST.json"
-    if not manifest.is_file():
-        return None
-    try:
-        data = json.loads(manifest.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-    value = data.get("bundle_hash")
-    return str(value) if value else None
-
-
-def print_version() -> None:
-    bh = read_bundle_hash()
-    lines = [
-        f"archovive public CLI v{CLI_VERSION}",
-        f"engine (bundle): {ENGINE_VERSION}",
-    ]
-    if bh:
-        lines.append(f"bundle hash: {bh}")
-    else:
-        lines.append("bundle: not detected — install archovive-enterprise-5.0.0")
-    print("\n".join(lines))
+Evidence Camera — full output in enterprise bundle. See docs/04-governance/."""
 
 
 def print_top_help() -> None:
@@ -153,11 +103,31 @@ def print_top_help() -> None:
 
 
 def print_command_help(command: str) -> None:
-    text = COMMAND_HELP.get(command)
-    if text:
-        print(text)
+    mapping = {
+        "run": RUN_HELP,
+        "verify": VERIFY_HELP,
+        "init": INIT_HELP,
+        "doctor": DOCTOR_HELP,
+        "diff": DIFF_HELP,
+        "sbom": SBOM_HELP,
+        "evidence": EVIDENCE_HELP,
+        "simulate": SIMULATE_HELP,
+        "ci": CI_HELP,
+    }
+    print(mapping.get(command, TOP_LEVEL_HELP))
+
+
+def print_version() -> None:
+    bundle_root = Path(BUNDLE_DIR)
+    detected = bundle_root.is_dir() or bool(
+        __import__("os").environ.get("ARCHOVIVE_BUNDLE_ROOT")
+    )
+    print(f"archovive OSS CLI v{CLI_VERSION}")
+    print(f"engine: {ENGINE_VERSION if detected else 'simulate demo (OSS)'}")
+    if detected:
+        print(f"bundle: {BUNDLE_DIR}")
     else:
-        print_top_help()
+        print("bundle: not installed — run dist/install.sh or archovive simulate")
 
 
 def wants_help(argv: list[str]) -> bool:

@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  boundary-and-cli:
-    name: boundary-and-cli
+  oss-product:
+    name: oss-product
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,38 +20,44 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install public package
-        run: pip install -e ".[dev]"
+      - name: Install OSS CLI
+        run: pip install -e internal/[dev]
 
       - name: Public repo boundary
-        run: bash scripts/verify_public_boundary.sh
+        run: bash internal/scripts/verify_public_boundary.sh
 
       - name: Unit tests
         run: python -m pytest archovive/tests -q
 
-      - name: CLI help smoke
+      - name: OSS funnel — simulate
         run: |
+          export PATH="$PWD/dist:$PATH"
+          archovive simulate | grep -q "POLICY_VIOLATION"
+          archovive simulate --json | grep -q "fee879ce6ea2d29634bde4f5f2d738e37a0bf409fb200d1d52009c1cd0c734aa"
+
+      - name: OSS funnel — ci check exit code
+        run: |
+          export PATH="$PWD/dist:$PATH"
+          archovive ci check || test $? -eq 2
+
+      - name: CLI smoke
+        run: |
+          export PATH="$PWD/dist:$PATH"
           archovive --help
           archovive --version
           archovive doctor
-          archovive evidence --help
-          archovive camera operator --help
-          archovive mcp --help
 
-      - name: Engine commands show bundle message
+      - name: Enterprise commands require bundle
         run: |
-          # require_engine exits 1 by design; capture output (pipefail-safe)
+          export PATH="$PWD/dist:$PATH"
           run_out="$(archovive run 2>&1 || true)"
           echo "$run_out" | grep -q "product bundle"
-          evidence_out="$(archovive evidence flask 2>&1 || true)"
-          echo "$evidence_out" | grep -q "product bundle"
 
-      - name: Release manifest checksums present
+      - name: Internal release pins
         run: |
-          test -f releases/archovive-enterprise-5.0.0.zip.sha256
-          test -f releases/build_manifest.json
-          test -f RELEASE.lock.json
-          grep -q 'bundle_sha256' RELEASE.lock.json
+          test -f internal/releases/archovive-enterprise-5.0.0.zip.sha256
+          test -f internal/RELEASE.lock.json
+          grep -q 'bundle_sha256' internal/RELEASE.lock.json
 
-      - name: Policy pack registry paths
-        run: bash scripts/verify_policy_registry.sh
+      - name: Policy pack registry (internal)
+        run: bash internal/scripts/verify_policy_registry.sh

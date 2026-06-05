@@ -1,4 +1,4 @@
-"""v5 CLI router — public stubs; engine commands require product bundle."""
+"""v5 CLI — OSS simulate funnel + enterprise bundle router."""
 from __future__ import annotations
 
 import shutil
@@ -15,6 +15,7 @@ from archovive.cli.product_ux import (
     strip_help_flags,
     wants_help,
 )
+from archovive.simulate.runner import run_simulate_cli
 
 
 def _apply_run_flags(argv: list[str]) -> list[str]:
@@ -38,13 +39,15 @@ def _dispatch_help(argv: list[str]) -> bool:
         print_top_help()
         return True
     cmd = argv[0]
-    if cmd in ("run", "verify", "init", "doctor", "diff", "sbom", "evidence", "mcp") and wants_help(
+    if cmd in ("run", "verify", "init", "doctor", "diff", "sbom", "evidence", "mcp", "simulate", "ci") and wants_help(
         argv
     ):
         if cmd == "mcp":
             print_mcp_help()
         elif cmd == "evidence":
             run_evidence_stub(["--help"])
+        elif cmd == "ci":
+            print_command_help("ci")
         else:
             print_command_help(cmd)
         return True
@@ -76,7 +79,7 @@ def run_doctor_public(argv: list[str]) -> int:
         print("archovive doctor: git OK")
     else:
         print("archovive doctor: git not found (recommended)", file=_sys.stderr)
-    print("archovive doctor: full checks require product bundle (see docs/INSTALL.md)")
+    print("archovive doctor: try `archovive simulate` — full checks need enterprise bundle")
     return 0 if ok else 1
 
 
@@ -92,7 +95,19 @@ def main(argv: list[str] | None = None) -> int:
 
     argv = strip_help_flags(argv)
 
-    if not argv or argv[0] in ("run",):
+    if not argv:
+        return run_simulate_cli([])
+
+    if argv[0] == "simulate":
+        return run_simulate_cli(argv[1:])
+
+    if argv[0] == "ci":
+        if len(argv) < 2 or argv[1] != "check":
+            print("Usage: archovive ci check [--repo PATH] [--json]", file=sys.stderr)
+            return 4
+        return run_simulate_cli(argv[2:], ci_mode=True)
+
+    if argv[0] in ("run",):
         require_engine("run")
     if argv[0] == "verify":
         require_engine("verify")

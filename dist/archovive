@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Archovive CLI — OSS router or frozen enterprise bundle when installed.
+set -euo pipefail
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+# OSS commands always use the public router (even if a bundle is on PATH).
+case "${1:-}" in
+  simulate|ci|""|--help|-h|--version|-V)
+    export PYTHONPATH="${REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
+    exec python3 -m archovive.cli.cli_main "$@"
+    ;;
+esac
+
+BUNDLE_ROOT="${ARCHOVIVE_BUNDLE_ROOT:-}"
+
+if [[ -z "${BUNDLE_ROOT}" && -n "${ARCHOVIVE_ENGINE_ROOT:-}" ]]; then
+  BUNDLE_ROOT="${ARCHOVIVE_ENGINE_ROOT}"
+fi
+
+if [[ -z "${BUNDLE_ROOT}" && -d "${REPO_ROOT}/archovive-enterprise-5.0.0" ]]; then
+  BUNDLE_ROOT="${REPO_ROOT}/archovive-enterprise-5.0.0"
+fi
+
+if [[ -n "${BUNDLE_ROOT}" && -x "${BUNDLE_ROOT}/bin/archovive" ]]; then
+  export ARCHOVIVE_BUNDLE_ROOT="${BUNDLE_ROOT}"
+  exec "${BUNDLE_ROOT}/bin/archovive" "$@"
+fi
+
+export PYTHONPATH="${REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
+if command -v python3 >/dev/null 2>&1; then
+  exec python3 -m archovive.cli.cli_main "$@"
+fi
+
+echo "archovive: run dist/install.sh or install enterprise bundle — docs/02-simulate" >&2
+exit 1
