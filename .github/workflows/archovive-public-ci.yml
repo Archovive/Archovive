@@ -21,10 +21,13 @@ jobs:
           python-version: "3.12"
 
       - name: Install public package
-        run: pip install -e .
+        run: pip install -e ".[dev]"
 
       - name: Public repo boundary
         run: bash scripts/verify_public_boundary.sh
+
+      - name: Unit tests
+        run: python -m pytest archovive/tests -q
 
       - name: CLI help smoke
         run: |
@@ -39,3 +42,22 @@ jobs:
         run: |
           archovive run 2>&1 | grep -q "product bundle"
           archovive evidence flask 2>&1 | grep -q "product bundle"
+
+      - name: Release manifest checksums present
+        run: |
+          test -f releases/archovive-enterprise-5.0.0.zip.sha256
+          test -f releases/build_manifest.json
+          test -f RELEASE.lock.json
+          grep -q 'bundle_sha256' RELEASE.lock.json
+
+      - name: Policy pack registry paths
+        run: |
+          python3 -c "
+import json
+reg = json.load(open('policy_packs/registry.json'))
+for p in reg.get('packs', []):
+    path = p.get('path', '')
+    assert not path.startswith('golden/'), path
+    assert path.startswith('policy_packs/'), path
+print('registry OK')
+"

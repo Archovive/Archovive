@@ -1,5 +1,18 @@
-# Archovive Enterprise — production stack (extends production compose)
-# Usage: cp deploy/profiles/.env.enterprise.example .env && docker compose -f deploy/profiles/enterprise.yml up -d
+# Enterprise production stack
 
-include:
-  - path: ../docker-compose.production.yml
+Enterprise server compose (Postgres, OIDC, mTLS) ships in **Archovive-core** — not this public installer repo.
+
+This public repository provides:
+
+- Frozen offline bundle (`archovive-enterprise-5.0.0.zip`)
+- `install.sh` → `/opt` + `/etc/archovive/archovive.env`
+- Env template: `deploy/profiles/.env.enterprise.example`
+
+```bash
+# Production install (bundle)
+sudo ./archovive-enterprise-5.0.0/scripts/install.sh
+source /etc/archovive/archovive.env
+archovive doctor
+```
+
+For Docker/K8s production stacks, contact enterprise support or use Archovive-core deploy manifests.

@@ -4,7 +4,7 @@
 
 **Statement:**
 
-Archovive v3 is an on-prem governance gate that checks software architecture automatically against DORA and NIS2 requirements and produces tamper-evident certificates for auditors — directly in CI/CD.
+Archovive v5 is an on-prem governance gate that checks software architecture automatically against DORA and NIS2 requirements and produces tamper-evident certificates for auditors — directly in CI/CD.
 
 **Moat:** The combination bridge — regulatory policy packs compiled into graph invariants. Code-quality tools do not evaluate law packs; legal tools do not compile repositories into hypergraphs.
 

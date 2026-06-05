@@ -3,25 +3,25 @@
     {
       "pack_content_hash": "5156550efd0c46ef326a326f8ed44cf5df2f62fb344c1b150a58d34a96c2d6ad",
       "pack_id": "ARCHITECTURE_INTEGRITY_V1",
-      "path": "golden/policy_packs/ARCHITECTURE_INTEGRITY_V1.json",
+      "path": "policy_packs/ARCHITECTURE_INTEGRITY_V1.json",
       "rule_count": 2
     },
     {
       "pack_content_hash": "78d2fb07a6f17baea056e33b0fbeb09cde71f5f923ee2743792798ba499e4106",
       "pack_id": "DORA_2026",
-      "path": "golden/policy_packs/DORA_2026.json",
+      "path": "policy_packs/DORA_2026.json",
       "rule_count": 3
     },
     {
       "pack_content_hash": "f832ab8d03f88e36ba03a5daacab4257013b143cbcda1c0ae9a422b0a15f134e",
       "pack_id": "GLOBAL_BASE",
-      "path": "golden/policy_packs/GLOBAL_BASE.json",
+      "path": "policy_packs/GLOBAL_BASE.json",
       "rule_count": 3
     },
     {
       "pack_content_hash": "7ecf17459fd2244fd6ef8c7560a4b4ef0755a13e338d05ac5705327ea9db78ea",
       "pack_id": "SOX_2026",
-      "path": "golden/policy_packs/SOX_2026.json",
+      "path": "policy_packs/SOX_2026.json",
       "rule_count": 3
     }
   ],

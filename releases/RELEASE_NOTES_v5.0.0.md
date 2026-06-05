@@ -8,8 +8,8 @@
 
 | Artifact | SHA256 |
 |----------|--------|
-| `archovive-enterprise-5.0.0.zip` | `07c99c1e07f7656ddba5947ca8e53bc245c462426fe616371acdaa538531fc33` |
-| CLI binary (`libexec/archovive/archovive`) | `ced22f46cf573b4d971648852a70fc4f6bbe6e887794175d7304a2eda8516ef4` |
+| `archovive-enterprise-5.0.0.zip` | `edf494d21bb4883d887fdc849c997a588a8eecbfee87e6a911309ffc4ddd3c99` |
+| CLI binary (`libexec/archovive/archovive`) | `2b9f5dfecf73628666448d03b93797683d1730d3d7b0e0c8be06215c247fd0f6` |
 
 SLSA provenance: `metadata/archovive.slsa.provenance.json` (inside bundle)
 

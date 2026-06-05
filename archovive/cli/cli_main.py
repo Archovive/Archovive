@@ -1,4 +1,4 @@
-"""v4 CLI router — public stubs; engine commands require product bundle."""
+"""v5 CLI router — public stubs; engine commands require product bundle."""
 from __future__ import annotations
 
 import shutil

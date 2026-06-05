@@ -26,7 +26,6 @@ for pattern in "${FORBIDDEN[@]}"; do
   fi
 done
 
-# Legacy v1 tree must be gone
 if [[ -d archovive_os/product_v1 ]]; then
   echo "remove legacy archovive_os/product_v1"
   fail=1

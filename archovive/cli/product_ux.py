@@ -1,5 +1,5 @@
 """
-Product CLI UX (v4.1) — help text and version display (public repo, no engine).
+Product CLI UX (v5.0.0) — help text and version display (public repo, no engine).
 """
 from __future__ import annotations
 

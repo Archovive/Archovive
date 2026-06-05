@@ -1,14 +1,15 @@
-# Archovive Team — optional decision-api + CI template
-# Usage: docker compose -f deploy/profiles/team.yml up -d
+# Team tier — optional decision-api
 
-services:
-  decision-api:
-    build:
-      context: ../..
-      dockerfile: deploy/Dockerfile.decision-api
-    environment:
-      ARCHOVIVE_PRODUCT: team
-      ARCHOVIVE_STORE_BACKEND: json
-      ARCHOVIVE_API_TOKEN: ${ARCHOVIVE_API_TOKEN:-dev-token}
-    ports:
-      - "8080:8080"
+The decision-api Docker image is built from **Archovive-core** (private engine repo).
+This public repo ships the frozen CLI bundle only.
+
+Team workflow without Docker:
+
+```bash
+source ./archovive.env
+export ARCHOVIVE_PRODUCT=team
+archovive gate
+archovive team feed
+```
+
+Env template: `deploy/profiles/.env.team.example`

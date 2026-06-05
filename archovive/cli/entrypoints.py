@@ -13,7 +13,7 @@ def main_archovive() -> None:
 
 
 def main_cli() -> None:
-    """Legacy alias — same v4 router."""
+    """Legacy alias — same v5 router."""
     raise SystemExit(main())
 
 
