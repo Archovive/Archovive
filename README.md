@@ -14,7 +14,8 @@ The deterministic **engine**, frozen **binary**, and **`archovive-enterprise-5.0
 ```bash
 git clone https://github.com/Archovive/Archovive.git
 cd Archovive
-# Download archovive-enterprise-5.0.0.zip from Archovive-core release v5.0.0
+# Download from GitHub Release v5.0.0:
+#   archovive-enterprise-5.0.0.zip + .sha256 + archovive.slsa.provenance.json
 ./install_archovive.sh
 source ./archovive.env
 archovive --version
@@ -22,10 +23,12 @@ archovive doctor
 archovive ask "why blocked?"
 ```
 
+Release notes: [docs/RELEASE_NOTES_v5.0.0.md](docs/RELEASE_NOTES_v5.0.0.md)
+
 | Mode | When |
 |------|------|
-| **After `./install_archovive.sh`** | `PATH` includes `archovive/` bundle; full v5 binary |
-| **Without ZIP** | Clone only — place bundle beside `install_archovive.sh` first |
+| **After `./install_archovive.sh`** | `PATH` includes `archovive-enterprise-5.0.0/bin`; full v5 binary |
+| **Without ZIP** | Clone only — download release assets beside `install_archovive.sh` first |
 
 See `docs/README.md` (customer POV).
 
