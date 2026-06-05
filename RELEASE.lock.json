@@ -1,7 +1,11 @@
 {
-  "product_version": "3.0.0",
-  "bundle_version": "v3",
-  "bundle_hash": "41507088c1eeaf7a7120f51a049a3703ecab85feee9e815e8395a84e943d5e84",
-  "build_integrity_hash": "5d8b501dc129fdd0aa72c683bc3764b60cf83ce8fad20416b721c36c6471067f",
-  "distribution": "open-core-cli-only"
+  "schema_id": "archovive_product_release_v5",
+  "product_version": "5.0.0",
+  "bundle_name": "archovive-enterprise-5.0.0.zip",
+  "bundle_tier": "enterprise",
+  "binary_sha256": "ced22f46cf573b4d971648852a70fc4f6bbe6e887794175d7304a2eda8516ef4",
+  "distribution": "open-core-product",
+  "install_script": "install_archovive.sh",
+  "core_repo": "Archovive/Archovive-core",
+  "truth_surfaces": ["ask", "chat", "governance decide"]
 }

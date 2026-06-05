@@ -1,0 +1,5 @@
+# Archovive Enterprise — production stack (extends production compose)
+# Usage: cp deploy/profiles/.env.enterprise.example .env && docker compose -f deploy/profiles/enterprise.yml up -d
+
+include:
+  - path: ../docker-compose.production.yml

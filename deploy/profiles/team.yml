@@ -1,0 +1,14 @@
+# Archovive Team — optional decision-api + CI template
+# Usage: docker compose -f deploy/profiles/team.yml up -d
+
+services:
+  decision-api:
+    build:
+      context: ../..
+      dockerfile: deploy/Dockerfile.decision-api
+    environment:
+      ARCHOVIVE_PRODUCT: team
+      ARCHOVIVE_STORE_BACKEND: json
+      ARCHOVIVE_API_TOKEN: ${ARCHOVIVE_API_TOKEN:-dev-token}
+    ports:
+      - "8080:8080"

@@ -1,0 +1,3 @@
+# Archovive Personal — CLI-only (zero infra)
+# Usage: archovive setup && archovive gate
+# No docker services required.

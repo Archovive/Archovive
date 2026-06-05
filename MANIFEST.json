@@ -1,51 +1,8 @@
 {
-  "schema": "archovive_open_core_manifest_v1",
-  "product_version": "3.0.0",
-  "bundle_version": "open-core",
-  "license": "MIT",
-  "engine_distribution": "proprietary_separate",
-  "cli_commands": [
-    "run",
-    "verify",
-    "init",
-    "doctor",
-    "diff",
-    "sbom"
-  ],
-  "license_tiers": [
-    "core",
-    "ci",
-    "gov"
-  ],
-  "exit_codes": {
-    "0": "PASS",
-    "1": "drift_violation",
-    "2": "regulatory_violation",
-    "3": "engine_error",
-    "4": "misuse_self_run_in_bundle"
-  },
-  "default_license_tier": "ci",
-  "policy_packs": [
-    "ARCHITECTURE_INTEGRITY_V1.json",
-    "CRA_MINIMAL_V1.json",
-    "DORA_2026.json",
-    "DORA_MINIMAL_V1.json",
-    "GLOBAL_BASE.json",
-    "NIS2_MINIMAL_V1.json",
-    "SOX_2026.json",
-    "registry.json"
-  ],
-  "docs": [
-    "docs/COMPILER_SPEC_V1.md",
-    "docs/ANNOTATION_SCHEMA_V1.md",
-    "docs/ARCHOVIVE_OUTPUT_EXAMPLE.md",
-    "docs/POSITIONING.md",
-    "docs/PRICING.md",
-    "docs/SLA.md",
-    "docs/PARSER_STRATEGY.md"
-  ],
-  "environment": {
-    "ARCHOVIVE_ENGINE_ROOT": "path to licensed product bundle root",
-    "ARCHOVIVE_LICENSE_TIER": "core | ci | gov"
-  }
+  "schema_id": "archovive_product_manifest_v5",
+  "version": "5.0.0",
+  "tier": "enterprise",
+  "commands": ["archovive", "archovive-mcp", "archovive-attestation"],
+  "docs": ["docs/README.md", "docs/LEXIKON.md", "docs/ENTERPRISE.md"],
+  "profiles": ["deploy/profiles/personal.yml", "deploy/profiles/team.yml", "deploy/profiles/enterprise.yml"]
 }
