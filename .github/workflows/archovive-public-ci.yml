@@ -40,8 +40,11 @@ jobs:
 
       - name: Engine commands show bundle message
         run: |
-          archovive run 2>&1 | grep -q "product bundle"
-          archovive evidence flask 2>&1 | grep -q "product bundle"
+          # require_engine exits 1 by design; capture output (pipefail-safe)
+          run_out="$(archovive run 2>&1 || true)"
+          echo "$run_out" | grep -q "product bundle"
+          evidence_out="$(archovive evidence flask 2>&1 || true)"
+          echo "$evidence_out" | grep -q "product bundle"
 
       - name: Release manifest checksums present
         run: |
