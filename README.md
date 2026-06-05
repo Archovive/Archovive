@@ -18,11 +18,21 @@ replay_hash: 3e700b6a…d3b9736
 Exit Code: 2
 ```
 
-Kein Bundle. Kein Account. Das ist die Demo auf `examples/demo-fintech` — **3 absichtliche Architektur-Verstöße** in einer fiktiven Payments-API.
+→ Ausprobieren: [docs/02-simulate](docs/02-simulate/README.md)  
+→ In CI: [docs/03-ci](docs/03-ci/README.md)  
+→ Pilot anfragen: [pilot@archovive.com](mailto:pilot@archovive.com)
+
+Kein Bundle. Kein Account. Demo: `examples/demo-fintech` — **3 absichtliche Architektur-Verstöße** in der fiktiven Payments-API **NovaPay**.
 
 ---
 
 ## Selbst ausprobieren
+
+```bash
+git clone https://github.com/Archovive/Archovive.git && bash Archovive/dist/install.sh
+```
+
+Oder Schritt für Schritt:
 
 ```bash
 git clone https://github.com/Archovive/Archovive.git

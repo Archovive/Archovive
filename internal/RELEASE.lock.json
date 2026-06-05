@@ -8,7 +8,7 @@
   "bundle_tier": "enterprise",
   "binary_sha256": "2b9f5dfecf73628666448d03b93797683d1730d3d7b0e0c8be06215c247fd0f6",
   "distribution": "open-core-product",
-  "install_script": "install_archovive.sh",
+  "install_script": "internal/install_archovive.sh",
   "core_repo": "Archovive/Archovive-core",
   "truth_surfaces": ["ask", "chat", "governance decide"]
 }

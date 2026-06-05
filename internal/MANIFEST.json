@@ -3,15 +3,14 @@
   "version": "5.0.0",
   "tier": "enterprise",
   "bundle_layout": "archovive-enterprise-5.0.0/{bin,share,scripts,metadata,libexec}",
-  "cli_commands": ["archovive", "archovive-mcp", "ask", "chat", "governance", "doctor", "gate"],
+  "cli_commands": ["archovive", "archovive-mcp", "ask", "chat", "governance", "doctor", "gate", "simulate", "ci"],
   "docs": [
-    "docs/README.md",
-    "docs/INSTALL.md",
-    "docs/RELEASE_NOTES_v5.0.0.md"
+    "docs/01-intro/README.md",
+    "docs/02-simulate/README.md",
+    "docs/07-enterprise/README.md"
   ],
   "release_assets": [
-    "releases/archovive-enterprise-5.0.0.zip",
-    "releases/archovive-enterprise-5.0.0.zip.sha256",
-    "releases/archovive.slsa.provenance.json"
+    "internal/releases/archovive-enterprise-5.0.0.zip.sha256",
+    "internal/releases/archovive.slsa.provenance.json"
   ]
 }
