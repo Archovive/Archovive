@@ -6,21 +6,35 @@ Archovive beantwortet eine Frage — mit reproduzierbarem Beweis:
 
 > **Darf dieser Code-Stand released werden — und warum (oder warum nicht)?**
 
-Nicht als Meinung. Nicht als Chat-Antwort. Sondern als **Verdict**, **Drift-Matrix** und **Evidence-Paket**, das Auditoren und CI gleichermaßen akzeptieren können.
+## Was du bekommst
+
+```text
+$ archovive simulate
+
+ARCHOVIVE GATE — demo-fintech v5.0.0
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+VERDICT       POLICY_VIOLATION
+Policy        DORA_2026
+Finding       layer boundary breach — API imports payments.ledger directly
+Exit Code     2
+replay_hash   3e700b6a…d3b9736  ✓ pinned (v5.0.0)
+```
+
+Kein Bundle. Kein Account. Das ist die Demo auf `examples/demo-fintech` — **3 absichtliche Architektur-Verstöße** in einer fiktiven Payments-API.
 
 ---
 
-## In 30 Sekunden testen
+## Selbst ausprobieren
 
 ```bash
 git clone https://github.com/Archovive/Archovive.git
 cd Archovive
 bash dist/install.sh
-archovive simulate
 ```
 
-Du siehst sofort: Architektur-Metriken → Drift-Status → Policy-Verdict → Replay-Hash.  
-**Kein Enterprise-Bundle nötig** — das OSS-Demo läuft auf `examples/demo-fintech`.
+`install.sh` installiert die CLI und startet `simulate` — gleicher Output wie oben.
+
+**Kein Enterprise-Bundle nötig.**
 
 ---
 
@@ -57,6 +71,8 @@ Build-Artefakte, Policy Packs, Release-Manifests und Enterprise-Installer liegen
 
 Für Analyse **deiner** Codebases: frozen Offline-Bundle `archovive-enterprise-5.0.0.zip`  
 → [Kapitel 07 — Enterprise](docs/07-enterprise/README.md)
+
+**Pilot bis Ende 2026** (5 Monate kostenlos): **pilot@archovive.com** · Details in [docs/08-pricing](docs/08-pricing/README.md#pilotphase)
 
 Sicherheitsmeldungen: `internal/SECURITY.md` · **security@archovive.com**
 

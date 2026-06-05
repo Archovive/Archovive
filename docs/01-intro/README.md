@@ -34,6 +34,15 @@ Gleicher Repository-Stand → gleicher Output (**Determinismus**).
 
 ---
 
+## Warum nicht SonarQube / Vanta?
+
+**SonarQube** findet Zeilen-Bugs. **Vanta** verwaltet Checklisten.  
+**Archovive** analysiert deine Architektur als Graph und entscheidet deterministisch: *darf dieser Stand released werden* — mit signierten Beweisen.
+
+Das ist keine Ersetzung für SAST oder GRC-Tools. Es ist die **Lücke dazwischen**: Architektur + Regulierung + reproduzierbares Evidence.
+
+---
+
 ## Was Archovive nicht ist
 
 - Kein Cloud-SaaS-Scanner

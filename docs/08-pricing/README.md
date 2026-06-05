@@ -86,11 +86,28 @@ Pricing-Dimensionen (Enterprise-Verhandlung): Repo-Anzahl, CI-Seats, Support-SLA
 
 ---
 
+## Pilotphase
+
+**Läuft bis Ende 2026** — erste **5 Monate kostenlos** für qualifizierte Piloten (regulierte Industrie, Platform-Teams mit CI-Mandat, Audit-Kanäle).
+
+Was du bekommst:
+
+- Enterprise-Bundle auf **deinem** Repository (nicht nur Demo)
+- Begleitung beim CI-Gate-Setup
+- Evidence-Packs für interne oder externe Auditoren
+
+**Interesse?** → **pilot@archovive.com**  
+Betreff: `Pilot` + Branche + ungefähre Repo-Größe. Antwort innerhalb von 2 Werktagen.
+
+Allgemeine Enterprise-Anfragen: enterprise@archovive.com
+
+---
+
 ## Nächste Schritte
 
 1. **Noch unsicher?** → [02 — Simulate](../02-simulate/README.md)
 2. **CI einbinden?** → [03 — CI](../03-ci/README.md)
-3. **Enterprise-Pilot?** → enterprise@archovive.com
+3. **Enterprise ohne Pilot?** → enterprise@archovive.com
 
 ---
 
