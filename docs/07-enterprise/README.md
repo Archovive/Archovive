@@ -20,7 +20,7 @@
 
 OSS = **funnel**. Enterprise = **production**.
 
-![Compact run output (enterprise bundle)](../../assets/gifs/graph.gif)
+<p align="center"><img src="../../assets/gifs/graph.gif" alt="Compact run output — enterprise bundle" width="600"></p>
 
 Requires `archovive run --compact` after installing the enterprise bundle — not available in this public repo.
 

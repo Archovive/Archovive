@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Ensure public product tree contains no engine / gov / benchmark source.
+# Ensure public product tree contains no engine / gov / benchmark source,
+# and no forbidden top-level layout paths (repository standard).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -22,6 +23,27 @@ for pattern in "${FORBIDDEN[@]}"; do
   if find . -path "./.git" -prune -o -path "./internal" -prune -o -name "${pattern}" -print -quit 2>/dev/null | grep -q .; then
     echo "forbidden path present outside internal/: ${pattern}"
     find . -path "./.git" -prune -o -path "./internal" -prune -o -name "${pattern}" -print 2>/dev/null | head -5
+    fail=1
+  fi
+done
+
+FORBIDDEN_TOP=(
+  scripts
+  tools
+  releases
+  policy_packs
+  archovive
+)
+for name in "${FORBIDDEN_TOP[@]}"; do
+  if [[ -e "${name}" ]]; then
+    echo "forbidden top-level path: ${name}/ (see docs/00-repository-standard/)"
+    fail=1
+  fi
+done
+
+for f in pyproject.toml setup.cfg setup.py; do
+  if [[ -f "${f}" ]]; then
+    echo "forbidden top-level file: ${f} (belongs in internal/)"
     fail=1
   fi
 done

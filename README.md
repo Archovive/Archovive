@@ -2,23 +2,19 @@
 
 **Understand in 30 seconds. Wire into CI. Scale on-prem.**
 
+Archovive uses a simplified, product-first repository layout. Everything visible at the root is part of the OSS product. Everything internal lives under `internal/`. This keeps the repository clean, predictable, and easy to adopt. → [Repository standard](docs/00-repository-standard/README.md)
+
 Archovive answers one question — with reproducible proof:
 
 > **May this codebase be released — and why (or why not)?**
 
 ## What you get
 
-![Archovive Gate — deterministic policy verdict](docs/assets/gifs/gate.gif)
+<p align="center">
+  <img src="docs/assets/gifs/gate.gif" alt="Archovive Gate — archovive simulate" width="640">
+</p>
 
-```text
-$ archovive simulate
-
-ARCHOVIVE GATE — DORA Boundary Crossing
-Verdict: POLICY_VIOLATION
-graph_hash: fee879ce…c734aa
-replay_hash: 3e700b6a…d3b9736
-Exit Code: 2
-```
+`archovive simulate` → **POLICY_VIOLATION** · gate exit code **2** · pinned `graph_hash` / `replay_hash`
 
 → Try it: [docs/02-simulate](docs/02-simulate/README.md)  
 → Wire CI: [docs/03-ci](docs/03-ci/README.md)  
@@ -68,6 +64,7 @@ bash dist/install.sh
 
 | # | Chapter | Who it's for |
 |---|---------|--------------|
+| 0 | [Repository standard](docs/00-repository-standard/README.md) | Contributors — layout rules |
 | 1 | [What is Archovive?](docs/01-intro/README.md) | Everyone — start here |
 | 2 | [Simulate](docs/02-simulate/README.md) | Anyone who wants a result in 30 seconds |
 | 3 | [CI gate](docs/03-ci/README.md) | Platform engineering, DevOps |
@@ -90,7 +87,7 @@ bash dist/install.sh
 | [evidence.gif](docs/assets/gifs/evidence.gif) | Enterprise bundle | `archovive audit export --bundle` |
 | [graph.gif](docs/assets/gifs/graph.gif) | Enterprise bundle | `archovive run --compact` |
 
-Regenerate stylized previews: `python3 scripts/demo/build_gifs.py` · Record real terminals: [docs/assets/gifs/README.md](docs/assets/gifs/README.md)
+Regenerate: `bash docs/assets/demo/build_gifs.sh` · Details: [docs/assets/gifs/README.md](docs/assets/gifs/README.md)
 
 ---
 
@@ -102,8 +99,9 @@ Regenerate stylized previews: `python3 scripts/demo/build_gifs.py` · Record rea
 | `simulate/` | Demo engine — local analysis without cloud |
 | `examples/demo-fintech/` | Sample repo with intentional policy violation |
 | `dist/` | `install.sh` and CLI wrapper |
-| `docs/` | Product story, chapters 01–08 |
+| `docs/` | Product story, chapters 00–08 |
 | `docs/assets/gifs/` | Terminal demo GIFs |
+| `docs/assets/demo/` | GIF regen scripts + VHS tapes |
 
 Build artifacts, policy packs, release manifests, and the enterprise installer live in **`internal/`** — not for end users.
 

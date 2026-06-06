@@ -19,7 +19,7 @@ Cloud SCM scanners fail when:
 
 Archovive is **local-first by design** — no telemetry, no upload, no account.
 
-![Air-gap mode](../../assets/gifs/airgap.gif)
+<p align="center"><img src="../../assets/gifs/airgap.gif" alt="Air-gap mode — enterprise bundle" width="600"></p>
 
 ---
 
@@ -77,7 +77,7 @@ export ARCHOVIVE_ISOLATED=1
 archovive run
 ```
 
-Preview: `bash scripts/demo/airgap_preview.sh`
+Preview: `bash docs/assets/demo/airgap_preview.sh`
 
 Cache, state, and sidecar data go only to XDG:
 

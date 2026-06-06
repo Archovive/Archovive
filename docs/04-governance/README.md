@@ -34,7 +34,7 @@ The OSS demo evaluates three rules live. Enterprise bundle: all packs including 
 
 The drift matrix describes **deviation from a stored baseline**:
 
-![Drift matrix](../../assets/gifs/drift.gif)
+<p align="center"><img src="../../assets/gifs/drift.gif" alt="Drift matrix — enterprise bundle" width="600"></p>
 
 | Field | Meaning |
 |-------|---------|

@@ -4,4 +4,6 @@ __pycache__/
 archovive.env
 fleet_runs/
 *.egg-info/
+archovive.egg-info/
+docs/assets/demo/.bin/
 .DS_Store

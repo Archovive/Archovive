@@ -4,6 +4,8 @@
 
 **Everyone** who wants to understand what Archovive does in under a minute — no install guide, no engine internals, no compliance jargon.
 
+Contributors: read [Chapter 00 — Repository standard](../00-repository-standard/README.md) first.
+
 ---
 
 ## The problem

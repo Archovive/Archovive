@@ -12,7 +12,7 @@ Archovive analyzes the demo repository `examples/demo-fintech` — NovaPay, a fi
 
 Default output = **product gate format** (identical to the [README](../../README.md#what-you-get)). With `--verbose` you see graph metrics, drift status, and all three evaluated policy rules (one fails on the demo: **DORA_2026**).
 
-![Gate output](../../assets/gifs/gate.gif)
+<p align="center"><img src="../../assets/gifs/gate.gif" alt="Gate output — archovive simulate" width="600"></p>
 
 ---
 

@@ -21,7 +21,7 @@ Nobody blocks the merge when the API suddenly imports payment-ledger internals �
 
 Archovive closes that gap with **deterministic exit codes**.
 
-![CI gate](../../assets/gifs/ci.gif)
+<p align="center"><img src="../../assets/gifs/ci.gif" alt="CI gate — archovive ci check" width="600"></p>
 
 ---
 
@@ -43,7 +43,7 @@ On the **OSS demo repo**, exit **2** is expected (DORA boundary crossing) — pr
 
 `simulate` prints the same gate lines but exits **0**; only **`ci check`** propagates the gate exit code to the shell.
 
-Local demo: `bash scripts/demo/ci_gate.sh`
+Local demo: `bash docs/assets/demo/ci_gate.sh`
 
 ---
 

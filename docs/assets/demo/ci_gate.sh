@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Simulated GitHub Actions step + real OSS ci check (exit 2 on demo).
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
 export PATH="${ROOT}/dist:${PATH}"
 cd "${ROOT}"
 pip install -q -e internal/ 2>/dev/null || true

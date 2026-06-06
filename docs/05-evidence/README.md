@@ -23,7 +23,7 @@ An evidence pack is a **coherent bundle** of analysis results you can hand to au
 
 OSS demo delivers terminal/JSON. Enterprise bundle writes the full set to the analysis directory.
 
-![Evidence export](../../assets/gifs/evidence.gif)
+<p align="center"><img src="../../assets/gifs/evidence.gif" alt="Evidence export — enterprise bundle" width="600"></p>
 
 ```bash
 archovive audit export --bundle   # enterprise / gov
