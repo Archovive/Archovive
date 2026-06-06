@@ -1,5 +1,7 @@
 # Chapter 02 — Simulate (30 seconds)
 
+**Navigation:** [Docs hub](../README.md) · Path A · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
+
 ## Who is this chapter for?
 
 **Developers, founders, and evaluators** who want to **see** Archovive — not believe a sales deck — without an enterprise contract, bundle download, or sales call.
@@ -10,9 +12,17 @@
 
 Archovive analyzes the demo repository `examples/demo-fintech` — NovaPay, a fictional payments API with intentional layer violations. Analysis runs **locally** in a few seconds.
 
-Default output = **product gate format** (identical to the [README](../../README.md#what-you-get)). With `--verbose` you see graph metrics, drift status, and all three evaluated policy rules (one fails on the demo: **DORA_2026**).
+Default output = **product gate format** (identical to the [README](../../README.md#try-it)).
 
-<p align="center"><img src="../../assets/gifs/gate.gif" alt="Gate output — archovive simulate" width="600"></p>
+```text
+$ make demo
+
+ARCHOVIVE GATE — DORA Boundary Crossing
+Verdict: POLICY_VIOLATION
+graph_hash: fee879ce…c734aa
+replay_hash: 3e700b6a…d3b9736
+Exit Code: 2
+```
 
 ---
 
@@ -34,7 +44,7 @@ For merge blockers, use **`ci check`**, not `simulate`.
 ```bash
 git clone https://github.com/Archovive/Archovive.git
 cd Archovive
-bash dist/install.sh
+make demo
 ```
 
 ### Option B — manual
@@ -80,4 +90,4 @@ Bare `archovive` with no arguments also runs **simulate**.
 
 ---
 
-**Next chapter:** [03 — CI](../03-ci/README.md) — wire simulate as a merge gate in GitHub Actions.
+**[← Docs hub](../README.md)** · **Next:** [03 — CI](../03-ci/README.md)

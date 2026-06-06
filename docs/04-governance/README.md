@@ -1,5 +1,7 @@
 # Chapter 04 — Governance
 
+**Navigation:** [Docs hub](../README.md) · [← CI](../03-ci/README.md) · [Next: Evidence →](../05-evidence/README.md)
+
 ## Who is this chapter for?
 
 **Tech leads, compliance engineers, and architects** who need to understand how Archovive goes from "code graph" to **regulatory verdict** — and what lives in `attestation.json` and `compliance_report.json`.
@@ -32,9 +34,14 @@ The OSS demo evaluates three rules live. Enterprise bundle: all packs including 
 
 ## Drift matrix
 
-The drift matrix describes **deviation from a stored baseline**:
+The drift matrix describes **deviation from a stored baseline** (enterprise bundle):
 
-<p align="center"><img src="../../assets/gifs/drift.gif" alt="Drift matrix — enterprise bundle" width="600"></p>
+```text
+$ archovive diff baseline/ HEAD
+  boundary_crossing ... api→payments.ledger
+  drift_score ......... 0.42
+Exit Code: 1
+```
 
 | Field | Meaning |
 |-------|---------|
@@ -102,4 +109,4 @@ No separate "chat knowledge". One kernel truth, multiple surfaces (CLI, MCP, CI)
 
 ---
 
-**Next chapter:** [05 — Evidence](../05-evidence/README.md) — attestations, SLSA, and signatures for auditors.
+**[← Docs hub](../README.md)** · **Next:** [05 — Evidence](../05-evidence/README.md)

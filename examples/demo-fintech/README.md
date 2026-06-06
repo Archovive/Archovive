@@ -8,7 +8,7 @@ The team shipped fast: API routes, payment ledger, batch processor, ops notifica
 
 Archovive scans this repo in a few seconds and shows **why** a release would be blocked — not as opinion, but as a policy verdict with replay hash.
 
-See the gate output in the [README](../../README.md#what-you-get). Run `archovive simulate --verbose` for graph metrics and per-rule evaluation.
+See the gate output in the [README](../../README.md#try-it). Run `make demo` or `archovive simulate --verbose` for per-rule detail.
 
 ---
 
@@ -47,7 +47,7 @@ archovive simulate --repo examples/demo-fintech
 archovive ci check --repo examples/demo-fintech   # process exit 2 — merge would block
 ```
 
-Expected verdict: `POLICY_VIOLATION` · gate exit code **2** · `replay_hash` pinned in [simulate/README.md](../../simulate/README.md)
+Expected verdict: `POLICY_VIOLATION` · gate exit code **2** · hashes pinned in [`simulate/format.py`](../../simulate/format.py)
 
 ---
 

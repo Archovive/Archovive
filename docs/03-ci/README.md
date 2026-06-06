@@ -1,5 +1,7 @@
 # Chapter 03 — CI gate
 
+**Navigation:** [Docs hub](../README.md) · Path B · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md)
+
 ## Who is this chapter for?
 
 **Platform engineers, DevOps, and release managers** who want objective merge blockers — exit codes instead of Slack debates, drift and policy **before** merge, not after an incident.
@@ -21,7 +23,9 @@ Nobody blocks the merge when the API suddenly imports payment-ledger internals �
 
 Archovive closes that gap with **deterministic exit codes**.
 
-<p align="center"><img src="../../assets/gifs/ci.gif" alt="CI gate — archovive ci check" width="600"></p>
+```bash
+make ci-demo   # exit 2 on demo-fintech — merge would block
+```
 
 ---
 
@@ -43,7 +47,7 @@ On the **OSS demo repo**, exit **2** is expected (DORA boundary crossing) — pr
 
 `simulate` prints the same gate lines but exits **0**; only **`ci check`** propagates the gate exit code to the shell.
 
-Local demo: `bash docs/assets/demo/ci_gate.sh`
+Local demo: `make ci-demo`
 
 ---
 
@@ -130,4 +134,4 @@ OSS `ci check` uses simplified policy rules on the demo graph. Enterprise adds:
 
 ---
 
-**Next chapter:** [04 — Governance](../04-governance/README.md) — policies, drift matrix, and verdicts in detail.
+**[← Docs hub](../README.md)** · **Next:** [04 — Governance](../04-governance/README.md)

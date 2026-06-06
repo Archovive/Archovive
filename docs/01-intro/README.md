@@ -1,10 +1,10 @@
 # Chapter 01 — What is Archovive?
 
+**Navigation:** [Docs hub](../README.md) · Path A · [Next: Simulate →](../02-simulate/README.md)
+
 ## Who is this chapter for?
 
-**Everyone** who wants to understand what Archovive does in under a minute — no install guide, no engine internals, no compliance jargon.
-
-Contributors: read [Chapter 00 — Repository standard](../00-repository-standard/README.md) first.
+**Everyone** — one minute, no jargon.
 
 ---
 
@@ -56,11 +56,7 @@ It does not replace SAST or GRC. It fills the **gap between them**: architecture
 
 ## 30-second demo
 
-See the gate GIF in the [README](../../README.md#what-you-get) or run:
-
-```bash
-bash dist/install.sh
-```
+See the pinned gate output in the [README](../../README.md#try-it) or run `make demo`.
 
 The demo repo is an intentionally broken fintech microservice layout — details in [examples/demo-fintech](../../examples/demo-fintech/README.md).
 
@@ -79,4 +75,4 @@ Surfaces sold per tier (CLI, MCP, CI) → [Chapter 08 — Pricing](../08-pricing
 
 ---
 
-**Next chapter:** [02 — Simulate](../02-simulate/README.md) — run the demo on your machine in 30 seconds.
+**[← Docs hub](../README.md)** · **Next:** [02 — Simulate](../02-simulate/README.md)

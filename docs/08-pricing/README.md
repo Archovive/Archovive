@@ -1,5 +1,7 @@
 # Chapter 08 — Pricing & tiers
 
+**Navigation:** [Docs hub](../README.md) · Path C · [← Enterprise](../07-enterprise/README.md)
+
 ## Who is this chapter for?
 
 **Budget owners, procurement, and founders** who need to know what's free, what scales, **who buys which surface** (CLI, MCP, CI), and why enterprise costs more than a scanner subscription.
@@ -52,7 +54,7 @@ What you **buy** at each level — CLI commands, MCP tools, and CI artifacts.
 | | |
 |---|---|
 | **Price** | **Free** (MIT) |
-| **Includes** | `simulate`, `ci check`, demo repo, story docs, GIFs |
+| **Includes** | `simulate`, `ci check`, demo repo, story docs |
 | **Surfaces** | CLI only · CI pattern on demo repo · no MCP server |
 | **Limit** | Demo engine only — simplified graph, three policy rules, no attestations |
 | **Ideal for** | Evaluation, developer adoption, learning CI patterns |
@@ -133,10 +135,10 @@ General enterprise: enterprise@archovive.com
 
 ## Next steps
 
-1. **Still unsure?** → [02 — Simulate](../02-simulate/README.md)
-2. **Wire CI?** → [03 — CI](../03-ci/README.md)
-3. **Enterprise without pilot?** → enterprise@archovive.com
+- **Try it:** `make demo` · [Docs hub](../README.md)
+- **CI:** [03 — CI](../03-ci/README.md)
+- **Enterprise:** **enterprise@archovive.com**
 
 ---
 
-**Next chapter:** [01 — Intro](../01-intro/README.md) — back to the start (or run the demo: `archovive simulate`).
+**[← Docs hub](../README.md)** · **Start:** [01 — Intro](../01-intro/README.md)

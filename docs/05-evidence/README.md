@@ -1,5 +1,7 @@
 # Chapter 05 — Evidence
 
+**Navigation:** [Docs hub](../README.md) · Path C · [← Governance](../04-governance/README.md) · [Next: Air-gap →](../06-airgap/README.md)
+
 ## Who is this chapter for?
 
 **Auditors, IT compliance, CRA/NIS2 owners, and SIEM operators** who need **verifiable artifacts** — not screenshots, not verbal confirmations, but signed, replayable evidence packs.
@@ -22,8 +24,6 @@ An evidence pack is a **coherent bundle** of analysis results you can hand to au
 | `risk_matrix.json` | Risk rows from analysis | gov |
 
 OSS demo delivers terminal/JSON. Enterprise bundle writes the full set to the analysis directory.
-
-<p align="center"><img src="../../assets/gifs/evidence.gif" alt="Evidence export — enterprise bundle" width="600"></p>
 
 ```bash
 archovive audit export --bundle   # enterprise / gov
@@ -119,4 +119,4 @@ Indicative enterprise price: **€2,500 / certified repository / year** → [Cha
 
 ---
 
-**Next chapter:** [06 — Air-gap](../06-airgap/README.md) — offline operation without cloud or telemetry.
+**[← Docs hub](../README.md)** · **Next:** [06 — Air-gap](../06-airgap/README.md)

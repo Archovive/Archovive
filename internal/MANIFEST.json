@@ -5,6 +5,7 @@
   "bundle_layout": "archovive-enterprise-5.0.0/{bin,share,scripts,metadata,libexec}",
   "cli_commands": ["archovive", "archovive-mcp", "ask", "chat", "governance", "doctor", "gate", "simulate", "ci"],
   "docs": [
+    "docs/README.md",
     "docs/01-intro/README.md",
     "docs/02-simulate/README.md",
     "docs/07-enterprise/README.md"

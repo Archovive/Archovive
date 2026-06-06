@@ -24,4 +24,4 @@ export PATH="${REPO_ROOT}/dist:${PATH}"
 echo "==> Try: archovive simulate"
 archovive simulate
 echo ""
-echo "Next: docs/02-simulate/README.md · docs/03-ci/README.md"
+echo "Next: docs/README.md (pick your path)"

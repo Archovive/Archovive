@@ -1,5 +1,7 @@
 # Chapter 06 — Air-gap & offline
 
+**Navigation:** [Docs hub](../README.md) · Path C · [← Evidence](../05-evidence/README.md) · [Next: Enterprise →](../07-enterprise/README.md)
+
 ## Who is this chapter for?
 
 **Government, KRITIS operators, defense suppliers, hospital IT, and any team** that **cannot use cloud scanners** — but still needs architecture governance and audit evidence.
@@ -19,7 +21,10 @@ Cloud SCM scanners fail when:
 
 Archovive is **local-first by design** — no telemetry, no upload, no account.
 
-<p align="center"><img src="../../assets/gifs/airgap.gif" alt="Air-gap mode — enterprise bundle" width="600"></p>
+```bash
+export ARCHOVIVE_ISOLATED=1
+archovive run   # enterprise bundle
+```
 
 ---
 
@@ -77,7 +82,7 @@ export ARCHOVIVE_ISOLATED=1
 archovive run
 ```
 
-Preview: `bash docs/assets/demo/airgap_preview.sh`
+Preview output (enterprise bundle only) is documented above; not runnable from this OSS repo.
 
 Cache, state, and sidecar data go only to XDG:
 
@@ -110,4 +115,4 @@ Archovive sends **nothing** to vendor servers. No telemetry. No "phone home" lic
 
 ---
 
-**Next chapter:** [07 — Enterprise](../07-enterprise/README.md) — sidecar, multi-repo, DORA/NIS2/CRA at full scale.
+**[← Docs hub](../README.md)** · **Next:** [07 — Enterprise](../07-enterprise/README.md)

@@ -1,5 +1,7 @@
 # Chapter 07 — Enterprise
 
+**Navigation:** [Docs hub](../README.md) · Path C · [← Air-gap](../06-airgap/README.md) · [Next: Pricing →](../08-pricing/README.md)
+
 ## Who is this chapter for?
 
 **CISO, head of compliance, procurement, and platform leads in regulated companies** deploying Archovive on **their own repositories** — with signed license, live dispatch, multi-repo governance, and full audit trail.
@@ -20,9 +22,9 @@
 
 OSS = **funnel**. Enterprise = **production**.
 
-<p align="center"><img src="../../assets/gifs/graph.gif" alt="Compact run output — enterprise bundle" width="600"></p>
-
-Requires `archovive run --compact` after installing the enterprise bundle — not available in this public repo.
+```bash
+archovive run --compact   # enterprise bundle
+```
 
 ---
 
@@ -136,4 +138,4 @@ archovive audit export --bundle
 
 ---
 
-**Next chapter:** [08 — Pricing](../08-pricing/README.md) — OSS, team, enterprise, and who buys CLI vs MCP vs CI.
+**[← Docs hub](../README.md)** · **Next:** [08 — Pricing](../08-pricing/README.md)

@@ -36,7 +36,7 @@ FORBIDDEN_TOP=(
 )
 for name in "${FORBIDDEN_TOP[@]}"; do
   if [[ -e "${name}" ]]; then
-    echo "forbidden top-level path: ${name}/ (see docs/00-repository-standard/)"
+    echo "forbidden top-level path: ${name}/ (see CONTRIBUTING.md#repository-standard)"
     fail=1
   fi
 done

@@ -1,9 +1,9 @@
-.venv/
 __pycache__/
 *.pyc
-archovive.env
-fleet_runs/
+.pytest_cache/
 *.egg-info/
 archovive.egg-info/
-docs/assets/demo/.bin/
+.venv/
+archovive.env
+fleet_runs/
 .DS_Store
