@@ -1,119 +1,132 @@
-# Kapitel 07 — Enterprise
+# Chapter 07 — Enterprise
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **CISO, Head of Compliance, Procurement und Platform-Leads in regulierten Unternehmen**, die Archovive auf **eigenen Repositories** produktiv einsetzen — mit signierter Lizenz, Live-Dispatch, Multi-Repo-Governance und vollständigem Audit-Trail.
+**CISO, head of compliance, procurement, and platform leads in regulated companies** deploying Archovive on **their own repositories** — with signed license, live dispatch, multi-repo governance, and full audit trail.
 
 ---
 
-## Wann reicht OSS nicht?
+## When OSS is not enough
 
-| Anforderung | OSS | Enterprise |
+| Requirement | OSS | Enterprise |
 |-------------|-----|------------|
-| Demo / Evaluierung | ✓ | ✓ |
-| CI auf eigenem Code | — | ✓ |
-| Polyglot-Hypergraph | — | ✓ |
-| Signierte Attestations | — | ✓ |
-| DORA/NIS2/CRA volle Packs | — | ✓ |
-| Live-Dispatch (PagerDuty, SIEM) | — | ✓ |
-| Authoritative Decision Store | — | ✓ |
+| Demo / evaluation | ✓ | ✓ |
+| CI on your code | — | ✓ |
+| Polyglot hypergraph | — | ✓ |
+| Signed attestations | — | ✓ |
+| Full DORA/NIS2/CRA packs | — | ✓ |
+| Live dispatch (PagerDuty, SIEM) | — | ✓ |
+| Authoritative decision store | — | ✓ |
 
-OSS = **Funnel**. Enterprise = **Produktion**.
+OSS = **funnel**. Enterprise = **production**.
+
+![Compact run output (enterprise bundle)](../../assets/gifs/graph.gif)
+
+Requires `archovive run --compact` after installing the enterprise bundle — not available in this public repo.
 
 ---
 
-## Sidecar-Architektur (v5)
+## Sidecar architecture (v5)
 
-Das Bundle unter `/opt/archovive` ist **read-only**. Alle Writes gehen in Sidecar-Layer:
+The bundle under `/opt/archovive` is **read-only**. All writes go to sidecar layers:
 
 ```
 /opt/archovive/                    ← immutable binary + share/
-/etc/archovive/                    ← Lizenz, System-Config
-/var/lib/archovive/                ← State, Transparency Log, Vault
-/var/cache/archovive/              ← IR-Cache, SBOM-Scratch
-~/.config/archovive/               ← User-Overrides (Dev)
+/etc/archovive/                    ← license, system config
+/var/lib/archovive/                ← state, transparency log, vault
+/var/cache/archovive/              ← IR cache, SBOM scratch
+~/.config/archovive/               ← user overrides (dev)
 ```
 
-**Warum:** Immutable Install = supply-chain trust. Sidecar = operative Wiederholbarkeit ohne Bundle-Mutation.
+**Why:** immutable install = supply-chain trust. Sidecar = operational repeatability without bundle mutation.
 
 ---
 
-## Installation (Kurz)
+## Installation (short)
 
 ```bash
-# 1. Release-Assets von GitHub (v5.0.0)
+# 1. Release assets from GitHub (v5.0.0)
 # 2. Installer
 bash internal/install_archovive.sh
 source archovive.env
 
-# 3. Lizenz (Enterprise — signiert, Pflicht)
+# 3. License (enterprise — signed, required)
 ./archovive-enterprise-5.0.0/scripts/setup_license.sh --system
 
 # 4. Health
 archovive ops runtime doctor
 ```
 
-Kontakt Engine-Zugang: **enterprise@archovive.com**
+Engine access: **enterprise@archovive.com**
 
 ---
 
-## Multi-Repo Governance
+## Multi-repo governance
 
-| Tool | Zweck |
-|------|--------|
-| `archovive-fleet` | Batch-Analyse mehrerer Repos (internes Tool) |
-| `archovive gate` | Release-Entscheidung pro Repo |
-| Matrix / CI | Deterministische Orchestrierung über Repos |
-| MCP `archovive.run_analysis` | IDE-Integration (Cursor, etc.) |
+| Tool | Purpose | Surface |
+|------|---------|---------|
+| `archovive-fleet` | Batch analysis across repos | CLI |
+| `archovive gate` | Release decision per repo | CLI + CI |
+| Matrix / CI | Deterministic orchestration | CI |
+| MCP `run_analysis` | IDE integration (Cursor, etc.) | MCP (enterprise bundle) |
+| MCP `archovive.evidence` | Auditor view in IDE | MCP |
 
-Product Tiers:
+### Product tiers (capability depth)
 
-| Tier | Capabilities | Typisch |
-|------|-------------|---------|
-| **personal** | 6 | Einzelentwickler |
-| **team** | 12 | Team Feed, Decision API |
-| **enterprise** | 20 | Authoritative Store, Live Dispatch |
+| Tier | Capabilities | Typical buyer |
+|------|-------------|---------------|
+| **personal** | 6 | Solo developer, evaluation |
+| **team** | 12 | Team feed, decision API, MCP read |
+| **enterprise** | 20 | Authoritative store, live dispatch, full MCP |
 
-Pipeline Tiers (Lizenz-Tiefe): **core** → **ci** → **gov**
+### Pipeline tiers (license depth)
 
----
+| Tier | Artifacts | Typical buyer |
+|------|-----------|---------------|
+| **core** | Human report, basic gate | Developer |
+| **ci** | `repro.json`, drift matrix, exit codes | Platform engineering |
+| **gov** | Attestations, compliance report, vault | Compliance, CISO, auditor |
 
-## Audit Trails
-
-Enterprise materialisiert:
-
-- **Transparency Log** — append-only (`transparency_log.jsonl`)
-- **Vault Store** — Entscheidungs-Historie
-- **Decision Contract Chain** — schema → verify → RBAC → upload gate
-- **SIEM Export** — JSONL/CEF, optional Real-time HEC
-- **`archovive audit export --bundle`** — 6-Feld-Ledger für Revision
+Full buyer × surface matrix → [Chapter 08](../08-pricing/README.md#surfaces-by-tier)
 
 ---
 
-## Regulatorische Frameworks
+## Audit trails
 
-| Framework | Policy Pack | Archovive-Beitrag |
-|-----------|-------------|-------------------|
-| **DORA** | `DORA_2026`, `DORA_MINIMAL_V1` | Critical-path isolation, Layer boundaries |
-| **NIS2** | `NIS2_MINIMAL_V1` | Boundary crossings, Instability ceilings |
-| **CRA** | `CRA_MINIMAL_V1` | Security reachability, Annex-IV-Stubs |
-| **SOX** | `SOX_2026` | ITGC-Architektur-Schwellen |
+Enterprise materializes:
 
-Archovive **zertifiziert keine Regulierung** — es liefert **technische Evidence**, die Prüfer bewerten.
-
----
-
-## Integrationen (Enterprise)
-
-Mit Credentials **live**, ohne Credentials **dry_run**:
-
-PagerDuty · Slack · Jira · ServiceNow · GitHub · SIEM · OIDC · K8s Admission (Kyverno)
-
-Dispatch-Status auf stderr: `sent` · `dry_run` · `failed`
+- **Transparency log** — append-only (`transparency_log.jsonl`)
+- **Vault store** — decision history
+- **Decision contract chain** — schema → verify → RBAC → upload gate
+- **SIEM export** — JSONL/CEF, optional real-time HEC
+- **`archovive audit export --bundle`** — 6-field ledger for revision
 
 ---
 
-## Procurement-Artefakte
+## Regulatory frameworks
+
+| Framework | Policy pack | Archovive contribution |
+|-----------|-------------|------------------------|
+| **DORA** | `DORA_2026`, `DORA_MINIMAL_V1` | Critical-path isolation, layer boundaries |
+| **NIS2** | `NIS2_MINIMAL_V1` | Boundary crossings, instability ceilings |
+| **CRA** | `CRA_MINIMAL_V1` | Security reachability, Annex IV stubs |
+| **SOX** | `SOX_2026` | ITGC architecture thresholds |
+
+Archovive **does not certify regulation** — it delivers **technical evidence** auditors evaluate.
+
+---
+
+## Integrations (enterprise)
+
+With credentials **live**, without credentials **dry_run**:
+
+PagerDuty · Slack · Jira · ServiceNow · GitHub · SIEM · OIDC · K8s admission (Kyverno)
+
+Dispatch status on stderr: `sent` · `dry_run` · `failed`
+
+---
+
+## Procurement artifacts
 
 ```bash
 archovive spec procurement-pdf --out evidence/procurement/
@@ -123,4 +136,4 @@ archovive audit export --bundle
 
 ---
 
-**Nächstes Kapitel:** [08 — Pricing](../08-pricing/README.md) — OSS, Team, Enterprise und Value Proposition.
+**Next chapter:** [08 — Pricing](../08-pricing/README.md) — OSS, team, enterprise, and who buys CLI vs MCP vs CI.

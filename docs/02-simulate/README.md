@@ -1,22 +1,35 @@
-# Kapitel 02 — Simulate (30 Sekunden)
+# Chapter 02 — Simulate (30 seconds)
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **Entwickler, Gründer und Evaluatoren**, die Archovive nicht glauben, sondern **sehen** wollen — ohne Enterprise-Vertrag, ohne Bundle-Download, ohne Sales-Call.
+**Developers, founders, and evaluators** who want to **see** Archovive — not believe a sales deck — without an enterprise contract, bundle download, or sales call.
 
 ---
 
-## Was passiert bei `simulate`?
+## What happens when you run `simulate`?
 
-Archovive analysiert das Demo-Repository `examples/demo-fintech` — NovaPay, eine fiktive Payments-API mit absichtlichen Schichtverstößen. Die Analyse läuft **lokal**, in wenigen Sekunden.
+Archovive analyzes the demo repository `examples/demo-fintech` — NovaPay, a fictional payments API with intentional layer violations. Analysis runs **locally** in a few seconds.
 
-Standard-Ausgabe = **Produkt-Gate-Format** (identisch mit README). Mit `--verbose` siehst du Graph-Metriken, Drift und einzelne Policy-Regeln.
+Default output = **product gate format** (identical to the [README](../../README.md#what-you-get)). With `--verbose` you see graph metrics, drift status, and all three evaluated policy rules (one fails on the demo: **DORA_2026**).
+
+![Gate output](../../assets/gifs/gate.gif)
+
+---
+
+## Exit codes: `simulate` vs `ci check`
+
+| Command | Prints gate exit code? | Process exit code |
+|---------|------------------------|-------------------|
+| `archovive simulate` | Yes (e.g. `Exit Code: 2`) | Always **0** — demo funnel |
+| `archovive ci check` | Same gate output | **Matches gate** (0, 1, 2, …) — use in CI |
+
+For merge blockers, use **`ci check`**, not `simulate`.
 
 ---
 
 ## Quickstart
 
-### Option A — Einzeiler
+### Option A — one-liner
 
 ```bash
 git clone https://github.com/Archovive/Archovive.git
@@ -24,7 +37,7 @@ cd Archovive
 bash dist/install.sh
 ```
 
-### Option B — Manuell
+### Option B — manual
 
 ```bash
 pip install -e internal/
@@ -32,50 +45,39 @@ export PATH="$PWD/dist:$PATH"
 archovive simulate
 ```
 
-**Voraussetzungen:** Python 3.11+, Git empfohlen.
+**Requirements:** Python 3.11+, Git recommended.
 
 ---
 
-## Befehle
+## Commands
 
 ```bash
-archovive simulate              # Gate-Format (wie README)
-archovive simulate --verbose    # Volle Analyse
-archovive simulate --json       # Maschinenlesbar
-archovive simulate --repo PATH  # Anderes Repo
+archovive simulate              # Gate format (like README)
+archovive simulate --verbose    # Graph, drift, policy rules
+archovive simulate --json       # Machine-readable
+archovive simulate --repo PATH  # Other repo
 ```
 
-Leerer Aufruf `archovive` ohne Argumente startet ebenfalls **simulate**.
+Bare `archovive` with no arguments also runs **simulate**.
 
 ---
 
-## Beispiel-Output (v5.0.0, gepinnt)
+## Why FAIL?
 
-Identisch mit [README](../../README.md#was-du-bekommst):
-
-```text
-$ archovive simulate
-
-ARCHOVIVE GATE — DORA Boundary Crossing
-Verdict: POLICY_VIOLATION
-graph_hash: fee879ce…c734aa
-replay_hash: 3e700b6a…d3b9736
-Exit Code: 2
-```
-
-**Warum FAIL?** `services/api/routes.py` importiert `payments.ledger` direkt — layer boundary breach (DORA_2026).
+`services/api/routes.py` imports `payments.ledger` directly — layer boundary breach (`DORA_2026`). The demo repo contains **three intentional anti-patterns** in code; the OSS engine evaluates **three policy rules** and fails on the DORA boundary rule. See [examples/demo-fintech](../../examples/demo-fintech/README.md).
 
 ---
 
-## Simulate vs. Enterprise `run`
+## Simulate vs enterprise `run`
 
 | | **OSS `simulate`** | **Enterprise `run`** |
-|---|-------------------|----------------------|
-| Zielgruppe | Evaluierung, Demos | Production CI/CD |
-| Repo | Demo oder `--repo` | Beliebiges Repository |
-| Output | Gate-Format + optional `--verbose` | Volle Artefakte + Attestation |
-| Bundle nötig? | Nein | Ja |
+|---|---------------------|----------------------|
+| Buyer | Evaluator | Platform / compliance |
+| Surface | CLI only | CLI + MCP + CI artifacts |
+| Repo | Demo or `--repo` | Any repository |
+| Output | Gate format + optional `--verbose` | Full artifacts + attestation |
+| Bundle required? | No | Yes |
 
 ---
 
-**Nächstes Kapitel:** [03 — CI](../03-ci/README.md) — Simulate als Merge-Gate in GitHub Actions einbinden.
+**Next chapter:** [03 — CI](../03-ci/README.md) — wire simulate as a merge gate in GitHub Actions.

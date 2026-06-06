@@ -1,12 +1,14 @@
 # Archovive — Local-First Architecture Governance
 
-**In 30 Sekunden verstehen. In CI nutzen. On-prem skalieren.**
+**Understand in 30 seconds. Wire into CI. Scale on-prem.**
 
-Archovive beantwortet eine Frage — mit reproduzierbarem Beweis:
+Archovive answers one question — with reproducible proof:
 
-> **Darf dieser Code-Stand released werden — und warum (oder warum nicht)?**
+> **May this codebase be released — and why (or why not)?**
 
-## Was du bekommst
+## What you get
+
+![Archovive Gate — deterministic policy verdict](docs/assets/gifs/gate.gif)
 
 ```text
 $ archovive simulate
@@ -18,21 +20,37 @@ replay_hash: 3e700b6a…d3b9736
 Exit Code: 2
 ```
 
-→ Ausprobieren: [docs/02-simulate](docs/02-simulate/README.md)  
-→ In CI: [docs/03-ci](docs/03-ci/README.md)  
-→ Pilot anfragen: [pilot@archovive.com](mailto:pilot@archovive.com)
+→ Try it: [docs/02-simulate](docs/02-simulate/README.md)  
+→ Wire CI: [docs/03-ci](docs/03-ci/README.md)  
+→ Request a pilot: [pilot@archovive.com](mailto:pilot@archovive.com)
 
-Kein Bundle. Kein Account. Demo: `examples/demo-fintech` — **3 absichtliche Architektur-Verstöße** in der fiktiven Payments-API **NovaPay**.
+No bundle. No account. Demo repo: `examples/demo-fintech` — **3 intentional layering anti-patterns** in the fictional payments API **NovaPay** (the OSS gate surfaces the DORA boundary violation; `ci check` exits **2**).
 
 ---
 
-## Selbst ausprobieren
+## Who uses what (surfaces per tier)
+
+All paid tiers require the **enterprise bundle** — this public repo ships the OSS funnel only.
+
+| Buyer | Tier | CLI | MCP | CI |
+|-------|------|-----|-----|-----|
+| Evaluator / developer | **OSS** (this repo) | `simulate`, `ci check` on demo | — | GitHub Actions pattern |
+| Platform engineer | **Team / ci** | `run`, `diff`, `gate` | `run_analysis` (bundle) | Exit codes 0–4, `repro.json`, drift matrix |
+| Tech lead / staff eng | **Team / ci** | `gate`, decision API | MCP in IDE | Merge blocker on **your** repo |
+| Compliance / auditor | **Enterprise / gov** | `verify`, `audit export`, `governance decide` | `evidence`, `global` | Signed attestation artifacts |
+| CISO / regulated org | **Enterprise / gov** | vault, dispatch, fleet | full MCP surface | SIEM JSONL, admission hooks |
+
+Full tier breakdown → [docs/08-pricing](docs/08-pricing/README.md#surfaces-by-tier)
+
+---
+
+## Try it yourself
 
 ```bash
 git clone https://github.com/Archovive/Archovive.git && bash Archovive/dist/install.sh
 ```
 
-Oder Schritt für Schritt:
+Or step by step:
 
 ```bash
 git clone https://github.com/Archovive/Archovive.git
@@ -40,49 +58,65 @@ cd Archovive
 bash dist/install.sh
 ```
 
-`install.sh` installiert die CLI und startet `simulate` — gleicher Output wie oben.
+`install.sh` installs the CLI and runs `simulate` — same gate output as above (process exit **0**; use `ci check` when the shell exit code must block a merge).
 
-**Kein Enterprise-Bundle nötig.**
-
----
-
-## Dokumentation (in dieser Reihenfolge lesen)
-
-| # | Kapitel | Für wen |
-|---|---------|---------|
-| 1 | [Was ist Archovive?](docs/01-intro/README.md) | Alle — Einstieg |
-| 2 | [Simulate](docs/02-simulate/README.md) | Jeder, der sofort ein Ergebnis will |
-| 3 | [CI-Gate](docs/03-ci/README.md) | Platform Engineering, DevOps |
-| 4 | [Governance](docs/04-governance/README.md) | Tech Leads, Compliance Engineers |
-| 5 | [Evidence](docs/05-evidence/README.md) | Auditoren, CRA/NIS2-Verantwortliche |
-| 6 | [Air-gap](docs/06-airgap/README.md) | Behörden, KRITIS, Offline-Umgebungen |
-| 7 | [Enterprise](docs/07-enterprise/README.md) | CISO, Procurement, Regulierte |
-| 8 | [Pricing](docs/08-pricing/README.md) | Einkauf, Budget-Entscheider |
+**No enterprise bundle required for the demo.**
 
 ---
 
-## Was du in diesem Repo siehst
+## Documentation (read in order)
 
-| Pfad | Zweck |
-|------|--------|
-| `cli/` | OSS-Befehle: `simulate`, `ci check`, Router zum Enterprise-Bundle |
-| `simulate/` | Demo-Engine — 30-Sekunden-Analyse ohne Cloud |
-| `examples/demo-fintech/` | Beispiel-Repository mit absichtlichem Policy-Verstoß |
-| `dist/` | `install.sh` und CLI-Wrapper |
-| `docs/` | Produkt-Story, Kapitel 01–08 |
-
-Build-Artefakte, Policy Packs, Release-Manifests und Enterprise-Installer liegen in **`internal/`** — nicht für Endnutzer.
+| # | Chapter | Who it's for |
+|---|---------|--------------|
+| 1 | [What is Archovive?](docs/01-intro/README.md) | Everyone — start here |
+| 2 | [Simulate](docs/02-simulate/README.md) | Anyone who wants a result in 30 seconds |
+| 3 | [CI gate](docs/03-ci/README.md) | Platform engineering, DevOps |
+| 4 | [Governance](docs/04-governance/README.md) | Tech leads, compliance engineers |
+| 5 | [Evidence](docs/05-evidence/README.md) | Auditors, CRA/NIS2 owners |
+| 6 | [Air-gap](docs/06-airgap/README.md) | Government, KRITIS, offline environments |
+| 7 | [Enterprise](docs/07-enterprise/README.md) | CISO, procurement, regulated industry |
+| 8 | [Pricing](docs/08-pricing/README.md) | Budget owners, buyers |
 
 ---
 
-## Enterprise (eigene Repositories)
+## Demo GIFs
 
-Für Analyse **deiner** Codebases: frozen Offline-Bundle `archovive-enterprise-5.0.0.zip`  
-→ [Kapitel 07 — Enterprise](docs/07-enterprise/README.md)
+| GIF | Available in OSS? | Command |
+|-----|-------------------|---------|
+| [gate.gif](docs/assets/gifs/gate.gif) | Yes | `archovive simulate` |
+| [ci.gif](docs/assets/gifs/ci.gif) | Yes | `archovive ci check` |
+| [drift.gif](docs/assets/gifs/drift.gif) | Enterprise bundle | `archovive diff` |
+| [airgap.gif](docs/assets/gifs/airgap.gif) | Enterprise bundle | `ARCHOVIVE_ISOLATED=1 archovive run` |
+| [evidence.gif](docs/assets/gifs/evidence.gif) | Enterprise bundle | `archovive audit export --bundle` |
+| [graph.gif](docs/assets/gifs/graph.gif) | Enterprise bundle | `archovive run --compact` |
 
-**Pilot bis Ende 2026** (5 Monate kostenlos): **pilot@archovive.com** · Details in [docs/08-pricing](docs/08-pricing/README.md#pilotphase)
+Regenerate stylized previews: `python3 scripts/demo/build_gifs.py` · Record real terminals: [docs/assets/gifs/README.md](docs/assets/gifs/README.md)
 
-Sicherheitsmeldungen: `internal/SECURITY.md` · **security@archovive.com**
+---
+
+## What's in this repo
+
+| Path | Purpose |
+|------|---------|
+| `cli/` | OSS commands: `simulate`, `ci check`, router to enterprise bundle |
+| `simulate/` | Demo engine — local analysis without cloud |
+| `examples/demo-fintech/` | Sample repo with intentional policy violation |
+| `dist/` | `install.sh` and CLI wrapper |
+| `docs/` | Product story, chapters 01–08 |
+| `docs/assets/gifs/` | Terminal demo GIFs |
+
+Build artifacts, policy packs, release manifests, and the enterprise installer live in **`internal/`** — not for end users.
+
+---
+
+## Enterprise (separate repositories)
+
+To analyze **your** codebases: frozen offline bundle `archovive-enterprise-5.0.0.zip`  
+→ [Chapter 07 — Enterprise](docs/07-enterprise/README.md)
+
+**Pilot through end of 2026** (5 months free): **pilot@archovive.com** · Details in [docs/08-pricing](docs/08-pricing/README.md#pilot-program)
+
+Security reports: `internal/SECURITY.md` · **security@archovive.com**
 
 ---
 

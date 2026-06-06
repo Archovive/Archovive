@@ -1,45 +1,49 @@
-# Kapitel 06 — Air-gap & Offline
+# Chapter 06 — Air-gap & offline
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **Behörden, KRITIS-Betreiber, Defense-Zulieferer, Krankenhaus-IT und jedes Team**, das **keine Cloud-Scanner** einsetzen darf — aber trotzdem Architektur-Governance und Audit-Evidence braucht.
+**Government, KRITIS operators, defense suppliers, hospital IT, and any team** that **cannot use cloud scanners** — but still needs architecture governance and audit evidence.
 
----
-
-## Warum Air-gap?
-
-Cloud-SCM-Scanner scheitern, wenn:
-
-- Code das Netzwerk nicht verlassen darf
-- Build-Runner isoliert sind
-- Verträge „on-prem only" vorschreiben
-- Regulatoren Data-Residency verlangen
-
-Archovive ist **local-first by design** — kein Telemetry, kein Upload, kein Account.
+**Surface sold:** frozen bundle CLI · no MCP cloud dependency · CI on isolated runners · `ARCHOVIVE_ISOLATED=1` for sidecar-only writes.
 
 ---
 
-## Frozen Bundle
+## Why air-gap?
 
-Das Enterprise-Produkt ist ein **PyInstaller-Binary** in einer ZIP — **kein Python** auf dem Zielsystem nötig:
+Cloud SCM scanners fail when:
+
+- Code must not leave the network
+- Build runners are isolated
+- Contracts require on-prem only
+- Regulators mandate data residency
+
+Archovive is **local-first by design** — no telemetry, no upload, no account.
+
+![Air-gap mode](../../assets/gifs/airgap.gif)
+
+---
+
+## Frozen bundle
+
+The enterprise product is a **PyInstaller binary** in a ZIP — **no Python** required on the target system:
 
 ```
 archovive-enterprise-5.0.0/
-  bin/archovive          ← CLI + MCP-Wrapper
+  bin/archovive          ← CLI + MCP wrapper
   libexec/               ← Runtime (read-only)
-  share/                 ← Docs, Legal, Templates
+  share/                 ← Docs, legal, templates
   scripts/               ← install.sh, verify_signature.sh
-  metadata/              ← Manifest, Provenance
+  metadata/              ← Manifest, provenance
 ```
 
-**~63 MB**, offline-fähig, Linux x86_64 (glibc 2.31+, WSL2 ok).
+**~63 MB**, offline-capable, Linux x86_64 (glibc 2.31+, WSL2 ok).
 
 ---
 
-## Installation (Enterprise)
+## Installation (enterprise)
 
-1. GitHub Release **v5.0.0** herunterladen: ZIP + `.sha256` + SLSA
-2. Installer ausführen (liegt nach Download neben der ZIP):
+1. Download GitHub release **v5.0.0**: ZIP + `.sha256` + SLSA
+2. Run installer (after download, next to the ZIP):
 
 ```bash
 bash internal/install_archovive.sh
@@ -47,60 +51,63 @@ source archovive.env
 archovive doctor
 ```
 
-3. Produktion: `/opt/archovive` via `scripts/install.sh` im Bundle — siehe [Kapitel 07](../07-enterprise/README.md)
+3. Production: `/opt/archovive` via `scripts/install.sh` in the bundle — see [Chapter 07](../07-enterprise/README.md)
 
 ---
 
-## Verify Signature
+## Verify signature
 
-**Vor** dem ersten Produktiv-Lauf:
+**Before** first production run:
 
 ```bash
 sha256sum -c archovive-enterprise-5.0.0.zip.sha256
 ./archovive-enterprise-5.0.0/scripts/verify_signature.sh
 ```
 
-Damit prüfst du: Bundle-Integrität, Manifest-Signatur, Policy-Pack-Registry — **supply-chain trust anchor**.
+This checks: bundle integrity, manifest signature, policy pack registry — **supply-chain trust anchor**.
 
 ---
 
-## Isolated Mode
+## Isolated mode
 
-Wenn das Analyse-Repository read-only ist oder du **keine Sidecar-Writes** im Repo willst:
+When the analysis repository is read-only or you want **no sidecar writes in the repo**:
 
 ```bash
 export ARCHOVIVE_ISOLATED=1
+archovive run
 ```
 
-Cache, State und Sidecar-Daten gehen ausschließlich nach XDG:
+Preview: `bash scripts/demo/airgap_preview.sh`
 
-| Variable | Default (User) | System |
+Cache, state, and sidecar data go only to XDG:
+
+| Variable | Default (user) | System |
 |----------|----------------|--------|
 | `ARCHOVIVE_CONFIG` | `~/.config/archovive` | `/etc/archovive` |
 | `ARCHOVIVE_CACHE` | `~/.cache/archovive` | `/var/cache/archovive` |
 | `ARCHOVIVE_STATE` | `~/.local/state/archovive` | `/var/lib/archovive` |
 
-Das **Install-Bundle bleibt immutable** — keine Writes ins `/opt`-Verzeichnis.
+The **install bundle stays immutable** — no writes into `/opt`.
 
 ---
 
-## Kein Telemetry
+## No telemetry
 
-Archovive sendet **nichts** an Vendor-Server. Keine Telemetrie. Keine „Phone Home"-Lizenzprüfung im Offline-Modus über das Netz (Lizenz ist lokal signiert).
+Archovive sends **nothing** to vendor servers. No telemetry. No "phone home" license check over the network in offline mode (license is locally signed).
 
 ---
 
-## Typischer Air-gap-Workflow
+## Typical air-gap workflow
 
 ```
-1. ZIP + Hashes per Sneakernet in isolierte Zone
+1. ZIP + hashes via sneakernet into isolated zone
 2. verify_signature.sh
 3. setup_license.sh --system
-4. archovive run / gate auf internem Git-Mirror
-5. Evidence-JSON per Export-Medium an Audit-Zone
-6. archovive verify attestation.json (ohne Re-Analyse)
+4. archovive run / gate on internal Git mirror
+5. Evidence JSON via export medium to audit zone
+6. archovive verify attestation.json (no re-analysis)
 ```
 
 ---
 
-**Nächstes Kapitel:** [07 — Enterprise](../07-enterprise/README.md) — Sidecar, Multi-Repo, DORA/NIS2/CRA im Vollbetrieb.
+**Next chapter:** [07 — Enterprise](../07-enterprise/README.md) — sidecar, multi-repo, DORA/NIS2/CRA at full scale.

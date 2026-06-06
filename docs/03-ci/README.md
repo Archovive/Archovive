@@ -1,45 +1,53 @@
-# Kapitel 03 — CI-Gate
+# Chapter 03 — CI gate
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **Platform Engineers, DevOps und Release Manager**, die objektive Merge-Blocker wollen — Exit Codes statt Slack-Diskussionen, Drift und Policy **vor** dem Merge, nicht nach dem Incident.
+**Platform engineers, DevOps, and release managers** who want objective merge blockers — exit codes instead of Slack debates, drift and policy **before** merge, not after an incident.
+
+**Surface sold:** `archovive ci check` (OSS demo) → full pipeline gate with `repro.json` + drift matrix (Team/ci) → signed attestation upload (Enterprise/gov).
 
 ---
 
-## Das CI-Problem
+## The CI problem
 
-Die meisten Pipelines prüfen:
+Most pipelines check:
 
-- Unit Tests ✓
+- Unit tests ✓
 - Lint ✓
-- SAST (Zeilen-Bugs) ✓
+- SAST (line bugs) ✓
 
-Was fehlt: **Architektur-Governance.**  
-Niemand blockiert den Merge, wenn die API plötzlich die Payment-Ledger-Interna importiert — bis der Auditor oder ein Production-Vorfall kommt.
+What's missing: **architecture governance.**  
+Nobody blocks the merge when the API suddenly imports payment-ledger internals — until the auditor or a production incident.
 
-Archovive schließt diese Lücke mit **deterministischen Exit Codes**.
+Archovive closes that gap with **deterministic exit codes**.
+
+![CI gate](../../assets/gifs/ci.gif)
 
 ---
 
-## Der Gate-Befehl
+## The gate command
 
 ```bash
 archovive ci check
 ```
 
-| Exit Code | Bedeutung | CI-Aktion |
-|-----------|-----------|-----------|
-| **0** | Alle Policies bestanden | Merge erlaubt |
-| **1** | Drift-Verstoß | Merge blockieren |
-| **2** | Policy-/Regulierungs-Verstoß | Merge blockieren |
-| **3** | Engine-Fehler | Pipeline rot, Investigation |
-| **4** | Falsche Nutzung / fehlende Args | Pipeline-Konfiguration prüfen |
+| Exit code | Meaning | CI action |
+|-----------|---------|-----------|
+| **0** | All policies passed | Allow merge |
+| **1** | Drift violation | Block merge |
+| **2** | Policy / regulatory violation | Block merge |
+| **3** | Engine error | Red pipeline, investigate |
+| **4** | Misuse / missing args | Fix pipeline config |
 
-Auf dem **OSS-Demo-Repo** ist Exit **2** erwartet (DORA boundary crossing) — so testest du, dass deine Pipeline bei Verstößen wirklich stoppt.
+On the **OSS demo repo**, exit **2** is expected (DORA boundary crossing) — proof your pipeline actually stops on violations.
+
+`simulate` prints the same gate lines but exits **0**; only **`ci check`** propagates the gate exit code to the shell.
+
+Local demo: `bash scripts/demo/ci_gate.sh`
 
 ---
 
-## GitHub Actions — vollständiges Beispiel
+## GitHub Actions — full example
 
 ```yaml
 name: archovive-governance
@@ -81,9 +89,9 @@ jobs:
 
 ---
 
-## Production CI (Enterprise-Bundle)
+## Production CI (enterprise bundle)
 
-Mit installiertem Enterprise-Bundle auf **deinem** Repository:
+With the enterprise bundle on **your** repository:
 
 ```yaml
       - name: Archovive full analysis
@@ -93,32 +101,33 @@ Mit installiertem Enterprise-Bundle auf **deinem** Repository:
           archovive verify attestation.json
 ```
 
-Artefakte (`repro.json`, `drift_matrix.json`, `attestation.json`) als Pipeline-Artifacts hochladen → Audit-Trail ohne manuellen Export.
+Upload artifacts (`repro.json`, `drift_matrix.json`, `attestation.json`) as pipeline artifacts → audit trail without manual export.
+
+**MCP in CI:** use CLI in pipelines; use MCP (`archovive.run_analysis`) in the IDE for the same kernel truth.
 
 ---
 
 ## Reproducibility in CI
 
-Archovives **funktionale SLA** (keine Latenz-SLA):
+Archovive's **functional SLA** (not a latency SLA):
 
-> Gleicher Commit + gleiche Policy-Packs → gleicher `replay_hash` auf jedem Runner.
+> Same commit + same policy packs → same `replay_hash` on every runner.
 
-Das bedeutet: CI-Ergebnisse sind **vergleichbar** zwischen Entwickler-Laptop, GitHub Actions und On-Prem-Runner — keine „works on my machine"-Governance.
-
----
-
-## Übergang zu Governance
-
-`ci check` im OSS-Modus nutzt vereinfachte Policy-Regeln auf dem Demo-Graph.  
-Im Enterprise-Produkt kommen hinzu:
-
-- Vollständige Policy Packs (DORA, NIS2, CRA, SOX) mit Ed25519-Signaturen
-- Signierte Attestations
-- Drift gegen gespeicherte Baseline
-- Transparency Log
-
-→ [Kapitel 04 — Governance](../04-governance/README.md)
+CI results are **comparable** across developer laptop, GitHub Actions, and on-prem runners — no "works on my machine" governance.
 
 ---
 
-**Nächstes Kapitel:** [04 — Governance](../04-governance/README.md) — Policies, Drift-Matrix und Verdicts im Detail.
+## Transition to governance
+
+OSS `ci check` uses simplified policy rules on the demo graph. Enterprise adds:
+
+- Full policy packs (DORA, NIS2, CRA, SOX) with Ed25519 `.json.sig` signatures
+- Signed attestations
+- Drift vs stored baseline
+- Transparency log
+
+→ [Chapter 04 — Governance](../04-governance/README.md)
+
+---
+
+**Next chapter:** [04 — Governance](../04-governance/README.md) — policies, drift matrix, and verdicts in detail.

@@ -1,92 +1,96 @@
-# Kapitel 04 — Governance
+# Chapter 04 — Governance
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **Tech Leads, Compliance Engineers und Architekten**, die verstehen müssen, wie Archovive von „Code-Graph" zu **regulatorischem Verdict** kommt — und was in `attestation.json` und `compliance_report.json` steckt.
-
----
-
-## Governance in einem Satz
-
-Archovive übersetzt **Architektur-Zustand** in **regulatorische Aussagen** — mit Regeln, die reproduzierbar, versioniert und signierbar sind.
+**Tech leads, compliance engineers, and architects** who need to understand how Archovive goes from "code graph" to **regulatory verdict** — and what lives in `attestation.json` and `compliance_report.json`.
 
 ---
 
-## Policy Packs
+## Governance in one sentence
 
-Policy Packs sind **keine Checklisten in Excel**. Sie sind maschinenlesbare Regelsets, die auf Graph-Metriken operieren:
-
-| Pack | Framework | Beispiel-Regel |
-|------|-----------|----------------|
-| `GLOBAL_BASE` | Architektur-Baseline | Kopplung ≤ Schwellwert |
-| `DORA_2026` | DORA | Schicht-Grenzüberschreitungen = 0 |
-| `NIS2_MINIMAL_V1` | NIS2 | Instabilität kritischer Domains |
-| `CRA_MINIMAL_V1` | CRA | Security-Reachability, SBOM-Stubs |
-| `SOX_2026` | SOX ITGC | Coupling / Boundary für Finanz-IT |
-
-Im OSS-Demo werden drei Regeln live ausgewertet. Im Enterprise-Bundle: alle Packs inkl. Ed25519-`.json.sig`-Signaturen.
-
-**Warum das der Moat ist:** SAST-Tools kennen keine DORA-Artikel. GRC-Tools kompilieren kein Repository in einen Graph. Archovive verbindet beides.
+Archovive translates **architecture state** into **regulatory statements** — with rules that are reproducible, versioned, and signable.
 
 ---
 
-## Drift-Matrix
+## Policy packs
 
-Die Drift-Matrix beschreibt **Abweichung gegen eine gespeicherte Baseline**:
+Policy packs are **not Excel checklists**. They are machine-readable rule sets operating on graph metrics:
 
-| Feld | Bedeutung |
-|------|-----------|
-| `drift_status: unmeasured` | Erster Lauf — **kein Risiko-Signal**, nur neutral |
-| `drift_status: measured` | Baseline vorhanden — Abweichung berechnet |
-| `drift_score: null` | Kein numerischer Score ohne Baseline |
-| `drift_score: 0.0–1.0` | Nur mit Baseline — höher = mehr strukturelle Abweichung |
+| Pack | Framework | Example rule |
+|------|-----------|--------------|
+| `GLOBAL_BASE` | Architecture baseline | Coupling ≤ threshold |
+| `DORA_2026` | DORA | Layer boundary crossings = 0 |
+| `NIS2_MINIMAL_V1` | NIS2 | Critical domain instability |
+| `CRA_MINIMAL_V1` | CRA | Security reachability, SBOM stubs |
+| `SOX_2026` | SOX ITGC | Coupling / boundary for finance IT |
 
-**Wichtig:** `unmeasured` oder `null` bedeutet **nicht** „mittleres Risiko". Erst nach `archovive init` / Baseline-Speicherung werden Drift-Scores meaningful.
+The OSS demo evaluates three rules live. Enterprise bundle: all packs including Ed25519 `.json.sig` signatures.
 
-Strukturelle Klassen (Enterprise): topologisch, semantisch, verhaltensbasiert — in `drift_matrix.json`.
+**Why this is the moat:** SAST tools do not know DORA articles. GRC tools do not compile a repository into a graph. Archovive connects both.
+
+---
+
+## Drift matrix
+
+The drift matrix describes **deviation from a stored baseline**:
+
+![Drift matrix](../../assets/gifs/drift.gif)
+
+| Field | Meaning |
+|-------|---------|
+| `drift_status: unmeasured` | First run — **no risk signal**, neutral only |
+| `drift_status: measured` | Baseline exists — deviation computed |
+| `drift_score: null` | No numeric score without baseline |
+| `drift_score: 0.0–1.0` | With baseline — higher = more structural drift |
+
+**Important:** `unmeasured` or `null` does **not** mean "medium risk". Drift scores become meaningful only after `archovive init` / baseline storage.
+
+Structural classes (enterprise): topological, semantic, behavioral — in `drift_matrix.json`.
+
+**Surface:** CLI `archovive diff` (enterprise bundle) · CI artifact `drift_matrix.json` · MCP via `archovive-mcp` (enterprise bundle).
 
 ---
 
 ## Verdicts
 
-| Verdict | Bedeutung | Typische CI-Reaktion |
-|---------|-----------|---------------------|
-| `APPROVED` | Alle Policies bestanden | Merge / Release freigeben |
-| `POLICY_VIOLATION` | Regulatorische Regel verletzt | Exit 2 — blockieren |
-| `DRIFT_VIOLATION` | Architektur weicht von Baseline ab | Exit 1 — blockieren |
-| `OVERRIDE_REQUIRED` | Menschliche Entscheidung nötig | Workflow / Ticket |
+| Verdict | Meaning | Typical CI reaction |
+|---------|---------|---------------------|
+| `APPROVED` | All policies passed | Allow merge / release |
+| `POLICY_VIOLATION` | Regulatory rule violated | Exit 2 — block |
+| `DRIFT_VIOLATION` | Architecture deviates from baseline | Exit 1 — block |
+| `OVERRIDE_REQUIRED` | Human decision needed | Workflow / ticket |
 
-Im Enterprise-Produkt materialisiert `archovive gate` den Verdict als **Decision Contract** — signiertes JSON mit `decision_id`, `lookup_key`, Zeitstempel.
+In enterprise, `archovive gate` materializes the verdict as a **decision contract** — signed JSON with `decision_id`, `lookup_key`, timestamp.
 
 ---
 
-## Evidence-Modell (Überblick)
+## Evidence model (overview)
 
-Governance erzeugt ein **Evidence-Set** — maschinenlesbar, verknüpft, hash-verkettet:
+Governance produces an **evidence set** — machine-readable, linked, hash-chained:
 
 ```
 Repository
     → Graph (graph_hash)
-    → Policy Results (compliance_report.json)
+    → Policy results (compliance_report.json)
     → Verdict (attestation.json)
-    → Replay Pin (repro.json / replay_hash)
+    → Replay pin (repro.json / replay_hash)
 ```
 
-Die drei **Kameras** (Perspektiven auf dasselbe Ergebnis):
+Three **cameras** (perspectives on the same result):
 
-| Kamera | Zielgruppe | Haupt-Artefakt |
-|--------|------------|----------------|
-| **Operator** | Menschen | `ARCHOVIVE_OUTPUT.md` |
+| Camera | Buyer | Main artifact |
+|--------|-------|---------------|
+| **Operator** | Humans | `ARCHOVIVE_OUTPUT.md` |
 | **Machine** | CI/CD | `repro.json`, `drift_matrix.json` |
-| **Evidence** | Auditoren | `attestation.json`, SBOM, Verify-Chain |
+| **Evidence** | Auditors | `attestation.json`, SBOM, verify chain |
 
-Details → [Kapitel 05 — Evidence](../05-evidence/README.md)
+Details → [Chapter 05 — Evidence](../05-evidence/README.md)
 
 ---
 
-## Truth Surfaces (Enterprise)
+## Truth surfaces (enterprise)
 
-Diese drei Befehle **müssen identische Antworten** liefern — Paritäts-Garantie:
+These three commands **must give identical answers** — parity guarantee:
 
 ```bash
 archovive ask "why blocked?"
@@ -94,8 +98,8 @@ archovive chat "why blocked?"
 archovive governance decide --json
 ```
 
-Kein separates „Chat-Wissen". Eine Kernel-Wahrheit, mehrere Oberflächen.
+No separate "chat knowledge". One kernel truth, multiple surfaces (CLI, MCP, CI).
 
 ---
 
-**Nächstes Kapitel:** [05 — Evidence](../05-evidence/README.md) — Attestations, SLSA und Signaturen für Auditoren.
+**Next chapter:** [05 — Evidence](../05-evidence/README.md) — attestations, SLSA, and signatures for auditors.

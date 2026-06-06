@@ -1,57 +1,60 @@
-# demo-fintech — Lern-Repository für Archovive Simulate
+# demo-fintech — learning repository for Archovive simulate
 
-## Die Story
+## The story
 
-**NovaPay** ist eine fiktive europäische Payments-API — kein Produktionscode, sondern ein **Absichts-Beispiel** für Architektur-Governance.
+**NovaPay** is a fictional European payments API — not production code, but an **intentional example** for architecture governance.
 
-Das Team hat schnell gebaut: API-Routes, Payment-Ledger, Batch-Processor, Ops-Notifications. Alles funktioniert in Tests. Aber die **Schichtgrenzen** wurden nie durchgesetzt — genau das Muster, das bei DORA-Audits und Release-Gates auffliegt.
+The team shipped fast: API routes, payment ledger, batch processor, ops notifications. Tests pass. But **layer boundaries** were never enforced — exactly the pattern that fails DORA audits and release gates.
 
-Archovive scannt dieses Repo in ~30 Sekunden und zeigt dir, **warum** ein Release blockiert würde — nicht als Meinung, sondern als Policy-Verdict mit Replay-Hash.
+Archovive scans this repo in a few seconds and shows **why** a release would be blocked — not as opinion, but as a policy verdict with replay hash.
 
----
-
-## 3 absichtliche Verstöße (eingebaut)
-
-| # | Wo | Was | Policy |
-|---|-----|-----|--------|
-| 1 | `services/api/routes.py` | API importiert `payments.ledger` direkt | **DORA_2026** — layer boundary breach |
-| 2 | `services/api/routes.py` | API ruft `payments.processor.run_batch` auf | Schichtvermischung / critical-path |
-| 3 | `services/payments/ledger.py` | Ledger triggert Notifications inline | Kopplung kritischer Domains |
-
-Du musst den Code nicht lesen, um das Problem zu verstehen — `archovive simulate` erklärt es dir.
+See the gate output in the [README](../../README.md#what-you-get). Run `archovive simulate --verbose` for graph metrics and per-rule evaluation.
 
 ---
 
-## Struktur
+## 3 intentional anti-patterns (in code)
+
+| # | Where | What | What the OSS gate shows |
+|---|-------|------|-------------------------|
+| 1 | `services/api/routes.py` | API imports `payments.ledger` directly | **DORA_2026** boundary crossing → `POLICY_VIOLATION` |
+| 2 | `services/api/routes.py` | API calls `payments.processor.run_batch` | Layer mixing (visible in graph metrics) |
+| 3 | `services/payments/ledger.py` | Ledger calls `notify_ops` inline | Critical-domain coupling (code smell) |
+
+The default gate surfaces violation **#1** as the blocking rule. Rules **GLOBAL_BASE** and **NIS2_MINIMAL_V1** pass on this demo.
+
+---
+
+## Structure
 
 ```text
-services/api/              HTTP-Schicht (sollte nicht in Ledger greifen)
-services/payments/         Zahlungsdomäne — Ledger, Processor
-services/notifications/    Ops-Alerts
-shared/                    Config & Audit-Logging
-tests/                     Smoke-Test (grün — Architektur trotzdem rot)
+services/api/              HTTP layer (should not touch ledger)
+services/payments/         Payments domain — ledger, processor
+services/notifications/    Ops alerts
+shared/                    Config & audit logging
+tests/                     Smoke test (green — architecture still red)
 ```
 
-**12 Module.** Klein genug zum Scrollen, groß genug für realistische Metriken (`coupling_index`, `boundary_crossings`).
+**12 modules.** Small enough to scroll, large enough for realistic metrics (`coupling_index`, `boundary_crossings`).
 
 ---
 
-## Ausführen
+## Run
 
 ```bash
 archovive simulate
+archovive simulate --verbose
 archovive simulate --repo examples/demo-fintech
-archovive ci check --repo examples/demo-fintech   # Exit 2 — Merge würde blockieren
+archovive ci check --repo examples/demo-fintech   # process exit 2 — merge would block
 ```
 
-Erwarteter Verdict: `POLICY_VIOLATION` · Exit **2** · `replay_hash` gepinnt in [simulate/README.md](../../simulate/README.md)
+Expected verdict: `POLICY_VIOLATION` · gate exit code **2** · `replay_hash` pinned in [simulate/README.md](../../simulate/README.md)
 
 ---
 
-## Was du daraus lernst
+## What you learn
 
-- **Drift** allein reicht nicht — beim ersten Lauf ist `drift_status: unmeasured` (neutral, kein Risiko-Signal)
-- **Policy** feuert sofort — weil Regeln auf Graph-Metriken operieren, nicht auf „kenne ich diesen Code?"
-- **CI** kann dasselbe automatisieren → [docs/03-ci](../../docs/03-ci/README.md)
+- **Drift** alone is not enough — first run has `drift_status: unmeasured` (neutral, not a risk signal)
+- **Policy** fires on graph metrics — the DORA rule fails because `boundary_crossings > 0`
+- **CI** must use `ci check` so the process exit code blocks the merge → [docs/03-ci](../../docs/03-ci/README.md)
 
-Pilot auf **deinem** Repository: [docs/08-pricing](../../docs/08-pricing/README.md#pilotphase) · **pilot@archovive.com**
+Pilot on **your** repository: [docs/08-pricing](../../docs/08-pricing/README.md#pilot-program) · **pilot@archovive.com**

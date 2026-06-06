@@ -27,7 +27,7 @@ jobs:
         run: bash internal/scripts/verify_public_boundary.sh
 
       - name: Unit tests
-        run: python -m pytest archovive/tests -q
+        run: python -m pytest cli/tests -q
 
       - name: OSS funnel — simulate
         run: |

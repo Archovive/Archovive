@@ -1,35 +1,61 @@
-# Kapitel 08 — Pricing & Tiers
+# Chapter 08 — Pricing & tiers
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **Budget-Entscheider, Einkauf und Gründer**, die verstehen wollen, was kostenlos ist, was skaliert und **warum** Enterprise mehr kostet als ein Scanner-Abo.
+**Budget owners, procurement, and founders** who need to know what's free, what scales, **who buys which surface** (CLI, MCP, CI), and why enterprise costs more than a scanner subscription.
 
-*Indikativ — nicht vertraglich. Verbindliche Angebote: **enterprise@archovive.com***
-
----
-
-## Value Proposition
-
-Archovive liefert **deterministische, offline-fähige Architektur-Evidence** — ohne Code zu ändern, ohne Daten in die Cloud zu senden.
-
-| Outcome | Nutzen |
-|---------|--------|
-| **CI-Gates** | Objektive Exit Codes statt Meinungs-Diskussionen |
-| **Audit-Evidence** | Signierte Attestations statt manueller Reviews |
-| **Regulatory Bridge** | DORA/NIS2/CRA-Regeln auf Graph-Ebene — nicht nur Checklisten |
-
-**Moat:** Regulatorische Policy Packs → Graph-Invarianten. SAST kennt keine Gesetze. GRC kompiliert kein Repository.
+*Indicative — not contractual. Binding quotes: **enterprise@archovive.com***
 
 ---
 
-## OSS (dieses Repository)
+## Value proposition
+
+Archovive delivers **deterministic, offline-capable architecture evidence** — without changing code, without sending data to the cloud.
+
+| Outcome | Benefit |
+|---------|---------|
+| **CI gates** | Objective exit codes instead of opinion debates |
+| **Audit evidence** | Signed attestations instead of manual reviews |
+| **Regulatory bridge** | DORA/NIS2/CRA rules at graph level — not checklists only |
+
+**Moat:** regulatory policy packs → graph invariants. SAST does not know laws. GRC does not compile repositories.
+
+---
+
+## Surfaces by tier
+
+What you **buy** at each level — CLI commands, MCP tools, and CI artifacts.  
+**OSS** = this GitHub repo. **Team / Enterprise / gov** = enterprise bundle + license (not shipped here).
+
+| Buyer persona | Product tier | Pipeline tier | CLI | MCP (bundle) | CI |
+|---------------|-------------|---------------|-----|--------------|-----|
+| Evaluator, OSS adopter | — (OSS) | — | `simulate`, `ci check` (demo) | — | Actions pattern; demo exit 2 |
+| Platform engineer | **team** | **ci** | `run`, `diff`, `gate` | `run_analysis` | Exit 0–4, `repro.json`, drift matrix |
+| Staff eng / tech lead | **team** | **ci** | `gate`, decision API | IDE integration | Merge blocker on **your** repo |
+| IDE power user | **team+** | **ci+** | same as team | full read tools | Pre-commit / PR checks |
+| Compliance engineer | **enterprise** | **gov** | `verify`, `audit export`, `governance decide` | `evidence`, `global` | Signed attestation upload |
+| CISO / regulated bank | **enterprise** | **gov** | vault, dispatch, fleet | full MCP surface | SIEM JSONL, admission hooks |
+| External auditor | **gov** (per mandate) | **gov** | `verify` (trustless) | evidence camera | Archived artifacts, no re-scan |
+
+### CLI vs MCP vs CI — when each is sold
+
+| Surface | Best for | Sold starting at |
+|---------|----------|------------------|
+| **CLI** | Scripts, CI runners, air-gap, auditors | OSS (`simulate`) → Team (`run`, `diff`) → Enterprise (`gate`, `audit export`) |
+| **MCP** | IDE workflow, analysis from Cursor | Enterprise bundle (`archovive-mcp`; tools: `run_analysis`, `evidence`, `global`) |
+| **CI** | Objective merge/release gates | OSS (pattern + demo `ci check`) → Team (`repro.json`, drift) → Gov (attestation chain) |
+
+---
+
+## OSS (this repository)
 
 | | |
 |---|---|
-| **Preis** | **Kostenlos** (MIT) |
-| **Enthält** | `simulate`, `ci check`, Demo-Repo, Story-Docs |
-| **Limit** | Vereinfachte Analyse, kein voller Hypergraph, keine Attestations |
-| **Ideal für** | Evaluierung, Developer Adoption, CI-Pattern lernen |
+| **Price** | **Free** (MIT) |
+| **Includes** | `simulate`, `ci check`, demo repo, story docs, GIFs |
+| **Surfaces** | CLI only · CI pattern on demo repo · no MCP server |
+| **Limit** | Demo engine only — simplified graph, three policy rules, no attestations |
+| **Ideal for** | Evaluation, developer adoption, learning CI patterns |
 
 ```bash
 bash dist/install.sh && archovive simulate
@@ -41,12 +67,13 @@ bash dist/install.sh && archovive simulate
 
 | | |
 |---|---|
-| **Preis** | **Kostenlos** für Open Source; **€49 / Dev / Monat** kommerziell (KMU) |
-| **Enthält** | `repro.json`, `drift_matrix.json`, CI Exit Codes |
-| **Ideal für** | Platform Engineering, Scale-ups, Monorepo-Teams |
-| **Schmerz** | „Wir wissen nicht, ob die Architektur noch stimmt" |
+| **Price** | **Free** for open source; **€49 / dev / month** commercial (SMB) |
+| **Includes** | `repro.json`, `drift_matrix.json`, CI exit codes |
+| **Surfaces** | CLI `run`, `diff`, `gate` · MCP `run_analysis` · CI merge gate |
+| **Ideal for** | Platform engineering, scale-ups, monorepo teams |
+| **Pain** | "We don't know if architecture still matches intent" |
 
-Kein CISO nötig. Ein DevOps-Lead reicht als Champion.
+Requires enterprise bundle. No CISO required — one DevOps lead is enough as champion.
 
 ---
 
@@ -54,12 +81,13 @@ Kein CISO nötig. Ein DevOps-Lead reicht als Champion.
 
 | | |
 |---|---|
-| **Preis** | **€2.500 / zertifiziertes Repository / Jahr** (unbegrenzte Attestations) |
-| **Enthält** | Attestations, Compliance Reports, Vault, Transparency Log, Live-Dispatch |
-| **Ideal für** | Regulierte Unternehmen, Banken, Audit-Kanäle |
-| **Schmerz** | DORA/NIS2/CRA-Deadline, Audit-Vorbereitung, Release-Governance |
+| **Price** | **€2,500 / certified repository / year** (unlimited attestations) |
+| **Includes** | Attestations, compliance reports, vault, transparency log, live dispatch |
+| **Surfaces** | Full CLI · full MCP · gov CI artifacts + SIEM |
+| **Ideal for** | Regulated companies, banks, audit channels |
+| **Pain** | DORA/NIS2/CRA deadline, audit prep, release governance |
 
-Pricing-Dimensionen (Enterprise-Verhandlung): Repo-Anzahl, CI-Seats, Support-SLA, Signing Key Ceremony.
+Enterprise negotiation dimensions: repo count, CI seats, support SLA, signing key ceremony.
 
 ---
 
@@ -67,48 +95,48 @@ Pricing-Dimensionen (Enterprise-Verhandlung): Repo-Anzahl, CI-Seats, Support-SLA
 
 | | OSS | Enterprise |
 |---|-----|------------|
-| **Latenz** | Keine Garantie | Keine Latenz-SLA |
-| **Determinismus** | Demo-gepinnt | **Funktionale SLA:** gleicher Stand → gleicher `replay_hash` |
-| **Support** | Community / Docs | enterprise@archovive.com |
+| **Latency** | No guarantee | No latency SLA |
+| **Determinism** | Demo-pinned hashes | **Functional SLA:** same commit + packs → same `replay_hash` |
+| **Support** | Community / docs | enterprise@archovive.com |
 
 ---
 
-## Segment-Matrix
+## Segment matrix
 
-| Segment | Tier | Einstiegs-Kapitel |
-|---------|------|-------------------|
-| Developer / Evaluator | OSS | 01, 02 |
-| Platform Engineering | Team/CI | 03 |
-| CRA/NIS2 Vendor | Gov | 04, 05 |
-| Air-gap / Behörde | Enterprise | 06, 07 |
+| Segment | Tier | Entry chapter |
+|---------|------|---------------|
+| Developer / evaluator | OSS | 01, 02 |
+| Platform engineering | Team/CI | 03 |
+| CRA/NIS2 vendor | Gov | 04, 05 |
+| Air-gap / government | Enterprise | 06, 07 |
 | Bank / DORA | Enterprise | 07 |
-| Audit-Boutique | Gov (pro Mandant) | 05, 07 |
+| Audit boutique | Gov (per client) | 05, 07 |
 
 ---
 
-## Pilotphase
+## Pilot program
 
-**Läuft bis Ende 2026** — erste **5 Monate kostenlos** für qualifizierte Piloten (regulierte Industrie, Platform-Teams mit CI-Mandat, Audit-Kanäle).
+**Runs through end of 2026** — first **5 months free** for qualified pilots (regulated industry, platform teams with CI mandate, audit channels).
 
-Was du bekommst:
+What you get:
 
-- Enterprise-Bundle auf **deinem** Repository (nicht nur Demo)
-- Begleitung beim CI-Gate-Setup
-- Evidence-Packs für interne oder externe Auditoren
+- Enterprise bundle on **your** repository (not demo only)
+- Help wiring the CI gate
+- Evidence packs for internal or external auditors
 
-**Interesse?** → **pilot@archovive.com**  
-Betreff: `Pilot` + Branche + ungefähre Repo-Größe. Antwort innerhalb von 2 Werktagen.
+**Interested?** → **pilot@archovive.com**  
+Subject: `Pilot` + industry + approximate repo size. Reply within 2 business days.
 
-Allgemeine Enterprise-Anfragen: enterprise@archovive.com
-
----
-
-## Nächste Schritte
-
-1. **Noch unsicher?** → [02 — Simulate](../02-simulate/README.md)
-2. **CI einbinden?** → [03 — CI](../03-ci/README.md)
-3. **Enterprise ohne Pilot?** → enterprise@archovive.com
+General enterprise: enterprise@archovive.com
 
 ---
 
-**Nächstes Kapitel:** [01 — Intro](../01-intro/README.md) — zurück zum Einstieg (oder Demo starten: `archovive simulate`).
+## Next steps
+
+1. **Still unsure?** → [02 — Simulate](../02-simulate/README.md)
+2. **Wire CI?** → [03 — CI](../03-ci/README.md)
+3. **Enterprise without pilot?** → enterprise@archovive.com
+
+---
+
+**Next chapter:** [01 — Intro](../01-intro/README.md) — back to the start (or run the demo: `archovive simulate`).

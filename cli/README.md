@@ -1,14 +1,14 @@
 # CLI — Archovive OSS
 
-Öffentliche Befehle ohne Enterprise-Bundle:
+Public commands without the enterprise bundle:
 
-| Befehl | Funktion |
-|--------|----------|
-| `archovive simulate` | 30s-Demo — Graph, Drift, Policy, Verdict |
-| `archovive ci check` | CI-Gate (Exit 2 bei Policy-Verstoß) |
-| `archovive doctor` | Python + Git Check |
-| `archovive --help` | Übersicht |
+| Command | Purpose |
+|---------|---------|
+| `archovive simulate` | 30s demo — graph, drift, policy, verdict |
+| `archovive ci check` | CI gate (exit 2 on policy violation) |
+| `archovive doctor` | Python + Git check |
+| `archovive --help` | Overview |
 
-Enterprise-Befehle (`run`, `gate`, `verify`, …) delegieren an das frozen Bundle, wenn installiert.
+Enterprise commands (`run`, `gate`, `verify`, …) delegate to the frozen bundle when installed.
 
 Wrapper: `dist/archovive` · Install: `dist/install.sh`

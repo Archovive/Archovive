@@ -1,82 +1,80 @@
-# Kapitel 01 — Was ist Archovive?
+# Chapter 01 — What is Archovive?
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **alle**, die in unter einer Minute verstehen wollen, was Archovive leistet — ohne Installationsanleitung, ohne Engine-Details, ohne Compliance-Fachjargon.
+**Everyone** who wants to understand what Archovive does in under a minute — no install guide, no engine internals, no compliance jargon.
 
 ---
 
-## Das Problem
+## The problem
 
-Software-Teams stehen vor drei Lücken, die weder SAST noch GRC allein schließen:
+Software teams face three gaps that neither SAST nor GRC closes alone:
 
 ### 1. Drift
-Die implementierte Architektur weicht vom Soll ab — oft unbemerkt bis kurz vor dem Release. Code-Reviews sehen Dateien, nicht **Struktur**. Monorepos wachsen, Grenzen verschwimmen.
+The implemented architecture diverges from the target — often unnoticed until release. Code review sees files, not **structure**. Monorepos grow; boundaries blur.
 
 ### 2. Evidence
-Auditoren, Regulatoren und Kunden verlangen **nachweisbare** Artefakte: Was wurde geprüft? Gegen welche Regeln? Mit welchem Ergebnis? Wer hat wann zugestimmt? Screenshots und Word-Dokumente reichen nicht.
+Auditors, regulators, and customers require **provable** artifacts: What was checked? Against which rules? With what outcome? Who approved when? Screenshots and Word docs are not enough.
 
 ### 3. Compliance
-DORA, NIS2, CRA und SOX verlangen **Software-Governance** — nicht nur IT-Sicherheit auf Einzelzeilen-Ebene. Gesetze kennen Architektur-Schichten. Scanner kennen Gesetze nicht.
+DORA, NIS2, CRA, and SOX require **software governance** — not just line-level security. Regulations know architecture layers. Scanners do not know regulations.
 
 ---
 
-## Die Lösung
+## The solution
 
-**Archovive** ist eine **local-first Governance Engine**:
+**Archovive** is a **local-first governance engine**:
 
-1. **Repository einlesen** → Architektur-Graph (Module, Abhängigkeiten, Schichten)
-2. **Graph auswerten** → Drift gegen Baseline, Policy-Regeln (DORA, NIS2, …)
-3. **Ergebnis materialisieren** → Verdict, Hashes, Evidence-Paket
+1. **Ingest repository** → architecture graph (modules, dependencies, layers)
+2. **Evaluate graph** → drift vs baseline, policy rules (DORA, NIS2, …)
+3. **Materialize result** → verdict, hashes, evidence pack
 
-Alles **on-prem**. Kein Code-Upload in die Cloud. Kein Telemetry.  
-Gleicher Repository-Stand → gleicher Output (**Determinismus**).
-
----
-
-## Warum nicht SonarQube / Vanta?
-
-**SonarQube** findet Zeilen-Bugs. **Vanta** verwaltet Checklisten.  
-**Archovive** analysiert deine Architektur als Graph und entscheidet deterministisch: *darf dieser Stand released werden* — mit signierten Beweisen.
-
-Das ist keine Ersetzung für SAST oder GRC-Tools. Es ist die **Lücke dazwischen**: Architektur + Regulierung + reproduzierbares Evidence.
+All **on-prem**. No code upload to the cloud. No telemetry.  
+Same repository state → same output (**determinism**).
 
 ---
 
-## Was Archovive nicht ist
+## Why not SonarQube / Vanta?
 
-- Kein Cloud-SaaS-Scanner
-- Kein Ersatz für Zeile-für-Zeile-Bugfinding (SAST)
-- Keine Checklisten-App ohne Code-Anbindung
-- Keine generische KI-Suche — `ask`/`chat` im Enterprise-Produkt sind **deterministische Governance-Oberflächen** auf demselben Kernel
+**SonarQube** finds line-level bugs. **Vanta** manages checklists.  
+**Archovive** analyzes your architecture as a graph and decides deterministically: *may this state be released* — with signed evidence.
+
+It does not replace SAST or GRC. It fills the **gap between them**: architecture + regulation + reproducible evidence.
 
 ---
 
-## 30-Sekunden-Demo (Beispiel-Output)
+## What Archovive is not
 
-```text
-$ archovive simulate
+- Not a cloud SaaS scanner
+- Not a replacement for line-by-line bug finding (SAST)
+- Not a checklist app without code binding
+- Not generic AI search — `ask`/`chat` in the enterprise product are **deterministic governance surfaces** on the same kernel
 
-ARCHOVIVE GATE — DORA Boundary Crossing
-Verdict: POLICY_VIOLATION
-graph_hash: fee879ce…c734aa
-replay_hash: 3e700b6a…d3b9736
-Exit Code: 2
+---
+
+## 30-second demo
+
+See the gate GIF in the [README](../../README.md#what-you-get) or run:
+
+```bash
+bash dist/install.sh
 ```
 
-Das Demo-Repo ist eine absichtlich fehlerhafte Fintech-Microservice-Struktur — Details in [examples/demo-fintech](../../examples/demo-fintech/README.md).
+The demo repo is an intentionally broken fintech microservice layout — details in [examples/demo-fintech](../../examples/demo-fintech/README.md).
 
 ---
 
-## Wer profitiert wann?
+## Who benefits when?
 
-| Rolle | Typischer Einstieg |
-|-------|-------------------|
-| Entwickler / Tech Lead | Kapitel 02 — Simulate |
-| Platform / DevOps | Kapitel 03 — CI-Gate |
-| Compliance / GRC | Kapitel 04–05 — Governance & Evidence |
-| CISO / Enterprise | Kapitel 07 — Enterprise-Bundle |
+| Role | Typical entry |
+|------|---------------|
+| Developer / tech lead | Chapter 02 — Simulate |
+| Platform / DevOps | Chapter 03 — CI gate |
+| Compliance / GRC | Chapters 04–05 — Governance & Evidence |
+| CISO / enterprise | Chapter 07 — Enterprise bundle |
+
+Surfaces sold per tier (CLI, MCP, CI) → [Chapter 08 — Pricing](../08-pricing/README.md#surfaces-by-tier)
 
 ---
 
-**Nächstes Kapitel:** [02 — Simulate](../02-simulate/README.md) — Demo in 30 Sekunden auf deinem Rechner ausführen.
+**Next chapter:** [02 — Simulate](../02-simulate/README.md) — run the demo on your machine in 30 seconds.

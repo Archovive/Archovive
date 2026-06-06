@@ -1,114 +1,122 @@
-# Kapitel 05 — Evidence
+# Chapter 05 — Evidence
 
-## Für wen ist dieses Kapitel?
+## Who is this chapter for?
 
-Für **Auditoren, IT-Compliance, CRA/NIS2-Verantwortliche und SIEM-Betreiber**, die **prüfbare Artefakte** brauchen — nicht Screenshots, nicht mündliche Bestätigungen, sondern signierte, replay-fähige Evidence Packs.
+**Auditors, IT compliance, CRA/NIS2 owners, and SIEM operators** who need **verifiable artifacts** — not screenshots, not verbal confirmations, but signed, replayable evidence packs.
+
+**Surface sold:** CLI `verify`, `audit export` · MCP `archovive.evidence`, `archovive.global` · CI artifact upload (gov tier).
 
 ---
 
-## Was ist ein Evidence Pack?
+## What is an evidence pack?
 
-Ein Evidence Pack ist ein **zusammenhängendes Bündel** aus Analyse-Ergebnissen, das du an Prüfer, Regulatoren oder interne Revision weitergeben kannst:
+An evidence pack is a **coherent bundle** of analysis results you can hand to auditors, regulators, or internal revision:
 
-| Datei | Inhalt | Tier |
-|-------|--------|------|
-| `ARCHOVIVE_OUTPUT.md` | Menschlicher Report | core+ |
-| `repro.json` | Replay-Metadaten, Graph-Hashes | ci+ |
-| `drift_matrix.json` | Drift-Taxonomie | ci+ |
-| `compliance_report.json` | Policy-Pack-Matrizen | gov |
-| `attestation.json` | Signierte Verdict-Bescheinigung | gov |
-| `risk_matrix.json` | Risiko-Zeilen aus Analyse | gov |
+| File | Content | Pipeline tier |
+|------|---------|---------------|
+| `ARCHOVIVE_OUTPUT.md` | Human report | core+ |
+| `repro.json` | Replay metadata, graph hashes | ci+ |
+| `drift_matrix.json` | Drift taxonomy | ci+ |
+| `compliance_report.json` | Policy pack matrices | gov |
+| `attestation.json` | Signed verdict certificate | gov |
+| `risk_matrix.json` | Risk rows from analysis | gov |
 
-OSS-Demo liefert Terminal/JSON. Enterprise-Bundle schreibt das volle Set ins Analyse-Verzeichnis.
+OSS demo delivers terminal/JSON. Enterprise bundle writes the full set to the analysis directory.
+
+![Evidence export](../../assets/gifs/evidence.gif)
+
+```bash
+archovive audit export --bundle   # enterprise / gov
+```
 
 ---
 
 ## Attestations
 
-`attestation.json` ist das **Kernstück für Auditoren**:
+`attestation.json` is the **core artifact for auditors**:
 
-- `H_verdict` — Hash der Entscheidung
-- `trust_surface` — Verkettung: audit_chain_root, epoch_binding, hypervisor_binding
-- Ed25519-Signatur (gov-Tier)
-- Decision Trace — welche Policy-Regeln feuerten
+- `H_verdict` — hash of the decision
+- `trust_surface` — chain: audit_chain_root, epoch_binding, hypervisor_binding
+- Ed25519 signature (gov tier)
+- Decision trace — which policy rules fired
 
-**Verify ohne Re-Analyse:**
+**Verify without re-analysis:**
 
 ```bash
 archovive verify attestation.json
 ```
 
-Trustless: Dritte können die Bescheinigung prüfen, ohne dein Repository erneut zu scannen.
+Trustless: third parties can verify the certificate without re-scanning your repository.
 
 ---
 
-## SBOM & Supply Chain
+## SBOM & supply chain
 
-Archovive erzeugt SBOM-Daten mit **`file_hashes`** — SHA-256 pro Dateipfad im Analyse-Scope. Relevant für:
+Archovive produces SBOM data with **`file_hashes`** — SHA-256 per file path in analysis scope. Relevant for:
 
-- **CRA** — Software-Transparenz für digitale Produkte
-- **NIS2** — Lieferketten-Nachweise
-- **DORA** — ICT-Risikomanagement
-- **SLSA** — Build-Provenance
+- **CRA** — software transparency for digital products
+- **NIS2** — supply chain evidence
+- **DORA** — ICT risk management
+- **SLSA** — build provenance
 
-Leere `file_hashes` im gov-Tier = Bug, kein Feature.
+Empty `file_hashes` in gov tier = bug, not a feature.
 
 ---
 
-## SLSA & Build-Provenance
+## SLSA & build provenance
 
-Das Enterprise-Release liefert:
+The enterprise release ships:
 
-| Artefakt | Zweck |
-|----------|--------|
-| `archovive.slsa.provenance.json` | SLSA v1 — wer, wann, womit gebaut |
-| `build_manifest.json` | SHA-256 jeder Datei im Bundle (~940 Pfade) |
-| `archovive-enterprise-5.0.0.zip.sha256` | Release-Pin |
-| cosign-Signaturen | Keyless Signing des CLI-Binaries |
+| Artifact | Purpose |
+|----------|---------|
+| `archovive.slsa.provenance.json` | SLSA v1 — who, when, how built |
+| `build_manifest.json` | SHA-256 of every file in bundle (~940 paths) |
+| `archovive-enterprise-5.0.0.zip.sha256` | Release pin |
+| cosign signatures | Keyless signing of CLI binary |
 
-Verify vor Installation:
+Verify before install:
 
 ```bash
 sha256sum -c internal/releases/archovive-enterprise-5.0.0.zip.sha256
 ./archovive-enterprise-5.0.0/scripts/verify_signature.sh
 ```
 
-*(Hashes liegen in `internal/releases/` — Build-Pin, nicht Endnutzer-Dokumentation.)*
+*(Hashes live in `internal/releases/` — build pin, not end-user documentation.)*
 
 ---
 
-## Signaturen
+## Signatures
 
-| Was | Algorithmus | Wo |
-|-----|-------------|-----|
-| Policy Packs | Ed25519 (`.json.sig`) | Enterprise-Bundle |
-| Enterprise-Lizenz | Ed25519 | `archovive_license.json` |
+| What | Algorithm | Where |
+|------|-----------|-------|
+| Policy packs | Ed25519 (`.json.sig`) | Enterprise bundle |
+| Enterprise license | Ed25519 | `archovive_license.json` |
 | Attestation | Ed25519 | `attestation.json` |
-| CLI-Binary | cosign (keyless) | GitHub Release |
+| CLI binary | cosign (keyless) | GitHub release |
 
-Enterprise **fail-closed**: ohne gültige Lizenz-Signatur kein gov-Tier, kein Live-Dispatch.
+Enterprise **fail-closed**: without valid license signature, no gov tier, no live dispatch.
 
 ---
 
-## Evidence Camera (Enterprise)
+## Evidence camera (enterprise)
 
 ```bash
 archovive evidence
 archovive camera evidence
 ```
 
-MCP-Äquivalent: `archovive.evidence`, `archovive.global`
+MCP equivalents: `archovive.evidence`, `archovive.global`
 
-Benchmark-JSON (Flask, FastAPI, Django) im Bundle für globale Vergleichsmatrizen — `global_matrix.json`, `global_ranking.json`.
-
----
-
-## Audit-Kanal
-
-Wirtschaftsprüfer und GRC-Boutiquen können Evidence Packs **pro Repository / pro Release** archivieren — deterministisch, wiederholbar, ohne erneute Analyse-Kosten.
-
-Indikativer Enterprise-Preis: **€2.500 / zertifiziertes Repository / Jahr** → [Kapitel 08](../08-pricing/README.md)
+Benchmark JSON (Flask, FastAPI, Django) in the bundle for global comparison matrices — `global_matrix.json`, `global_ranking.json`.
 
 ---
 
-**Nächstes Kapitel:** [06 — Air-gap](../06-airgap/README.md) — Offline-Betrieb ohne Cloud und ohne Telemetry.
+## Audit channel
+
+Auditors and GRC boutiques can archive evidence packs **per repository / per release** — deterministic, repeatable, without re-analysis cost.
+
+Indicative enterprise price: **€2,500 / certified repository / year** → [Chapter 08](../08-pricing/README.md)
+
+---
+
+**Next chapter:** [06 — Air-gap](../06-airgap/README.md) — offline operation without cloud or telemetry.
