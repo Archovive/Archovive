@@ -34,6 +34,9 @@ Production (your repositories):
 Options:
   --help, --version
 
+Surfaces: CLI · CI · MCP (bundle)
+Tiers: Free (this repo) · Team · Enterprise
+
 {EXIT_CODES_HELP}
 
 Docs: docs/01-intro/ · Enterprise bundle: {BUNDLE_ZIP} — docs/07-enterprise/"""

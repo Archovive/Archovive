@@ -1,6 +1,6 @@
 # Chapter 02 — Simulate (30 seconds)
 
-**Navigation:** [Docs hub](../README.md) · Path A · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
+**Navigation:** [Docs hub](../README.md) · **CLI Surface · Free Tier** · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
 
 ## Who is this chapter for?
 

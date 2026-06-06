@@ -16,7 +16,7 @@ internal/                              ← build, releases, enterprise (not docu
 | OSS CLI | `cli/` |
 | Demo engine | `simulate/` |
 | Demo repos | `examples/` |
-| Product docs | `docs/01-intro/` … `docs/08-pricing/` |
+| Product docs | `docs/01-intro/` … `docs/09-mcp/` |
 | Install | `dist/install.sh` |
 | Build / releases | `internal/` only |
 

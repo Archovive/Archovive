@@ -1,6 +1,6 @@
 # Chapter 03 — CI gate
 
-**Navigation:** [Docs hub](../README.md) · Path B · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md)
+**Navigation:** [Docs hub](../README.md) · **CI Surface · Team+Enterprise parity** · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md) · [MCP →](../09-mcp/README.md)
 
 ## Who is this chapter for?
 
@@ -107,7 +107,7 @@ With the enterprise bundle on **your** repository:
 
 Upload artifacts (`repro.json`, `drift_matrix.json`, `attestation.json`) as pipeline artifacts → audit trail without manual export.
 
-**MCP in CI:** use CLI in pipelines; use MCP (`archovive.run_analysis`) in the IDE for the same kernel truth.
+**MCP in CI:** use CLI in pipelines; use MCP (`archovive.run_analysis`) in the IDE for the same kernel truth → [Chapter 09 — MCP](../09-mcp/README.md).
 
 ---
 

@@ -10,6 +10,24 @@
 
 ---
 
+## Surfaces & Tiers
+
+**Surfaces:**  
+CLI — local-first simulate, graph, policy  
+CI — deterministic merge gate  
+MCP — machine interface for AI coding tools  
+
+**Tiers:**  
+Free (OSS) — simulate, ci check, local governance  
+Team — multi-repo CI, shared baselines, drift history  
+Enterprise — offline bundle, MCP, evidence, signed policy packs  
+
+This repository ships the **Free** tier. Team and Enterprise require the [enterprise bundle](../07-enterprise/README.md).
+
+Full capability matrix → [docs hub](../README.md#capability-matrix).
+
+---
+
 ## Value proposition
 
 Archovive delivers **deterministic, offline-capable architecture evidence** — without changing code, without sending data to the cloud.
@@ -24,28 +42,9 @@ Archovive delivers **deterministic, offline-capable architecture evidence** — 
 
 ---
 
-## Surfaces by tier
+## Who buys what
 
-What you **buy** at each level — CLI commands, MCP tools, and CI artifacts.  
-**OSS** = this GitHub repo. **Team / Enterprise / gov** = enterprise bundle + license (not shipped here).
-
-| Buyer persona | Product tier | Pipeline tier | CLI | MCP (bundle) | CI |
-|---------------|-------------|---------------|-----|--------------|-----|
-| Evaluator, OSS adopter | — (OSS) | — | `simulate`, `ci check` (demo) | — | Actions pattern; demo exit 2 |
-| Platform engineer | **team** | **ci** | `run`, `diff`, `gate` | `run_analysis` | Exit 0–4, `repro.json`, drift matrix |
-| Staff eng / tech lead | **team** | **ci** | `gate`, decision API | IDE integration | Merge blocker on **your** repo |
-| IDE power user | **team+** | **ci+** | same as team | full read tools | Pre-commit / PR checks |
-| Compliance engineer | **enterprise** | **gov** | `verify`, `audit export`, `governance decide` | `evidence`, `global` | Signed attestation upload |
-| CISO / regulated bank | **enterprise** | **gov** | vault, dispatch, fleet | full MCP surface | SIEM JSONL, admission hooks |
-| External auditor | **gov** (per mandate) | **gov** | `verify` (trustless) | evidence camera | Archived artifacts, no re-scan |
-
-### CLI vs MCP vs CI — when each is sold
-
-| Surface | Best for | Sold starting at |
-|---------|----------|------------------|
-| **CLI** | Scripts, CI runners, air-gap, auditors | OSS (`simulate`) → Team (`run`, `diff`) → Enterprise (`gate`, `audit export`) |
-| **MCP** | IDE workflow, analysis from Cursor | Enterprise bundle (`archovive-mcp`; tools: `run_analysis`, `evidence`, `global`) |
-| **CI** | Objective merge/release gates | OSS (pattern + demo `ci check`) → Team (`repro.json`, drift) → Gov (attestation chain) |
+See the [hub capability matrix](../README.md#capability-matrix) for CLI, CI, and MCP by tier. MCP detail → [Chapter 09](../09-mcp/README.md).
 
 ---
 

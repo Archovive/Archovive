@@ -73,23 +73,9 @@ Engine access: **enterprise@archovive.com**
 | MCP `run_analysis` | IDE integration (Cursor, etc.) | MCP (enterprise bundle) |
 | MCP `archovive.evidence` | Auditor view in IDE | MCP |
 
-### Product tiers (capability depth)
+Full MCP setup → [Chapter 09 — MCP](../09-mcp/README.md).
 
-| Tier | Capabilities | Typical buyer |
-|------|-------------|---------------|
-| **personal** | 6 | Solo developer, evaluation |
-| **team** | 12 | Team feed, decision API, MCP read |
-| **enterprise** | 20 | Authoritative store, live dispatch, full MCP |
-
-### Pipeline tiers (license depth)
-
-| Tier | Artifacts | Typical buyer |
-|------|-----------|---------------|
-| **core** | Human report, basic gate | Developer |
-| **ci** | `repro.json`, drift matrix, exit codes | Platform engineering |
-| **gov** | Attestations, compliance report, vault | Compliance, CISO, auditor |
-
-Full buyer × surface matrix → [Chapter 08](../08-pricing/README.md#surfaces-by-tier)
+Product and pipeline tier depth → [docs hub capability matrix](../README.md#capability-matrix) · [Chapter 08 — Pricing](../08-pricing/README.md).
 
 ---
 

@@ -8,7 +8,8 @@
     "docs/README.md",
     "docs/01-intro/README.md",
     "docs/02-simulate/README.md",
-    "docs/07-enterprise/README.md"
+    "docs/07-enterprise/README.md",
+    "docs/09-mcp/README.md"
   ],
   "release_assets": [
     "internal/releases/archovive-enterprise-5.0.0.zip.sha256",

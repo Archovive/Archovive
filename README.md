@@ -12,6 +12,8 @@ Local-first architecture governance — deterministic gate, no cloud, no account
 git clone https://github.com/Archovive/Archovive.git && cd Archovive && make demo
 ```
 
+*Free tier — same gate format as production.*
+
 ```text
 ARCHOVIVE GATE — DORA Boundary Crossing
 Verdict: POLICY_VIOLATION
@@ -26,19 +28,30 @@ CI merge blocker on the demo: `make ci-demo` (exit **2**).
 
 ## Documentation
 
-**Pick your path** — full index: [docs/README.md](docs/README.md)
+Full index: [docs/README.md](docs/README.md)
 
-| You are… | Read |
-|----------|------|
-| New here | [Intro](docs/01-intro/README.md) → [Simulate](docs/02-simulate/README.md) |
-| Platform / DevOps | [CI gate](docs/03-ci/README.md) |
-| Enterprise / procurement | [Enterprise](docs/07-enterprise/README.md) → [Pricing](docs/08-pricing/README.md) |
+## Surfaces & Tiers
+
+**Surfaces:**  
+CLI — local-first simulate, graph, policy  
+CI — deterministic merge gate  
+MCP — machine interface for AI coding tools  
+
+**Tiers:**  
+Free (OSS) — simulate, ci check, local governance  
+Team — multi-repo CI, shared baselines, drift history  
+Enterprise — offline bundle, MCP, evidence, signed policy packs  
+
+This repository ships the **Free** tier. Team and Enterprise require the [enterprise bundle](docs/07-enterprise/README.md).
+
+| Tier | Start here |
+|------|------------|
+| **Free (OSS)** | [Intro](docs/01-intro/README.md) → [Simulate](docs/02-simulate/README.md) |
+| **Team** | [CI gate](docs/03-ci/README.md) → [Governance](docs/04-governance/README.md) |
+| **Enterprise** | [Enterprise](docs/07-enterprise/README.md) → [Pricing](docs/08-pricing/README.md) |
 
 ---
 
-## Enterprise
-
-Frozen offline bundle for **your** repositories → [docs/07-enterprise](docs/07-enterprise/README.md)  
-Pilot: [pilot@archovive.com](mailto:pilot@archovive.com) · Security: **security@archovive.com**
+Enterprise bundle & pilot → [docs/07-enterprise](docs/07-enterprise/README.md) · [pilot@archovive.com](mailto:pilot@archovive.com)
 
 MIT [LICENSE](LICENSE) · [Contributing](CONTRIBUTING.md)

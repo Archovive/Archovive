@@ -1,32 +1,56 @@
 # Documentation
 
-Pick **one path**. Each chapter links back here so you never get lost.
+Surfaces, tiers, and paths — pick one and go. Each chapter links back here.
 
 ---
 
-## Path A — Try it (5 minutes)
+## Surfaces & Tiers
 
-1. [01 — What is Archovive?](01-intro/README.md)
-2. [02 — Simulate](02-simulate/README.md) · run `make demo`
+**Surfaces:**  
+CLI — local-first simulate, graph, policy  
+CI — deterministic merge gate  
+MCP — machine interface for AI coding tools  
 
-**Done?** Wire CI → Path B. Need pricing → Path C.
+**Tiers:**  
+Free (OSS) — simulate, ci check, local governance  
+Team — multi-repo CI, shared baselines, drift history  
+Enterprise — offline bundle, MCP, evidence, signed policy packs  
+
+This repository ships the **Free** tier. Team and Enterprise require the [enterprise bundle](07-enterprise/README.md).
 
 ---
 
-## Path B — CI / Platform
+## Paths by tier
 
-1. [03 — CI gate](03-ci/README.md) · run `make ci-demo`
-
-Optional depth: [04 — Governance](04-governance/README.md)
+| Tier | Path | Commands |
+|------|------|----------|
+| **Free (OSS)** | [01 Intro](01-intro/README.md) → [02 Simulate](02-simulate/README.md) | `make demo`, `ci check` |
+| **Team** | [03 CI](03-ci/README.md) → [04 Governance](04-governance/README.md) → [08 Pricing (Team)](08-pricing/README.md#team--ci) | `run`, `diff`, drift matrix |
+| **Enterprise** | [07 Enterprise](07-enterprise/README.md) → [05 Evidence](05-evidence/README.md) → [06 Air-gap](06-airgap/README.md) | bundle, MCP, attestations |
 
 ---
 
-## Path C — Enterprise / Compliance
+## Paths by surface
 
-1. [07 — Enterprise](07-enterprise/README.md)
-2. [08 — Pricing](08-pricing/README.md)
+| Surface | Start here |
+|---------|------------|
+| **CLI** | [02 Simulate](02-simulate/README.md) |
+| **CI** | [03 CI gate](03-ci/README.md) |
+| **MCP** | [09 MCP](09-mcp/README.md) |
 
-Optional: [05 — Evidence](05-evidence/README.md) · [06 — Air-gap](06-airgap/README.md)
+---
+
+## Capability matrix
+
+| Capability | Free | Team | Enterprise | Doc |
+|------------|:----:|:----:|:------------:|-----|
+| CLI simulate / graph / policy | ✓ | ✓ | ✓ | 02 |
+| CI merge gate | ✓ | ✓ | ✓ | 03 |
+| Drift matrix | — | ✓ | ✓ | 04 |
+| Policy packs | 3 rules | full | signed | 04 |
+| Evidence | — | partial | ✓ | 05 |
+| Offline bundle | — | — | ✓ | 06 |
+| MCP | — | run_analysis | full | 09 |
 
 ---
 
@@ -42,6 +66,7 @@ Optional: [05 — Evidence](05-evidence/README.md) · [06 — Air-gap](06-airgap
 | 6 | [Air-gap](06-airgap/README.md) |
 | 7 | [Enterprise](07-enterprise/README.md) |
 | 8 | [Pricing](08-pricing/README.md) |
+| 9 | [MCP](09-mcp/README.md) |
 
 ---
 
