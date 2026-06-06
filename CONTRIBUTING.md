@@ -43,7 +43,7 @@ GIFs are committed artifacts. Regenerate locally before doc commits:
 go install github.com/charmbracelet/vhs@latest
 
 # regenerate all GIFs
-bash docs/assets/demo/build_gifs.sh
+make gifs
 ```
 
 Fallback (no VHS): `python3 docs/assets/demo/build_gifs.py`

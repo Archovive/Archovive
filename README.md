@@ -1,5 +1,7 @@
 # Archovive — Local-First Architecture Governance
 
+[![Repository Standard](https://img.shields.io/badge/repo-standard-blue)](docs/00-repository-standard/README.md)
+
 **Understand in 30 seconds. Wire into CI. Scale on-prem.**
 
 Archovive uses a simplified, product-first repository layout. Everything visible at the root is part of the OSS product. Everything internal lives under `internal/`. This keeps the repository clean, predictable, and easy to adopt. → [Repository standard](docs/00-repository-standard/README.md)
@@ -87,7 +89,7 @@ bash dist/install.sh
 | [evidence.gif](docs/assets/gifs/evidence.gif) | Enterprise bundle | `archovive audit export --bundle` |
 | [graph.gif](docs/assets/gifs/graph.gif) | Enterprise bundle | `archovive run --compact` |
 
-Regenerate: `bash docs/assets/demo/build_gifs.sh` · Details: [docs/assets/gifs/README.md](docs/assets/gifs/README.md)
+Regenerate: `make gifs` · Details: [docs/assets/gifs/README.md](docs/assets/gifs/README.md)
 
 ---
 

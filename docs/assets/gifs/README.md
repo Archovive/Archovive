@@ -2,6 +2,8 @@
 
 Terminal animations for the public README and docs. **NovaPay** uses the same gate as `gate.gif` — no separate file (avoid duplication).
 
+**Last regenerated:** 2026-06-06 (commit `566e906`) — update this line when you run `make gifs`.
+
 GIFs marked **Enterprise bundle** are previews of bundle commands (this repo routes to the bundle; it does not ship the full engine).
 
 ## Files
@@ -26,6 +28,8 @@ go install github.com/charmbracelet/vhs@latest
 
 bash docs/assets/demo/build_gifs.sh
 ```
+
+Or from the repo root: `make gifs`
 
 VHS tape files: `docs/assets/demo/tapes/*.tape`
 
