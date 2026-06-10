@@ -1,8 +1,7 @@
 # 02 — Surfaces: CLI, CI, MCP
 
-**Layer 1 · System behavior spec**
-
-**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← System Architecture](01_system_architecture.md) · [Next: Evidence Model →](03_evidence_model.md)
+**L1 · System behavior spec** — interprets kernel; not adoption authority.  
+**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← System Architecture](01_system_architecture.md) · [Next: Evidence Model →](03_evidence_model.md)
 
 ## Definition
 

@@ -1,8 +1,10 @@
 # Deterministic Governance Parity Proof (DGPP) — Executive Readout
 
-**Layer 2 · Proof artifact — NOT documentation, NOT a product feature**
+**L2 · Proof artifact — NOT documentation · NOT a product feature · NOT decision authority**
 
-**See also:** [Decision Hub](../00_decision_hub.md) · [Invariants spec](../05_invariants_and_determinism.md) · Reproduce: `make dgpp`
+DGPP verifies cross-surface parity. It does **not** influence kernel execution, policy evaluation, or adoption decisions.
+
+**See also:** [L0 · Decision Hub](../00_decision_hub.md#5a-proof-artifact-dgpp) · [Truth hierarchy](../README.md#truth-hierarchy) · Reproduce: `make dgpp`
 
 **Version:** v5.1.0 · **Fixture:** demo-fintech · **Commit binding:** `0000000000000000000000000000000000000001`  
 **Verification:** `make dgpp` · **Test:** `tests/test_dgpp_governance_parity.py`

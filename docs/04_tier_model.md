@@ -1,8 +1,7 @@
 # 04 — Tier Model
 
-**Layer 1 · System behavior spec**
-
-**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Evidence Model](03_evidence_model.md) · [Next: Invariants →](05_invariants_and_determinism.md)
+**L1 · System behavior spec** — interprets kernel; not adoption authority.  
+**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Evidence Model](03_evidence_model.md) · [Next: Invariants →](05_invariants_and_determinism.md)
 
 ## Definition
 

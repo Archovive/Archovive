@@ -3,38 +3,40 @@
 [![Repository Standard](https://img.shields.io/badge/repo-standard-blue)](CONTRIBUTING.md#repository-standard)
 [![DGPP](https://img.shields.io/badge/DGPP-governance%20parity%20proof-green)](docs/artifacts/dgpp_executive_report.md)
 
+**Documentation entry priority:** [L0 · Decision Hub](docs/00_decision_hub.md) (PRIMARY) · [Docs hub](docs/README.md) (SECONDARY navigation) · This README is **routing only — not a decision document**.
+
 ## System Overview
 
 Archovive is a deterministic governance kernel: `f(repo, policy) → DecisionRecord`. CLI, CI, and MCP are projection surfaces over that single truth — not separate products.
 
 **Functional SLA:** same commit + same policy packs → same `replay_hash`.
 
-**Kernel model:** [docs/00_kernel_truth_model.md](docs/00_kernel_truth_model.md)
+**Truth hierarchy:** Kernel (only source of truth) → System docs (interpretation) → Decision Hub (adoption) → DGPP (verification-only). See [Decision Hub — Truth Hierarchy](docs/00_decision_hub.md#truth-hierarchy).
 
 ---
 
-## Decision Hub
+## Decision Hub (PRIMARY)
 
-**Primary entry point for CTO, CISO, and senior engineers evaluating integration.**
+**Primary entry for CTO, CISO, and senior engineers evaluating integration.**
 
-→ **[docs/00_decision_hub.md](docs/00_decision_hub.md)**
+→ **[L0 · docs/00_decision_hub.md](docs/00_decision_hub.md)**
 
-Includes: integration model · operational characteristics · risk model · pilot path · adoption checklist.
-
----
-
-## Executive Proof (DGPP)
-
-> **PROOF ARTIFACT — not product documentation**  
-> Formally testable guarantee: CLI ≡ CI ≡ MCP on `graph_hash`, `replay_hash`, and normalized DecisionRecord hash for a fixed kernel job.
-
-→ **[docs/artifacts/dgpp_executive_report.md](docs/artifacts/dgpp_executive_report.md)** · Reproduce: `make dgpp`
+Adoption · integration · operational characteristics · risk model · pilot path · checklist · DGPP positioning.
 
 ---
 
-## System Specs
+## Executive Proof — DGPP (L2, verification-only)
 
-Full documentation: [docs/README.md](docs/README.md)
+> **PROOF ARTIFACT — not product documentation · not decision authority**  
+> Validates CLI ≡ CI ≡ MCP hash parity. Does not influence kernel execution.
+
+→ **[L2 · docs/artifacts/dgpp_executive_report.md](docs/artifacts/dgpp_executive_report.md)** · Reproduce: `make dgpp`
+
+---
+
+## System Specs (SECONDARY navigation)
+
+→ **[docs/README.md](docs/README.md)** — L1 system behavior index · operational references (ch. 01–09)
 
 <details>
 <summary><strong>Layer 1 — System behavior specifications</strong></summary>

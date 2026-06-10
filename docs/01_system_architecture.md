@@ -1,8 +1,7 @@
 # 01 — System Architecture
 
-**Layer 1 · System behavior spec**
-
-**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Kernel Truth Model](00_kernel_truth_model.md) · [Next: Surfaces →](02_surfaces_cli_ci_mcp.md)
+**L1 · System behavior spec** — interprets kernel; not adoption authority.  
+**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Kernel Truth Model](00_kernel_truth_model.md) · [Next: Surfaces →](02_surfaces_cli_ci_mcp.md)
 
 ## Layered model
 

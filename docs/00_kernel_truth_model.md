@@ -1,8 +1,9 @@
 # 00 — Kernel Truth Model
 
-**Layer 1 · System behavior spec**
+**L1 · System behavior spec** (not L0 — see [L0 · Decision Hub](00_decision_hub.md#documentation-index-naming))  
+**File:** `00_kernel_truth_model.md` — kernel semantics documentation, not adoption entry.
 
-**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [DGPP proof](artifacts/dgpp_executive_report.md) · [Next: System Architecture →](01_system_architecture.md)
+**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [L2 · DGPP](artifacts/dgpp_executive_report.md) · [Next: System Architecture →](01_system_architecture.md)
 
 ## Definition
 

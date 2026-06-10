@@ -1,9 +1,51 @@
 # Decision Hub — Archovive v5.1
 
-**Layer 0 · Primary entry point for adoption decisions**
+**L0 · Primary entry point for adoption decisions**  
+**File:** `00_decision_hub.md` (Layer 0 — not to be confused with L1 kernel specs also prefixed `00_`)
 
 **Audience:** CTO · CISO · Senior Platform / Security Engineering  
-**Navigation:** [Docs hub](README.md) · [Executive proof (DGPP)](artifacts/dgpp_executive_report.md) · [System specs →](README.md#layer-1--system-behavior)
+
+**Entry priority:** This document is the **PRIMARY** documentation entry. [README](../README.md) is **SECONDARY** routing only — not a decision document.
+
+**Navigation:** [Docs hub (secondary)](README.md) · [DGPP proof](artifacts/dgpp_executive_report.md) · [System specs →](README.md#layer-1--system-behavior)
+
+---
+
+## Truth Hierarchy
+
+Authority flows in one direction only. Lower layers never override the kernel.
+
+| Rank | Layer | Role | Authority |
+|------|-------|------|-----------|
+| **1** | **Kernel** (runtime) | Deterministic execution truth — `f(job) → DecisionRecord` | **ONLY source of governance truth** |
+| **2** | **System documentation** (L1 specs + ch. 01–09) | Behavioral interpretation — architecture, surfaces, evidence, tiers | Describes kernel; does not define verdicts |
+| **3** | **Decision Hub** (L0 — this file) | Adoption / integration judgment — risks, pilot, checklist | **No technical authority** over kernel output |
+| **4** | **DGPP** (L2 proof artifact) | External verification output — cross-surface parity readout | **Non-authoritative**; verification-only |
+
+**Rules:**
+
+- Kernel is the **only** source of truth for verdicts, hashes, and policy evaluation.
+- System docs **interpret** kernel behavior; they do not compete with kernel output.
+- Decision Hub supports **human adoption decisions**; it does not alter or override kernel semantics.
+- DGPP **verifies** parity claims; it is **not** required for execution and **does not** influence kernel decisions.
+
+**Cognitive model:** Decision → System → Proof — not Feature → Feature → Feature.
+
+---
+
+## Documentation Index (naming)
+
+Two doc systems coexist by design. Use **layer prefix**, not filename alone:
+
+| Label | File / path | Layer |
+|-------|-------------|-------|
+| **L0 · Decision Hub** | `00_decision_hub.md` | Adoption entry |
+| **L1 · Kernel Truth Model** | `00_kernel_truth_model.md` | System spec (kernel semantics) |
+| **L1 · System specs** | `01_system_architecture.md` … `06_kernel_contract_v1.md` | System spec (flat files) |
+| **L1 · Operational refs** | `01-intro/` … `09-mcp/` | System behavior walkthroughs |
+| **L2 · DGPP** | `artifacts/dgpp_executive_report.md` | Proof artifact |
+
+The duplicate `00_` prefix marks **different layers**: L0 decision vs L1 kernel spec. Always cite the **L0 / L1 / L2** label in enterprise communication.
 
 ---
 
@@ -100,6 +142,24 @@ Air-gap: frozen bundle under `/opt/archovive` — [06 Air-gap reference](06-airg
 | Org process gaps | Archovive gates merge; does not replace human approval workflows |
 
 Proof artifact (not documentation): [DGPP executive report](artifacts/dgpp_executive_report.md) · Reproduce: `make dgpp`
+
+---
+
+## 5a. Proof Artifact (DGPP)
+
+DGPP is positioned **after** adoption context — as external validation, not system input.
+
+| Property | Definition |
+|----------|------------|
+| **Part of runtime?** | **No** — DGPP is a test-gated proof output, not a kernel or surface component |
+| **Required for execution?** | **No** — `archovive simulate` / `ci check` run without DGPP |
+| **Purpose** | Validation output for external audit — demonstrates CLI ≡ CI ≡ MCP hash parity |
+| **Influences kernel?** | **No** — DGPP reads kernel projections; kernel never reads DGPP |
+| **Decision authority?** | **No** — non-authoritative; verification-only |
+
+**Decision flow:** Evaluate adoption (this hub) → implement using system docs → optionally attach DGPP readout for audit evidence.
+
+→ [DGPP executive report](artifacts/dgpp_executive_report.md) · `make dgpp`
 
 ---
 

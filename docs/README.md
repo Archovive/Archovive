@@ -1,76 +1,85 @@
 # Archovive Documentation
 
+**SECONDARY entry** — system overview and navigation only.  
+**PRIMARY entry for adoption decisions:** [L0 · Decision Hub](00_decision_hub.md)
+
 Three-layer documentation architecture for Archovive v5.1.
+
+---
+
+## Truth Hierarchy
+
+| Rank | Layer | Location | Authority |
+|------|-------|----------|-----------|
+| 1 | **Kernel** (runtime) | `simulate/engine.py` · enterprise bundle | **Only source of governance truth** |
+| 2 | **System documentation** | L1 specs (`00_kernel_*` … `06_*`) · ch. `01–09/` | Behavioral interpretation — no verdict authority |
+| 3 | **Decision Hub** | [L0 · `00_decision_hub.md`](00_decision_hub.md) | Adoption judgment — no technical authority |
+| 4 | **DGPP** | [L2 · `artifacts/dgpp_executive_report.md`](artifacts/dgpp_executive_report.md) | Verification-only — non-authoritative |
+
+**Rules:** Kernel → System → Decision → Proof. No bidirectional influence. DGPP never affects kernel output.
+
+**Naming:** `00_decision_hub.md` (L0) and `00_kernel_truth_model.md` (L1) share a `00_` prefix but different layers — always use **L0 / L1 / L2** labels in enterprise docs.
+
+**Cognitive model:** Decision → System → Proof — not Feature → Feature → Feature.
+
+---
+
+## Entry Priority
+
+| Priority | Document | Role |
+|----------|----------|------|
+| **PRIMARY** | [L0 · Decision Hub](00_decision_hub.md) | Adoption · integration · risk · checklist |
+| **SECONDARY** | [Docs hub](README.md) (this file) | System overview · spec index · navigation |
+| **SECONDARY** | [Repository README](../README.md) | Repo routing · demo observation · links |
+
+README at repository root is **not** a decision document.
 
 ---
 
 ## Layer 0 — Decision
 
-**Single entry point for adoption decisions.**
-
 | Document | Audience |
 |----------|----------|
-| **[00 Decision Hub](00_decision_hub.md)** | CTO · CISO · Senior Engineering |
-
-Includes operational characteristics, integration model, risk model, pilot path, adoption checklist.
+| **[L0 · Decision Hub](00_decision_hub.md)** | CTO · CISO · Senior Engineering |
 
 ---
 
 ## Layer 1 — System Behavior
 
-Specifications define kernel semantics, surfaces, evidence, and tiers. **Authoritative for architecture meaning.**
+Specifications define kernel semantics. **Authoritative for architecture meaning** — not for adoption decisions (see L0).
 
-### Kernel / truth
-
-| Spec | Subject |
-|------|---------|
-| [00 Kernel Truth Model](00_kernel_truth_model.md) | `DecisionRecord`, hash chain, kernel purity |
-| [05 Invariants & Determinism](05_invariants_and_determinism.md) | SLA, verification, failure modes |
-| [06 Kernel Contract v1](06_kernel_contract_v1.md) | Formal `f(job) → DecisionRecord` |
-
-### Architecture
+### L1 kernel / truth specs (flat files)
 
 | Spec | Subject |
 |------|---------|
-| [01 System Architecture](01_system_architecture.md) | Layer model, repo layout, execution flow |
+| [L1 · Kernel Truth Model](00_kernel_truth_model.md) | `DecisionRecord`, hash chain |
+| [05 Invariants & Determinism](05_invariants_and_determinism.md) | SLA, verification |
+| [06 Kernel Contract v1](06_kernel_contract_v1.md) | Formal `f(job)` contract |
+| [01 System Architecture](01_system_architecture.md) | Layer model, execution |
+| [02 Surfaces: CLI, CI, MCP](02_surfaces_cli_ci_mcp.md) | Projections |
+| [03 Evidence Model](03_evidence_model.md) | Kernel serialization |
+| [04 Tier Model](04_tier_model.md) | Projection constraints |
 
-### Surfaces
+### L1 operational references (folders — system behavior, not decision context)
 
-| Spec | Operational reference |
-|------|----------------------|
-| [02 Surfaces: CLI, CI, MCP](02_surfaces_cli_ci_mcp.md) | [02 Simulate](02-simulate/README.md) · [03 CI gate](03-ci/README.md) · [09 MCP](09-mcp/README.md) |
+Organized by surface/workflow for operators — **conceptually grouped under L1**, not a separate authority layer.
 
-### Evidence
-
-| Spec | Operational reference |
-|------|----------------------|
-| [03 Evidence Model](03_evidence_model.md) | [05 Evidence](05-evidence/README.md) |
-
-### Tiers
-
-| Spec | Operational reference |
-|------|----------------------|
-| [04 Tier Model](04_tier_model.md) | [08 Pricing](08-pricing/README.md) |
-
-### Enterprise / air-gap
-
-| Operational reference |
-|----------------------|
-| [07 Enterprise](07-enterprise/README.md) · [06 Air-gap](06-airgap/README.md) |
-
-Context chapter: [01 Intro](01-intro/README.md)
+| Area | References |
+|------|------------|
+| Surfaces | [02 Simulate](02-simulate/README.md) · [03 CI](03-ci/README.md) · [09 MCP](09-mcp/README.md) |
+| Evidence / governance | [04 Governance](04-governance/README.md) · [05 Evidence](05-evidence/README.md) |
+| Enterprise | [07 Enterprise](07-enterprise/README.md) · [06 Air-gap](06-airgap/README.md) · [08 Pricing](08-pricing/README.md) |
+| Context | [01 Intro](01-intro/README.md) |
 
 ---
 
-## Layer 2 — Proof / Executive Artifacts
+## Layer 2 — Proof
 
-**Not documentation. Not feature description. Test-gated proof outputs.**
+**Not documentation. Verification-only. Non-authoritative.**
 
 | Artifact | Reproduce |
 |----------|-----------|
-| **[DGPP Executive Report](artifacts/dgpp_executive_report.md)** | `make dgpp` |
-
-Validation: [`schemas/`](../schemas/) · [`tests/`](../tests/test_dgpp_governance_parity.py)
+| **[L2 · DGPP Executive Report](artifacts/dgpp_executive_report.md)** | `make dgpp` |
 
 ---
 
@@ -92,9 +101,9 @@ Functional SLA: **same commit + same policy packs → same `replay_hash`.**
 ```bash
 make demo      # CLI projection
 make ci-demo   # CI projection (exit 2 on demo)
-make dgpp      # cross-surface parity proof
+make dgpp      # L2 proof (optional audit gate)
 ```
 
 ---
 
-[← README](../README.md) · [Decision Hub →](00_decision_hub.md) · [Contributing](../CONTRIBUTING.md)
+[← README (secondary)](../README.md) · **[L0 · Decision Hub →](00_decision_hub.md)** · [Contributing](../CONTRIBUTING.md)

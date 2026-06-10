@@ -1,11 +1,11 @@
 # Chapter 02 — Simulate (30 seconds)
 
-> **Operational Reference (Legacy Surface Docs)**  
-> This document describes operational behavior.  
-> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
-> Surface spec: [02 Surfaces](../02_surfaces_cli_ci_mcp.md)
+> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
+> This document describes system behavior, not adoption or integration decisions.  
+> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
+> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
 
-**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
+**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
 
 ## Who is this chapter for?
 

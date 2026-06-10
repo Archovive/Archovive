@@ -1,11 +1,11 @@
 # Chapter 05 — Evidence
 
-> **Operational Reference (Legacy Surface Docs)**  
-> This document describes operational behavior.  
-> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
-> Evidence spec: [03 Evidence Model](../03_evidence_model.md)
+> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
+> This document describes system behavior, not adoption or integration decisions.  
+> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
+> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
 
-**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Governance](../04-governance/README.md) · [Next: Air-gap →](../06-airgap/README.md)
+**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Governance](../04-governance/README.md) · [Next: Air-gap →](../06-airgap/README.md)
 
 ## Who is this chapter for?
 

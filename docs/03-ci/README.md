@@ -1,11 +1,11 @@
 # Chapter 03 — CI gate
 
-> **Operational Reference (Legacy Surface Docs)**  
-> This document describes operational behavior.  
-> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
-> Surface spec: [02 Surfaces](../02_surfaces_cli_ci_mcp.md)
+> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
+> This document describes system behavior, not adoption or integration decisions.  
+> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
+> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
 
-**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md) · [MCP →](../09-mcp/README.md)
+**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md) · [MCP →](../09-mcp/README.md)
 
 ## Who is this chapter for?
 

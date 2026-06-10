@@ -1,8 +1,7 @@
 # 05 — Invariants & Determinism
 
-**Layer 1 · System behavior spec**
-
-**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [DGPP proof](artifacts/dgpp_executive_report.md) · [← Tier Model](04_tier_model.md) · [Next: Kernel Contract →](06_kernel_contract_v1.md)
+**L1 · System behavior spec** — interprets kernel; not adoption authority.  
+**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [L2 · DGPP](artifacts/dgpp_executive_report.md) · [← Tier Model](04_tier_model.md) · [Next: Kernel Contract →](06_kernel_contract_v1.md)
 
 ## Functional SLA
 
