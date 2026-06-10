@@ -1,14 +1,16 @@
-# demo-fintech — learning repository for Archovive simulate
+# demo-fintech — Deterministic Reference Fixture
 
-## The story
+**Regression anchor for OSS pins and DGPP** — not a domain scope, surface, tier, or capability.
 
-**NovaPay** is a fictional European payments API — not production code, but an **intentional example** for architecture governance.
+## The story (pedagogy only)
 
-The team shipped fast: API routes, payment ledger, batch processor, ops notifications. Tests pass. But **layer boundaries** were never enforced — exactly the pattern that fails DORA audits and release gates.
+**NovaPay** is a fictional European payments API — narrative context for learning, **not** production code or proof of fintech-only applicability.
 
-Archovive scans this repo in a few seconds and shows **why** a release would be blocked — not as opinion, but as a policy verdict with replay hash.
+The repo encodes **intentional layer-boundary violations** — the pattern that fails DORA audits and release gates. Archovive scans this fixture in seconds and materializes a policy verdict with replay hash.
 
-See the gate output in the [README](../../README.md#try-it). Run `make demo` or `archovive simulate --verbose` for per-rule detail.
+See gate output in the [repository README](../../README.md#quick-observation-oss-demo). Run `make demo` or `archovive simulate --verbose` for per-rule detail.
+
+→ [Reference Fixtures spec](../../docs/reference_fixtures_model.md) · [examples index](../README.md)
 
 ---
 
@@ -20,7 +22,7 @@ See the gate output in the [README](../../README.md#try-it). Run `make demo` or 
 | 2 | `services/api/routes.py` | API calls `payments.processor.run_batch` | Layer mixing (visible in graph metrics) |
 | 3 | `services/payments/ledger.py` | Ledger calls `notify_ops` inline | Critical-domain coupling (code smell) |
 
-The default gate surfaces violation **#1** as the blocking rule. Rules **GLOBAL_BASE** and **NIS2_MINIMAL_V1** pass on this demo.
+The default gate surfaces violation **#1** as the blocking rule. Rules **GLOBAL_BASE** and **NIS2_MINIMAL_V1** pass on this fixture.
 
 ---
 

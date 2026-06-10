@@ -29,7 +29,7 @@ Enterprise — offline bundle, MCP, evidence, signed policy packs
 
 This repository ships the **Free** tier. Team and Enterprise require the [enterprise bundle](../07-enterprise/README.md).
 
-Full capability matrix → [docs hub](../README.md#capability-matrix).
+Enterprise readiness (Surfaces → Tiers → Capabilities) → [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle) · [04 Tier Model](../04_tier_model.md#capability-projection-matrix).
 
 ---
 
@@ -49,7 +49,7 @@ Archovive delivers **deterministic, offline-capable architecture evidence** — 
 
 ## Who buys what
 
-See the [hub capability matrix](../README.md#capability-matrix) for CLI, CI, and MCP by tier. MCP detail → [Chapter 09](../09-mcp/README.md).
+See [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle) for surfaces and tiers by product level. MCP detail → [Chapter 09](../09-mcp/README.md).
 
 ---
 

@@ -60,7 +60,7 @@ The public repository contains a **self-contained demo kernel** for `examples/de
 - Python AST import graph only (no polyglot IR)
 - Three policy packs: `GLOBAL_BASE`, `DORA_2026`, `NIS2_MINIMAL_V1`
 - Drift always reports `unmeasured` (no baseline store in OSS)
-- Pinned hashes for canonical demo path (regression pins in `simulate/format.py`)
+- Pinned hashes for `demo-fintech` regression fixture (pins in `simulate/format.py`)
 
 This kernel implements the same **DecisionRecord shape** as production but with reduced policy depth. It exists to validate projection formatting and determinism pins, not to replace the enterprise kernel.
 

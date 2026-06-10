@@ -24,6 +24,24 @@ Three-layer documentation architecture for Archovive v5.1.
 
 ---
 
+## Primary Interpretation Rule
+
+Read product documentation in this order:
+
+1. **Surfaces** — CLI · CI · MCP (how accessed)
+2. **Tiers** — Free · Team · Enterprise (what enabled)
+3. **Capabilities** — drift · evidence · policy · offline · attestations (what possible)
+
+Capabilities never define surfaces. Tiers never redefine kernel behavior. Surfaces never change execution semantics.
+
+**Use cases** are derived from the three axes — not authoritative. **MCP** is a read/projection surface over the same kernel truth as CLI/CI — not execution authority parallel to CI.
+
+**Reference fixtures** (`examples/demo-fintech`) are orthogonal — not surface, tier, or capability. → [Reference Fixtures spec](reference_fixtures_model.md)
+
+Full rule and enterprise readiness: [L0 · Decision Hub](00_decision_hub.md#primary-interpretation-rule)
+
+---
+
 ## Entry Priority
 
 | Priority | Document | Role |
@@ -59,6 +77,7 @@ Specifications define kernel semantics. **Authoritative for architecture meaning
 | [02 Surfaces: CLI, CI, MCP](02_surfaces_cli_ci_mcp.md) | Projections |
 | [03 Evidence Model](03_evidence_model.md) | Kernel serialization |
 | [04 Tier Model](04_tier_model.md) | Projection constraints |
+| [Reference Fixtures](reference_fixtures_model.md) | Regression inputs (orthogonal to surfaces/tiers) |
 
 ### L1 operational references (folders — system behavior, not decision context)
 

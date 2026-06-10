@@ -78,7 +78,7 @@ The demo repo is an intentionally broken fintech microservice layout — details
 | Compliance / GRC | Chapters 04–05 — Governance & Evidence |
 | CISO / enterprise | Chapter 07 — Enterprise bundle |
 
-Surfaces and tiers → [docs hub](../README.md#capability-matrix) · [Chapter 08 — Pricing](../08-pricing/README.md)
+Interpretation order (Surfaces → Tiers → Capabilities) → [Decision Hub](../00_decision_hub.md#primary-interpretation-rule) · [Chapter 08 — Pricing](../08-pricing/README.md)
 
 ---
 

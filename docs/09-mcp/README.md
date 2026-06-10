@@ -9,7 +9,7 @@
 
 ## One-liner
 
-**MCP exposes the same kernel truth as CLI and CI** — verdict, `graph_hash`, `replay_hash` — inside your IDE agent loop.
+**MCP is a read/projection surface over the same kernel truth as CLI/CI** — verdict, `graph_hash`, `replay_hash` — inside your IDE agent loop. **Not** an execution authority parallel to CI enforcement.
 
 ---
 
@@ -80,7 +80,7 @@ Same `replay_hash` as CI on the same commit — no drift between IDE and pipelin
 | **Team** | `run_analysis` in IDE |
 | **Enterprise** | Full surface — `evidence`, `global`, offline bundle |
 
-Requires [enterprise bundle](../07-enterprise/README.md). Capability overview → [hub matrix](../README.md#capability-matrix).
+Requires [enterprise bundle](../07-enterprise/README.md). Enterprise readiness (Surfaces → Tiers → Capabilities) → [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle).
 
 ---
 

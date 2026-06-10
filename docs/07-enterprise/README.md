@@ -25,7 +25,9 @@
 | Live dispatch (PagerDuty, SIEM) | — | ✓ |
 | Authoritative decision store | — | ✓ |
 
-OSS = **funnel**. Enterprise = **production**.
+**Free tier (OSS)** = evaluate determinism on the pinned regression fixture. **Production** = enterprise bundle on **your** repository.
+
+→ [Decision Hub — Enterprise Readiness](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle)
 
 ```bash
 archovive run --compact   # enterprise bundle
@@ -80,7 +82,7 @@ Engine access: **enterprise@archovive.com**
 
 Full MCP setup → [Chapter 09 — MCP](../09-mcp/README.md).
 
-Product and pipeline tier depth → [docs hub capability matrix](../README.md#capability-matrix) · [Chapter 08 — Pricing](../08-pricing/README.md).
+Tier and capability depth → [04 Tier Model](../04_tier_model.md) · [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle) · [Chapter 08 — Pricing](../08-pricing/README.md).
 
 ---
 

@@ -33,6 +33,43 @@ Authority flows in one direction only. Lower layers never override the kernel.
 
 ---
 
+## Primary Interpretation Rule
+
+All product documentation is read in this order:
+
+1. **Surfaces** — how the system is accessed (CLI · CI · MCP)
+2. **Tiers** — what capabilities are licensed/enabled (Free · Team · Enterprise)
+3. **Capabilities** — what is technically possible (drift · evidence · policy · offline · attestations)
+
+**Constraints:**
+
+- Capabilities **never** define surfaces
+- Tiers **never** redefine kernel behavior
+- Surfaces **never** change execution semantics (kernel truth is identical; only projection differs)
+
+**Use cases:** derived from Surfaces + Tiers + Capabilities — **not authoritative**. Do not present Surface, Tier, and Capability as equal-weight navigation columns.
+
+**MCP:** read/projection surface over the same kernel truth as CLI/CI — **not** an execution authority parallel to CI enforcement.
+
+---
+
+## Reference Fixtures (orthogonal)
+
+**Reference fixtures** (e.g. `examples/demo-fintech`) are **not** surfaces, **not** tiers, and **not** capabilities. They are deterministic regression inputs that feed the kernel for CI pins and DGPP.
+
+| Property | Definition |
+|----------|------------|
+| What they are | Fixed repo snapshots for CI, hash pins, DGPP |
+| What they are not | Domain scope, tier, surface, capability, or production constraint |
+| Authority | Fixtures **feed** the kernel; they do not **define** product scope |
+| OSS fixture | `demo-fintech` — NovaPay narrative is **pedagogy only** |
+
+Archovive runs on arbitrary repositories via the enterprise bundle; `demo-fintech` is the OSS **regression anchor**, not proof of single-domain applicability.
+
+→ [Reference Fixtures spec](reference_fixtures_model.md) · [examples/README.md](../examples/README.md)
+
+---
+
 ## Documentation Index (naming)
 
 Two doc systems coexist by design. Use **layer prefix**, not filename alone:
@@ -63,7 +100,7 @@ This repository (Free tier) ships a demo kernel and CLI/CI projections. Team and
 
 ## 2. Integration Model
 
-Archovive integrates as a **CI merge gate** and optional **IDE query surface** (MCP). It does not replace SAST, dependency scanning, or GRC checklists — it closes the gap between code structure and regulatory policy at the architecture graph level.
+Archovive integrates primarily as a **CI merge gate** (enforcement surface). Optional **IDE query** (MCP) projects the same kernel truth — it does not replace CI enforcement. Archovive does not replace SAST, dependency scanning, or GRC checklists — it closes the gap between code structure and regulatory policy at the architecture graph level.
 
 ```
 Developer / Agent          Platform CI              Audit / GRC
@@ -85,7 +122,7 @@ Developer / Agent          Platform CI              Audit / GRC
 # exit 0 = allow merge · exit 2 = policy violation · exit 1 = drift (with baseline)
 ```
 
-**IDE integration (Team+ bundle):** MCP `run_analysis` returns the same `replay_hash` as CI on the same commit — verified by [DGPP](artifacts/dgpp_executive_report.md).
+**IDE integration (Team+ bundle):** MCP `run_analysis` is a **query projection** — same `replay_hash` as CI on the same commit, not a parallel enforcement path. Verified by [DGPP](artifacts/dgpp_executive_report.md).
 
 Detail: [02 Surfaces spec](02_surfaces_cli_ci_mcp.md) · [03 CI operational reference](03-ci/README.md)
 
@@ -202,7 +239,42 @@ Use this checklist before adoption. All items should be **YES** for production m
 
 ---
 
-## 8. Where to Go Next
+## 8. Enterprise Readiness — What OSS Proves vs Bundle
+
+Read in interpretation order (Surfaces → Tiers → Capabilities). This is **not** equal-weight navigation across axes.
+
+### 8.1 Surfaces (what OSS demonstrates)
+
+| Surface | OSS proves | Bundle required for |
+|---------|------------|---------------------|
+| **CLI** | Gate format, `--json` DecisionRecord | Full pipeline on **your** repository |
+| **CI** | Exit-code enforcement pattern | Production merge gate on **your** repository |
+| **MCP** | Parity proof via DGPP projection | Live MCP server + IDE integration |
+
+### 8.2 Tiers (what each enables)
+
+| Tier | OSS repo ships | Requires bundle |
+|------|----------------|-----------------|
+| **Free** | Demo kernel + CLI/CI on fixture | — |
+| **Team** | — | drift, `run_analysis`, multi-repo CI |
+| **Enterprise** | — | attestations, signed packs, air-gap bundle |
+
+### 8.3 Capabilities (derived — under tiers)
+
+| Capability | Free | Team+ | Enterprise |
+|------------|------|-------|------------|
+| Policy depth | 3 rules | full packs | signed |
+| Drift | unmeasured | baseline | baseline |
+| Evidence | stdout | repro.json | attestations |
+| Offline | — | — | bundle |
+
+**Threshold:** OSS = evaluation + determinism-on-fixture. Enterprise-worthy deployment = bundle + **your** repository + gov artifacts. DGPP-on-fixture ≠ production certification.
+
+Detail: [04 Tier Model](04_tier_model.md) · [07 Enterprise](07-enterprise/README.md)
+
+---
+
+## 9. Where to Go Next
 
 | Need | Document |
 |------|----------|

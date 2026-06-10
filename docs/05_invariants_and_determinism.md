@@ -90,7 +90,7 @@ Documented exit semantics: `cli/product_ux.py`. CI enforcement requires code 1/2
 | `simulate` process exit always 0 on success | CLI funnel projection | Evaluation UX in OSS |
 | `ci check` process exit = `exit_code` | CI enforcement projection | Merge gate semantics |
 | Gate header string fixed in OSS | Format layer | Cosmetic; not signed |
-| Demo hash pinning | Regression harness | Stabilizes CI for canonical fixture only |
+| Demo hash pinning | Regression harness | Stabilizes CI for pinned regression fixture only |
 
 Pinning applies when `repo_name == "demo-fintech"`. Other `--repo` paths receive computed hashes — still deterministic for that repo, unpinned.
 

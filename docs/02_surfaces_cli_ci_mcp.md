@@ -33,7 +33,7 @@ Execute the kernel (or invoke bundle runtime) and render output for human or scr
 
 Formatting lives in `simulate/format.py`. Kernel function `analyze_repo()` returns data only.
 
-### TTY gate projection (canonical)
+### TTY gate projection (pinned regression fixture)
 
 ```text
 ARCHOVIVE GATE — DORA Boundary Crossing
@@ -81,6 +81,8 @@ With enterprise bundle on target repository:
 Reference workflow: [03-ci/README.md](03-ci/README.md) (operational example; architecture semantics defined here).
 
 ## MCP Surface (query projection)
+
+**MCP is a read/projection surface over the same kernel truth as CLI/CI** — not an execution authority parallel to CI enforcement.
 
 ### Role
 

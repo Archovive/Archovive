@@ -42,7 +42,7 @@ Archovive separates four concerns. Only the kernel computes truth.
 | `cli/cli_main.py` | Surface router | Command dispatch to projections |
 | `cli/product_ux.py` | Surface help | User-facing command documentation |
 | `cli/mcp_client.py` | MCP projection stub | Documents bundle MCP; no server in OSS |
-| `examples/demo-fintech/` | Fixture | Canonical `RepoSnapshot` for pins |
+| `examples/demo-fintech/` | Fixture | Pinned regression fixture (`RepoSnapshot` for CI/DGPP pins) |
 | `internal/` | Build / bundle | Enterprise bundle assets (not kernel source in public tree) |
 
 **Boundary rule:** public tree must not contain full engine source (`make boundary`).

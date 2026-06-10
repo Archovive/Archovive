@@ -11,6 +11,8 @@ Archovive is a deterministic governance kernel: `f(repo, policy) → DecisionRec
 
 **Functional SLA:** same commit + same policy packs → same `replay_hash`.
 
+**Regression fixture:** `examples/demo-fintech` — pinned OSS anchor, not domain scope. → [Reference Fixtures](docs/reference_fixtures_model.md)
+
 **Truth hierarchy:** Kernel (only source of truth) → System docs (interpretation) → Decision Hub (adoption) → DGPP (verification-only). See [Decision Hub — Truth Hierarchy](docs/00_decision_hub.md#truth-hierarchy).
 
 ---
@@ -50,6 +52,7 @@ Adoption · integration · operational characteristics · risk model · pilot pa
 | [04_tier_model](docs/04_tier_model.md) | Projection constraints |
 | [05_invariants_and_determinism](docs/05_invariants_and_determinism.md) | SLA, verification |
 | [06_kernel_contract_v1](docs/06_kernel_contract_v1.md) | Formal `f(job)` contract |
+| [reference_fixtures_model](docs/reference_fixtures_model.md) | Regression fixtures (orthogonal) |
 
 **Operational reference (legacy surface docs):** [01-intro](docs/01-intro/README.md) · [02-simulate](docs/02-simulate/README.md) · [03-ci](docs/03-ci/README.md) · [04-governance](docs/04-governance/README.md) · [05-evidence](docs/05-evidence/README.md) · [06-airgap](docs/06-airgap/README.md) · [07-enterprise](docs/07-enterprise/README.md) · [08-pricing](docs/08-pricing/README.md) · [09-mcp](docs/09-mcp/README.md)
 

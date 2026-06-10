@@ -15,7 +15,7 @@ DGPP verifies cross-surface parity. It does **not** influence kernel execution, 
 
 > This system demonstrates deterministic governance parity across CLI, CI, and MCP surfaces using a shared kernel execution model.
 
-Archovive materializes one governance decision from repository state and policy inputs. CLI executes, CI enforces, and MCP queries — each surface projects the same kernel truth. No surface computes an independent verdict.
+Archovive materializes one governance decision from repository state and policy inputs. CLI executes, CI enforces, and MCP queries — each surface projects the same kernel truth. **MCP is a read/projection surface, not execution authority parallel to CI.** No surface computes an independent verdict.
 
 ---
 
