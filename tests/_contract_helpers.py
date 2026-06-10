@@ -1,13 +1,23 @@
 """Test-only kernel contract helpers — not imported by runtime paths."""
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
 
-from simulate.engine import AnalysisResult, analyze_repo
+from simulate.engine import (
+    PINNED_GRAPH_HASH,
+    PINNED_REPLAY_HASH,
+    AnalysisResult,
+    analyze_repo,
+)
 
 SCHEMA_DIR = Path(__file__).resolve().parents[1] / "schemas"
+
+# DGPP canonical fixture — stable envelope binding for executive parity proof.
+DGPP_COMMIT_REF = "0000000000000000000000000000000000000001"
+DGPP_POLICY_PACK_IDS = ["GLOBAL_BASE", "DORA_2026", "NIS2_MINIMAL_V1"]
 
 FORBIDDEN_KERNEL_JOB_KEYS = frozenset(
     {
@@ -45,10 +55,46 @@ def canonical_demo_job(repo_root: Path) -> dict[str, Any]:
         "repo_path": str(demo.resolve()),
         "repo_name": "demo-fintech",
         "commit_ref": None,
-        "policy_pack_ids": ["GLOBAL_BASE", "DORA_2026", "NIS2_MINIMAL_V1"],
+        "policy_pack_ids": list(DGPP_POLICY_PACK_IDS),
         "mode": "analyze",
         "baseline_ref": None,
     }
+
+
+def dgpp_canonical_job(repo_root: Path) -> dict[str, Any]:
+    """Deterministic Governance Parity Proof — fixed envelope for all surfaces."""
+    job = canonical_demo_job(repo_root)
+    job["commit_ref"] = DGPP_COMMIT_REF
+    return job
+
+
+def stable_payload_hash(payload: Any) -> str:
+    blob = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(blob).hexdigest()
+
+
+def decision_record_hash(record: dict[str, Any]) -> str:
+    return stable_payload_hash(normalize_decision_record(record))
+
+
+def policy_results_checksum(record: dict[str, Any]) -> str:
+    normalized = normalize_decision_record(record)
+    return stable_payload_hash(normalized["policy_results"])
+
+
+def extract_dgpp_artifacts(record: dict[str, Any]) -> dict[str, str]:
+    normalized = normalize_decision_record(record)
+    return {
+        "graph_hash": normalized["graph_hash"],
+        "replay_hash": normalized["replay_hash"],
+        "decision_record_hash": decision_record_hash(record),
+        "policy_results_checksum": policy_results_checksum(record),
+    }
+
+
+def assert_dgpp_pinned_hashes(artifacts: dict[str, str]) -> None:
+    assert artifacts["graph_hash"] == PINNED_GRAPH_HASH
+    assert artifacts["replay_hash"] == PINNED_REPLAY_HASH
 
 
 def validate_kernel_job(envelope: dict[str, Any]) -> None:

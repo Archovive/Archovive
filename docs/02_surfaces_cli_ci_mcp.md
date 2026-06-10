@@ -1,6 +1,8 @@
 # 02 — Surfaces: CLI, CI, MCP
 
-**Navigation:** [Docs hub](README.md) · [← System Architecture](01_system_architecture.md) · [Next: Evidence Model →](03_evidence_model.md)
+**Layer 1 · System behavior spec**
+
+**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← System Architecture](01_system_architecture.md) · [Next: Evidence Model →](03_evidence_model.md)
 
 ## Definition
 

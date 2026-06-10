@@ -1,8 +1,11 @@
 # Chapter 03 — CI gate
 
-> **Architecture:** CI is an **enforcement projection** of the kernel — [02 Surfaces](../02_surfaces_cli_ci_mcp.md#ci-surface-enforcement-projection). Same `replay_hash` as CLI; process exit = kernel `exit_code`.
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
+> Surface spec: [02 Surfaces](../02_surfaces_cli_ci_mcp.md)
 
-**Navigation:** [Docs hub](../README.md) · **CI Surface · Team+Enterprise parity** · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md) · [MCP →](../09-mcp/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md) · [MCP →](../09-mcp/README.md)
 
 ## Who is this chapter for?
 

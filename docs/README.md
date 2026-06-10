@@ -1,74 +1,100 @@
 # Archovive Documentation
 
-System specification for Archovive v5.0.0 — deterministic governance kernel with three projection surfaces.
+Three-layer documentation architecture for Archovive v5.1.
 
-**Authoritative architecture** (read in order):
+---
 
-| # | Specification | Subject |
-|---|---------------|---------|
-| 00 | [Kernel Truth Model](00_kernel_truth_model.md) | `DecisionRecord`, hash chain, kernel purity |
-| 01 | [System Architecture](01_system_architecture.md) | Layer model, repo layout, execution flow |
-| 02 | [Surfaces: CLI, CI, MCP](02_surfaces_cli_ci_mcp.md) | Execution, enforcement, query projections |
-| 03 | [Evidence Model](03_evidence_model.md) | Kernel output serialization |
-| 04 | [Tier Model](04_tier_model.md) | Projection constraints (Repo A) |
-| 05 | [Invariants & Determinism](05_invariants_and_determinism.md) |
-| 06 | [Kernel Contract v1](06_kernel_contract_v1.md) |
+## Layer 0 — Decision
 
-**Validation layer:** [`schemas/`](../schemas/) · [`tests/`](../tests/test_surface_parity.py) (surface parity, determinism, evidence consistency) SLA, verification, failure modes |
+**Single entry point for adoption decisions.**
+
+| Document | Audience |
+|----------|----------|
+| **[00 Decision Hub](00_decision_hub.md)** | CTO · CISO · Senior Engineering |
+
+Includes operational characteristics, integration model, risk model, pilot path, adoption checklist.
+
+---
+
+## Layer 1 — System Behavior
+
+Specifications define kernel semantics, surfaces, evidence, and tiers. **Authoritative for architecture meaning.**
+
+### Kernel / truth
+
+| Spec | Subject |
+|------|---------|
+| [00 Kernel Truth Model](00_kernel_truth_model.md) | `DecisionRecord`, hash chain, kernel purity |
+| [05 Invariants & Determinism](05_invariants_and_determinism.md) | SLA, verification, failure modes |
+| [06 Kernel Contract v1](06_kernel_contract_v1.md) | Formal `f(job) → DecisionRecord` |
+
+### Architecture
+
+| Spec | Subject |
+|------|---------|
+| [01 System Architecture](01_system_architecture.md) | Layer model, repo layout, execution flow |
+
+### Surfaces
+
+| Spec | Operational reference |
+|------|----------------------|
+| [02 Surfaces: CLI, CI, MCP](02_surfaces_cli_ci_mcp.md) | [02 Simulate](02-simulate/README.md) · [03 CI gate](03-ci/README.md) · [09 MCP](09-mcp/README.md) |
+
+### Evidence
+
+| Spec | Operational reference |
+|------|----------------------|
+| [03 Evidence Model](03_evidence_model.md) | [05 Evidence](05-evidence/README.md) |
+
+### Tiers
+
+| Spec | Operational reference |
+|------|----------------------|
+| [04 Tier Model](04_tier_model.md) | [08 Pricing](08-pricing/README.md) |
+
+### Enterprise / air-gap
+
+| Operational reference |
+|----------------------|
+| [07 Enterprise](07-enterprise/README.md) · [06 Air-gap](06-airgap/README.md) |
+
+Context chapter: [01 Intro](01-intro/README.md)
+
+---
+
+## Layer 2 — Proof / Executive Artifacts
+
+**Not documentation. Not feature description. Test-gated proof outputs.**
+
+| Artifact | Reproduce |
+|----------|-----------|
+| **[DGPP Executive Report](artifacts/dgpp_executive_report.md)** | `make dgpp` |
+
+Validation: [`schemas/`](../schemas/) · [`tests/`](../tests/test_dgpp_governance_parity.py)
 
 ---
 
 ## Architecture summary
 
 ```
-Kernel (pure) → DecisionRecord { graph_hash, replay_hash, verdict, exit_code, … }
-                      │
-        ┌─────────────┼─────────────┐
-        ▼             ▼             ▼
-     CLI Surface   CI Surface   MCP Surface
-    (execution)  (enforcement)   (query)
+Kernel (pure) → DecisionRecord
+       ├─► CLI Surface   (execution)
+       ├─► CI Surface   (enforcement)
+       └─► MCP Surface  (query)
 ```
-
-- **Kernel** computes truth. No IO. No tiers. No formatting.
-- **Surfaces** project truth. Never mutate `DecisionRecord`.
-- **Evidence** persists kernel output (`repro.json`, `drift_matrix.json`, `attestation.json`).
-- **Tiers** constrain which projections and writes are available in this repository — not kernel logic.
 
 Functional SLA: **same commit + same policy packs → same `replay_hash`.**
 
 ---
 
-## Observation (OSS demo kernel)
-
-This repository ships Free-tier projections with a demo kernel on `examples/demo-fintech`.
+## OSS demo
 
 ```bash
-make demo      # CLI execution projection
-make ci-demo   # CI enforcement projection (exit 2 on demo violation)
+make demo      # CLI projection
+make ci-demo   # CI projection (exit 2 on demo)
+make dgpp      # cross-surface parity proof
 ```
 
-Pinned demo hashes: see [05_invariants_and_determinism.md](05_invariants_and_determinism.md#i1--replay-determinism).
-
-Full kernel + gov artifacts: [07-enterprise/README.md](07-enterprise/README.md) (bundle required).
-
 ---
 
-## Legacy operational chapters
-
-Narrative walkthroughs retained for onboarding. **Architecture semantics are defined by specs 00–05**, not these chapters.
-
-| # | Chapter | Use when |
-|---|---------|----------|
-| 01 | [Intro](01-intro/README.md) | Problem context |
-| 02 | [Simulate](02-simulate/README.md) | CLI projection quickstart |
-| 03 | [CI gate](03-ci/README.md) | CI enforcement wiring |
-| 04 | [Governance](04-governance/README.md) | Policy packs (bundle) |
-| 05 | [Evidence](05-evidence/README.md) | Auditor walkthrough |
-| 06 | [Air-gap](06-airgap/README.md) | Offline bundle install |
-| 07 | [Enterprise](07-enterprise/README.md) | Bundle deployment |
-| 08 | [Pricing](08-pricing/README.md) | Tier licensing (product) |
-| 09 | [MCP](09-mcp/README.md) | MCP client configuration |
-
----
-
-[← README](../README.md) · [Contributing](../CONTRIBUTING.md)
+[← README](../README.md) · [Decision Hub →](00_decision_hub.md) · [Contributing](../CONTRIBUTING.md)

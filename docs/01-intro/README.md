@@ -1,8 +1,10 @@
 # Chapter 01 — What is Archovive?
 
-> **Architecture:** Authoritative system specification → [00 Kernel Truth Model](../00_kernel_truth_model.md) · [01 System Architecture](../01_system_architecture.md). This chapter is operational context only.
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)
 
-**Navigation:** [Docs hub](../README.md) · Free Tier · [Next: Simulate →](../02-simulate/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [Next: Simulate →](../02-simulate/README.md)
 
 ## Who is this chapter for?
 

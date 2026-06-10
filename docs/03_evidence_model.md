@@ -1,6 +1,8 @@
 # 03 — Evidence Model
 
-**Navigation:** [Docs hub](README.md) · [← Surfaces](02_surfaces_cli_ci_mcp.md) · [Next: Tier Model →](04_tier_model.md)
+**Layer 1 · System behavior spec**
+
+**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Surfaces](02_surfaces_cli_ci_mcp.md) · [Next: Tier Model →](04_tier_model.md)
 
 ## Definition
 

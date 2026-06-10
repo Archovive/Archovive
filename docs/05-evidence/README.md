@@ -1,8 +1,11 @@
 # Chapter 05 — Evidence
 
-> **Architecture:** Evidence artifacts are **kernel output serializations** — [03 Evidence Model](../03_evidence_model.md). This chapter is an auditor walkthrough.
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
+> Evidence spec: [03 Evidence Model](../03_evidence_model.md)
 
-**Navigation:** [Docs hub](../README.md) · Path C · [← Governance](../04-governance/README.md) · [Next: Air-gap →](../06-airgap/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Governance](../04-governance/README.md) · [Next: Air-gap →](../06-airgap/README.md)
 
 ## Who is this chapter for?
 

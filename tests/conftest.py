@@ -18,3 +18,10 @@ def demo_job(repo_root: Path) -> dict:
     from tests._contract_helpers import canonical_demo_job
 
     return canonical_demo_job(repo_root)
+
+
+@pytest.fixture(scope="session")
+def dgpp_job(repo_root: Path) -> dict:
+    from tests._contract_helpers import dgpp_canonical_job
+
+    return dgpp_canonical_job(repo_root)

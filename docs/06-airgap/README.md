@@ -1,8 +1,10 @@
 # Chapter 06 — Air-gap & offline
 
-> **Architecture:** Offline bundle deploys the full kernel + surfaces without changing truth semantics — [01 System Architecture](../01_system_architecture.md).
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)
 
-**Navigation:** [Docs hub](../README.md) · Path C · [← Evidence](../05-evidence/README.md) · [Next: Enterprise →](../07-enterprise/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Evidence](../05-evidence/README.md) · [Next: Enterprise →](../07-enterprise/README.md)
 
 ## Who is this chapter for?
 

@@ -1,8 +1,11 @@
 # Chapter 02 — Simulate (30 seconds)
 
-> **Architecture:** CLI is an **execution projection** of the kernel — [02 Surfaces](../02_surfaces_cli_ci_mcp.md#cli-surface-execution-projection). This chapter covers OSS quickstart only.
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
+> Surface spec: [02 Surfaces](../02_surfaces_cli_ci_mcp.md)
 
-**Navigation:** [Docs hub](../README.md) · **CLI Surface · Free Tier** · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
 
 ## Who is this chapter for?
 

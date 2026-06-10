@@ -1,8 +1,11 @@
 # Chapter 09 — MCP (Model Context Protocol)
 
-> **Architecture:** MCP is a **query projection** of the kernel — [02 Surfaces](../02_surfaces_cli_ci_mcp.md#mcp-surface-query-projection). Same `replay_hash` as CLI/CI.
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
+> Surface spec: [02 Surfaces](../02_surfaces_cli_ci_mcp.md) · Proof: [DGPP](../artifacts/dgpp_executive_report.md)
 
-**Navigation:** [Docs hub](../README.md) · MCP Surface · [← CI](../03-ci/README.md) · [Enterprise →](../07-enterprise/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← CI](../03-ci/README.md) · [Enterprise →](../07-enterprise/README.md)
 
 ## One-liner
 

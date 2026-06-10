@@ -16,9 +16,10 @@ internal/                              ← build, releases, enterprise (not docu
 | OSS CLI | `cli/` |
 | Demo engine | `simulate/` |
 | Demo repos | `examples/` |
-| Product docs | `docs/00_kernel_truth_model.md` … `docs/06_kernel_contract_v1.md` (spec); `docs/01-intro/` … `docs/09-mcp/` (legacy walkthroughs) |
+| Product docs | **Layer 0:** `docs/00_decision_hub.md` · **Layer 1:** `docs/00_kernel_truth_model.md` … `docs/06_kernel_contract_v1.md` · **Layer 2:** `docs/artifacts/dgpp_executive_report.md` · **Operational:** `docs/01-intro/` … `docs/09-mcp/` |
 | Kernel contract schemas | `schemas/` |
-| Contract tests | `tests/test_surface_parity.py`, `tests/test_kernel_determinism.py`, `tests/test_evidence_consistency.py` |
+| Contract tests | `tests/test_surface_parity.py`, `tests/test_kernel_determinism.py`, `tests/test_evidence_consistency.py`, `tests/test_dgpp_governance_parity.py` |
+| DGPP executive readout | `docs/artifacts/dgpp_executive_report.md` · `make dgpp` |
 | Install | `dist/install.sh` |
 | Build / releases | `internal/` only |
 
@@ -32,6 +33,7 @@ CI enforces this: `make boundary` → `internal/scripts/verify_public_boundary.s
 make demo      # install + archovive simulate
 make ci-demo   # ci check on demo (exit 2)
 make test      # pytest
+make dgpp      # Deterministic Governance Parity Proof (executive gate)
 make boundary  # layout check
 ```
 

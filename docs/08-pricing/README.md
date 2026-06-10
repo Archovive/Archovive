@@ -1,8 +1,11 @@
 # Chapter 08 — Pricing & tiers
 
-> **Architecture:** Tiers are **projection constraints in Repo A** — [04 Tier Model](../04_tier_model.md). Pricing is product/licensing context, not kernel specification.
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
+> Tier spec: [04 Tier Model](../04_tier_model.md)
 
-**Navigation:** [Docs hub](../README.md) · Path C · [← Enterprise](../07-enterprise/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Enterprise](../07-enterprise/README.md)
 
 ## Who is this chapter for?
 

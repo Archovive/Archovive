@@ -1,6 +1,8 @@
 # 06 — Kernel Contract v1
 
-**Navigation:** [Docs hub](README.md) · [← Invariants](05_invariants_and_determinism.md)
+**Layer 1 · System behavior spec**
+
+**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [DGPP proof](artifacts/dgpp_executive_report.md) · [← Invariants](05_invariants_and_determinism.md)
 
 Formal execution boundary for Archovive v5.0.0. This document is **non-executable specification**. Enforcement lives in `schemas/` and `tests/`.
 

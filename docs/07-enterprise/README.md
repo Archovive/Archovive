@@ -1,8 +1,11 @@
 # Chapter 07 — Enterprise
 
-> **Architecture:** Enterprise tier constrains **projections and artifact writes**, not kernel logic — [04 Tier Model](../04_tier_model.md).
+> **Operational Reference (Legacy Surface Docs)**  
+> This document describes operational behavior.  
+> For system architecture and decision-making context see: [Decision Hub](../00_decision_hub.md)  
+> Tier spec: [04 Tier Model](../04_tier_model.md)
 
-**Navigation:** [Docs hub](../README.md) · Path C · [← Air-gap](../06-airgap/README.md) · [Next: Pricing →](../08-pricing/README.md)
+**Navigation:** [Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Air-gap](../06-airgap/README.md) · [Next: Pricing →](../08-pricing/README.md)
 
 ## Who is this chapter for?
 

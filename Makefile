@@ -1,4 +1,4 @@
-.PHONY: demo run test boundary ci-demo
+.PHONY: demo run test boundary ci-demo dgpp
 
 PY ?= python3
 REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -19,3 +19,8 @@ test:
 
 boundary:
 	bash internal/scripts/verify_public_boundary.sh
+
+dgpp:
+	@$(PY) -m pip install -q -e internal/ 2>/dev/null || \
+	  $(PY) -m pip install -q --break-system-packages -e internal/
+	$(PY) -m pytest tests/test_dgpp_governance_parity.py -v

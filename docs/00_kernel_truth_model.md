@@ -1,6 +1,8 @@
 # 00 — Kernel Truth Model
 
-**Navigation:** [Docs hub](README.md) · [Next: System Architecture →](01_system_architecture.md)
+**Layer 1 · System behavior spec**
+
+**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [DGPP proof](artifacts/dgpp_executive_report.md) · [Next: System Architecture →](01_system_architecture.md)
 
 ## Definition
 

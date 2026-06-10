@@ -1,6 +1,8 @@
 # 04 — Tier Model
 
-**Navigation:** [Docs hub](README.md) · [← Evidence Model](03_evidence_model.md) · [Next: Invariants →](05_invariants_and_determinism.md)
+**Layer 1 · System behavior spec**
+
+**Navigation:** [Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Evidence Model](03_evidence_model.md) · [Next: Invariants →](05_invariants_and_determinism.md)
 
 ## Definition
 
