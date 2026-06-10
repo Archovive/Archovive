@@ -1,5 +1,7 @@
 # Chapter 02 — Simulate (30 seconds)
 
+> **Architecture:** CLI is an **execution projection** of the kernel — [02 Surfaces](../02_surfaces_cli_ci_mcp.md#cli-surface-execution-projection). This chapter covers OSS quickstart only.
+
 **Navigation:** [Docs hub](../README.md) · **CLI Surface · Free Tier** · [← Intro](../01-intro/README.md) · [Next: CI →](../03-ci/README.md)
 
 ## Who is this chapter for?

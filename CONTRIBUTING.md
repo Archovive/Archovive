@@ -16,7 +16,9 @@ internal/                              ← build, releases, enterprise (not docu
 | OSS CLI | `cli/` |
 | Demo engine | `simulate/` |
 | Demo repos | `examples/` |
-| Product docs | `docs/01-intro/` … `docs/09-mcp/` |
+| Product docs | `docs/00_kernel_truth_model.md` … `docs/06_kernel_contract_v1.md` (spec); `docs/01-intro/` … `docs/09-mcp/` (legacy walkthroughs) |
+| Kernel contract schemas | `schemas/` |
+| Contract tests | `tests/test_surface_parity.py`, `tests/test_kernel_determinism.py`, `tests/test_evidence_consistency.py` |
 | Install | `dist/install.sh` |
 | Build / releases | `internal/` only |
 
@@ -34,6 +36,8 @@ make boundary  # layout check
 ```
 
 Gate output pins live in [`simulate/format.py`](simulate/format.py) — README and CLI must match.
+
+Kernel contract: [`docs/06_kernel_contract_v1.md`](docs/06_kernel_contract_v1.md) · run `make test` (includes parity + determinism tests).
 
 ---
 

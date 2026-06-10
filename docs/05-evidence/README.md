@@ -1,5 +1,7 @@
 # Chapter 05 — Evidence
 
+> **Architecture:** Evidence artifacts are **kernel output serializations** — [03 Evidence Model](../03_evidence_model.md). This chapter is an auditor walkthrough.
+
 **Navigation:** [Docs hub](../README.md) · Path C · [← Governance](../04-governance/README.md) · [Next: Air-gap →](../06-airgap/README.md)
 
 ## Who is this chapter for?

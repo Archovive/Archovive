@@ -13,7 +13,9 @@ ci-demo:
 	  archovive ci check --repo examples/demo-fintech
 
 test:
-	$(PY) -m pytest cli/tests -q
+	@$(PY) -m pip install -q -e internal/ 2>/dev/null || \
+	  $(PY) -m pip install -q --break-system-packages -e internal/
+	$(PY) -m pytest cli/tests tests -q
 
 boundary:
 	bash internal/scripts/verify_public_boundary.sh

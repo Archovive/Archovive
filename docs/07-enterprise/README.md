@@ -1,5 +1,7 @@
 # Chapter 07 — Enterprise
 
+> **Architecture:** Enterprise tier constrains **projections and artifact writes**, not kernel logic — [04 Tier Model](../04_tier_model.md).
+
 **Navigation:** [Docs hub](../README.md) · Path C · [← Air-gap](../06-airgap/README.md) · [Next: Pricing →](../08-pricing/README.md)
 
 ## Who is this chapter for?

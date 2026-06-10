@@ -1,5 +1,7 @@
 # Chapter 06 — Air-gap & offline
 
+> **Architecture:** Offline bundle deploys the full kernel + surfaces without changing truth semantics — [01 System Architecture](../01_system_architecture.md).
+
 **Navigation:** [Docs hub](../README.md) · Path C · [← Evidence](../05-evidence/README.md) · [Next: Enterprise →](../07-enterprise/README.md)
 
 ## Who is this chapter for?

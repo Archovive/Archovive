@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archovive.dev/schemas/repro_v1.json",
+  "title": "Archovive repro.json v1",
+  "description": "Pure serialization of kernel DecisionRecord fields plus replay metadata. No surface enrichment.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "replay_hash",
+    "graph_hash",
+    "verdict",
+    "exit_code",
+    "repo",
+    "policy_results",
+    "metrics"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "archovive_repro_v1"
+    },
+    "replay_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "graph_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "verdict": {
+      "type": "string"
+    },
+    "exit_code": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "repo": {
+      "type": "string"
+    },
+    "commit_ref": {
+      "type": ["string", "null"]
+    },
+    "archovive_version": {
+      "type": "string"
+    },
+    "policy_results": {
+      "type": "array"
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "drift_matrix": {
+      "type": "object"
+    }
+  },
+  "not": {
+    "anyOf": [
+      { "required": ["gate_header"] },
+      { "required": ["tty_lines"] },
+      { "required": ["ci_runner"] },
+      { "required": ["mcp_session"] },
+      { "required": ["tier"] },
+      { "required": ["attestation_signature"] }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 # Chapter 09 — MCP (Model Context Protocol)
 
+> **Architecture:** MCP is a **query projection** of the kernel — [02 Surfaces](../02_surfaces_cli_ci_mcp.md#mcp-surface-query-projection). Same `replay_hash` as CLI/CI.
+
 **Navigation:** [Docs hub](../README.md) · MCP Surface · [← CI](../03-ci/README.md) · [Enterprise →](../07-enterprise/README.md)
 
 ## One-liner

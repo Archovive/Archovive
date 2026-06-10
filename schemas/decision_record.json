@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archovive.dev/schemas/decision_record_v1.json",
+  "title": "Archovive DecisionRecord v1",
+  "description": "Canonical kernel output. All surfaces project this structure; they must not add verdict fields.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "archovive_version",
+    "repo",
+    "verdict",
+    "exit_code",
+    "graph_hash",
+    "replay_hash",
+    "metrics",
+    "policy_results",
+    "drift_matrix"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "archovive_decision_record_v1"
+    },
+    "archovive_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+"
+    },
+    "repo": {
+      "type": "string"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["APPROVED", "POLICY_VIOLATION"]
+    },
+    "exit_code": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "graph_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "replay_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["module_count", "edge_count", "coupling_index", "boundary_crossings"],
+      "properties": {
+        "module_count": { "type": "integer" },
+        "edge_count": { "type": "integer" },
+        "coupling_index": { "type": "number" },
+        "instability_payments": { "type": "number" },
+        "boundary_crossings": { "type": "integer" }
+      }
+    },
+    "policy_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pack_id", "rule_id", "control_id", "metric", "threshold", "value", "passed"],
+        "additionalProperties": false,
+        "properties": {
+          "pack_id": { "type": "string" },
+          "rule_id": { "type": "string" },
+          "control_id": { "type": "string" },
+          "metric": { "type": "string" },
+          "threshold": { "type": "number" },
+          "value": { "type": "number" },
+          "passed": { "type": "boolean" }
+        }
+      }
+    },
+    "drift_matrix": {
+      "type": "object",
+      "required": ["schema_version", "drift_status"],
+      "additionalProperties": true,
+      "properties": {
+        "schema_version": { "type": "string" },
+        "drift_status": { "type": "string" },
+        "drift_score": { "type": ["number", "null"] },
+        "baseline_present": { "type": "boolean" }
+      }
+    }
+  },
+  "not": {
+    "anyOf": [
+      { "required": ["gate_header"] },
+      { "required": ["tty_lines"] },
+      { "required": ["tier"] },
+      { "required": ["surface"] },
+      { "required": ["mcp_tool"] },
+      { "required": ["process_exit_override"] }
+    ]
+  }
+}

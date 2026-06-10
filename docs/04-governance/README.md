@@ -1,5 +1,7 @@
 # Chapter 04 — Governance
 
+> **Architecture:** Policy packs are **kernel inputs**, not a separate product layer — [00 Kernel Truth Model](../00_kernel_truth_model.md). Full packs require enterprise bundle.
+
 **Navigation:** [Docs hub](../README.md) · [← CI](../03-ci/README.md) · [Next: Evidence →](../05-evidence/README.md)
 
 ## Who is this chapter for?

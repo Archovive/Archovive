@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archovive.dev/schemas/kernel_job_v1.json",
+  "title": "Archovive Kernel Execution Envelope v1",
+  "description": "Canonical kernel input. Surfaces translate invocation context into this envelope before calling f(job).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "repo_path",
+    "repo_name",
+    "policy_pack_ids",
+    "mode"
+  ],
+  "properties": {
+    "schema_id": {
+      "type": "string",
+      "const": "archovive_kernel_job_v1"
+    },
+    "repo_path": {
+      "type": "string",
+      "description": "Absolute or relative path to repository snapshot root"
+    },
+    "repo_name": {
+      "type": "string",
+      "description": "Logical repository identifier used in DecisionRecord.repo"
+    },
+    "commit_ref": {
+      "type": ["string", "null"],
+      "description": "Optional VCS commit identifier binding the snapshot"
+    },
+    "policy_pack_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Ordered policy pack identifiers applied by kernel"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["analyze"],
+      "description": "Kernel execution mode (analysis only; no surface semantics)"
+    },
+    "baseline_ref": {
+      "type": ["string", "null"],
+      "description": "Optional baseline fingerprint for drift computation"
+    }
+  },
+  "not": {
+    "anyOf": [
+      { "required": ["tier"] },
+      { "required": ["surface"] },
+      { "required": ["cli_format"] },
+      { "required": ["tty"] },
+      { "required": ["process_exit"] },
+      { "required": ["mcp_tool"] },
+      { "required": ["license_tier"] },
+      { "required": ["product_tier"] }
+    ]
+  }
+}

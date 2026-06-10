@@ -1,5 +1,7 @@
 # Chapter 08 — Pricing & tiers
 
+> **Architecture:** Tiers are **projection constraints in Repo A** — [04 Tier Model](../04_tier_model.md). Pricing is product/licensing context, not kernel specification.
+
 **Navigation:** [Docs hub](../README.md) · Path C · [← Enterprise](../07-enterprise/README.md)
 
 ## Who is this chapter for?

@@ -21,4 +21,4 @@ where = [".."]
 include = ["cli*", "simulate*"]
 
 [tool.pytest.ini_options]
-testpaths = ["../cli/tests"]
+testpaths = ["../cli/tests", "../tests"]

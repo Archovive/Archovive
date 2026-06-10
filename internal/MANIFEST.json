@@ -6,6 +6,13 @@
   "cli_commands": ["archovive", "archovive-mcp", "ask", "chat", "governance", "doctor", "gate", "simulate", "ci"],
   "docs": [
     "docs/README.md",
+    "docs/00_kernel_truth_model.md",
+    "docs/01_system_architecture.md",
+    "docs/02_surfaces_cli_ci_mcp.md",
+    "docs/03_evidence_model.md",
+    "docs/04_tier_model.md",
+    "docs/05_invariants_and_determinism.md",
+    "docs/06_kernel_contract_v1.md",
     "docs/01-intro/README.md",
     "docs/02-simulate/README.md",
     "docs/07-enterprise/README.md",
