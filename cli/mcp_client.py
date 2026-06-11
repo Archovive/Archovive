@@ -17,7 +17,7 @@ Tools (bundle):
   archovive.global         global_matrix / heatmap / ranking
   get_version, ping        Smoke probes
 
-See docs/09-mcp/README.md"""
+See docs/integrate/ch-09-mcp.md"""
 
 
 def print_mcp_help() -> None:

@@ -1,7 +1,18 @@
-# 04 — Tier Model
+# 04 — Tier constraints
 
-**L1 · System behavior spec** — interprets kernel; not adoption authority.  
-**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Evidence Model](03_evidence_model.md) · [Next: Invariants →](05_invariants_and_determinism.md)
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [← attestation_schema](03_attestation_schema.md) · [Next → invariants_and_determinism](05_invariants_and_determinism.md)
+
+---
+
+## Tier ordering {#tier-ordering}
+
+Read product capabilities in this order:
+
+1. **Surfaces** — how accessed (CLI · CI · MCP)
+2. **Tiers** — what is licensed (Free · Team · Enterprise)
+3. **Capabilities** — what is possible (drift · evidence · policy depth · offline · attestations)
+
+Tiers constrain projections and persistence — they do not change kernel verdict logic for a given input. MCP is a query projection over the same kernel truth as CLI/CI; CI remains the enforcement surface for merge gates.
 
 ## Definition
 
@@ -88,8 +99,5 @@ Documentation in Repo A must not imply:
 - Free tier is a "toy" with different truth semantics (it uses a reduced **input scope**, not a different verdict model)
 - MCP or attestations exist in OSS without bundle
 
-Pricing and procurement context (non-architecture): [08-pricing/README.md](08-pricing/README.md)
+Pricing and procurement context (non-architecture): [pricing](../docs/evaluate/pricing.md)
 
----
-
-[Docs hub](README.md) · [← Evidence Model](03_evidence_model.md) · [Next: Invariants →](05_invariants_and_determinism.md)

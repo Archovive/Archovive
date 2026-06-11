@@ -4,7 +4,7 @@ from __future__ import annotations
 CORE_REPO_URL = "https://github.com/Archovive/Archovive-core"
 BUNDLE_ZIP = "archovive-enterprise-5.0.0.zip"
 BUNDLE_DIR = "archovive-enterprise-5.0.0"
-INSTALL_DOC = "docs/07-enterprise/README.md"
+INSTALL_DOC = "docs/integrate/ch-07-enterprise.md"
 
 ENGINE_REQUIRED_MSG = f"""\
 Archovive runtime ships in the enterprise product bundle ({BUNDLE_ZIP}), not this repository.

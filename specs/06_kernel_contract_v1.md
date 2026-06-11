@@ -1,15 +1,6 @@
 # 06 — Kernel Contract v1
 
-**L1 · System behavior spec** — interprets kernel; not adoption authority.  
-**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [L2 · DGPP](artifacts/dgpp_executive_report.md) · [← Invariants](05_invariants_and_determinism.md)
-
-Formal execution boundary for Archovive v5.0.0. This document is **non-executable specification**. Enforcement lives in `schemas/` and `tests/`.
-
-```
-f : KernelJob → DecisionRecord
-```
-
-Surfaces translate invocation context into `KernelJob`, call `f`, then project `DecisionRecord`. Surfaces must not alter truth.
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [← invariants_and_determinism](05_invariants_and_determinism.md) · [Next → reference_fixtures](07_reference_fixtures.md)
 
 ---
 
@@ -158,6 +149,3 @@ tests/test_evidence_consistency.py   → K6
 
 Run: `make test`
 
----
-
-[Docs hub](README.md) · [← Invariants](05_invariants_and_determinism.md)

@@ -1,7 +1,8 @@
 # 05 — Invariants & Determinism
 
-**L1 · System behavior spec** — interprets kernel; not adoption authority.  
-**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [L2 · DGPP](artifacts/dgpp_executive_report.md) · [← Tier Model](04_tier_model.md) · [Next: Kernel Contract →](06_kernel_contract_v1.md)
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [← tier_constraints](04_tier_constraints.md) · [Next → kernel_contract_v1](06_kernel_contract_v1.md)
+
+---
 
 ## Functional SLA
 
@@ -127,6 +128,3 @@ Frozen binary E2E (django, enterprise) — Run 1 = Run 2:
 
 Source: `internal/releases/RELEASE_NOTES_v5.0.0.md`
 
----
-
-[Docs hub](README.md) · [← Tier Model](04_tier_model.md)

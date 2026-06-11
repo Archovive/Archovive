@@ -1,11 +1,8 @@
-# Chapter 04 — Governance
+# Governance — Governance
 
-> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
-> This document describes system behavior, not adoption or integration decisions.  
-> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
-> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
+**Integrate** · [README](../../README.md) · [Docs](../README.md) · [Evaluate](../evaluate/decision-hub.md) · [← 03-ci](ch-03-ci.md) · [Next → 05-evidence](ch-05-evidence.md)
 
-**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← CI](../03-ci/README.md) · [Next: Evidence →](../05-evidence/README.md)
+---
 
 ## Who is this chapter for?
 
@@ -76,7 +73,7 @@ In enterprise, `archovive gate` materializes the verdict as a **decision contrac
 
 ---
 
-## Evidence model (overview)
+## Attestation schema (overview)
 
 Governance produces an **evidence set** — machine-readable, linked, hash-chained:
 
@@ -96,7 +93,7 @@ Three **cameras** (perspectives on the same result):
 | **Machine** | CI/CD | `repro.json`, `drift_matrix.json` |
 | **Evidence** | Auditors | `attestation.json`, SBOM, verify chain |
 
-Details → [Chapter 05 — Evidence](../05-evidence/README.md)
+Details → [Evidence](../integrate/ch-05-evidence.md)
 
 ---
 
@@ -113,5 +110,3 @@ archovive governance decide --json
 No separate "chat knowledge". One kernel truth, multiple surfaces (CLI, MCP, CI).
 
 ---
-
-**[← Docs hub](../README.md)** · **Next:** [05 — Evidence](../05-evidence/README.md)

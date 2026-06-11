@@ -8,9 +8,9 @@
 
 The repo encodes **intentional layer-boundary violations** — the pattern that fails DORA audits and release gates. Archovive scans this fixture in seconds and materializes a policy verdict with replay hash.
 
-See gate output in the [repository README](../../README.md#quick-observation-oss-demo). Run `make demo` or `archovive simulate --verbose` for per-rule detail.
+See gate output in the [README](../../README.md#try-it). Run `make demo` or `archovive simulate --verbose` for per-rule detail.
 
-→ [Reference Fixtures spec](../../docs/reference_fixtures_model.md) · [examples index](../README.md)
+→ [Reference fixtures spec](../../specs/07_reference_fixtures.md) · [examples index](../README.md)
 
 ---
 
@@ -57,6 +57,6 @@ Expected verdict: `POLICY_VIOLATION` · gate exit code **2** · hashes pinned in
 
 - **Drift** alone is not enough — first run has `drift_status: unmeasured` (neutral, not a risk signal)
 - **Policy** fires on graph metrics — the DORA rule fails because `boundary_crossings > 0`
-- **CI** must use `ci check` so the process exit code blocks the merge → [docs/03-ci](../../docs/03-ci/README.md)
+- **CI** must use `ci check` so the process exit code blocks the merge → [ch-03 CI](../../docs/integrate/ch-03-ci.md)
 
-Pilot on **your** repository: [docs/08-pricing](../../docs/08-pricing/README.md#pilot-program) · **pilot@archovive.com**
+Pilot on **your** repository: [pricing](../../docs/evaluate/pricing.md#pilot-program) · **pilot@archovive.com**

@@ -1,11 +1,8 @@
-# Chapter 08 — Pricing & tiers
+# Pricing — Pricing & tiers
 
-> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
-> This document describes system behavior, not adoption or integration decisions.  
-> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
-> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
+**Evaluate** · [README](../../README.md) · [Docs](../README.md) · [Decision hub](decision-hub.md)
 
-**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Enterprise](../07-enterprise/README.md)
+---
 
 ## Who is this chapter for?
 
@@ -27,9 +24,9 @@ Free (OSS) — simulate, ci check, local governance
 Team — multi-repo CI, shared baselines, drift history  
 Enterprise — offline bundle, MCP, evidence, signed policy packs  
 
-This repository ships the **Free** tier. Team and Enterprise require the [enterprise bundle](../07-enterprise/README.md).
+This repository ships the **Free** tier. Team and Enterprise require the [enterprise bundle](../integrate/ch-07-enterprise.md).
 
-Enterprise readiness (Surfaces → Tiers → Capabilities) → [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle) · [04 Tier Model](../04_tier_model.md#capability-projection-matrix).
+Readiness matrix → [Enterprise evaluation](../evaluate/decision-hub.md#oss-vs-bundle-readiness) · [Tier constraints](../../specs/04_tier_constraints.md#capability-projection-matrix).
 
 ---
 
@@ -49,7 +46,7 @@ Archovive delivers **deterministic, offline-capable architecture evidence** — 
 
 ## Who buys what
 
-See [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle) for surfaces and tiers by product level. MCP detail → [Chapter 09](../09-mcp/README.md).
+See [Enterprise evaluation](../evaluate/decision-hub.md#oss-vs-bundle-readiness) for surfaces and tiers by product level. MCP → [09 — MCP](../integrate/ch-09-mcp.md).
 
 ---
 
@@ -139,10 +136,10 @@ General enterprise: enterprise@archovive.com
 
 ## Next steps
 
-- **Try it:** `make demo` · [Docs hub](../README.md)
-- **CI:** [03 — CI](../03-ci/README.md)
+- **Try it:** [README#try-it](../../README.md#try-it) · `make demo`
+- **CI:** [03 — CI](../integrate/ch-03-ci.md)
 - **Enterprise:** **enterprise@archovive.com**
 
 ---
 
-**[← Docs hub](../README.md)** · **Start:** [01 — Intro](../01-intro/README.md)
+[← Docs](../README.md) · **Start:** [01 — Intro](../integrate/ch-01-intro.md)

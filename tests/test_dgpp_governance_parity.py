@@ -112,7 +112,7 @@ def test_dgpp_all_surfaces_pass_status(dgpp_job, repo_root):
         assert art["replay_hash"] == ref, f"DGPP FAIL: {name}"
 
 
-# Pinned executive readout values (demo-fintech @ v5.1.0) — must match docs/artifacts/dgpp_executive_report.md
+# Pinned executive readout values (demo-fintech @ v5.1.0) — must match specs/08_dgpp_parity_proof.md
 DGPP_PINNED_DECISION_RECORD_HASH = "13e91e402af6678db7c88b44339d14c811affbacf5d55f2451d45c16df6d29af"
 DGPP_PINNED_POLICY_CHECKSUM = "3063ddfce81e7298ad957dd9a01911e97089ed35c5ab10624e2c2f0c6f418b11"
 

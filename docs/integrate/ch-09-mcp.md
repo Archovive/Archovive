@@ -1,11 +1,8 @@
-# Chapter 09 — MCP (Model Context Protocol)
+# MCP (Model Context Protocol)
 
-> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
-> This document describes system behavior, not adoption or integration decisions.  
-> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
-> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
+**Integrate** · [README](../../README.md) · [Docs](../README.md) · [Evaluate](../evaluate/decision-hub.md) · [← 07-enterprise](ch-07-enterprise.md)
 
-**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← CI](../03-ci/README.md) · [Enterprise →](../07-enterprise/README.md)
+---
 
 ## One-liner
 
@@ -80,16 +77,6 @@ Same `replay_hash` as CI on the same commit — no drift between IDE and pipelin
 | **Team** | `run_analysis` in IDE |
 | **Enterprise** | Full surface — `evidence`, `global`, offline bundle |
 
-Requires [enterprise bundle](../07-enterprise/README.md). Enterprise readiness (Surfaces → Tiers → Capabilities) → [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle).
+Requires [enterprise bundle](../integrate/ch-07-enterprise.md). Readiness → [Enterprise evaluation](../evaluate/decision-hub.md#oss-vs-bundle-readiness).
 
 ---
-
-## Sales talk track
-
-- **IDE-native governance** — block bad merges before push, not after audit
-- **Same `replay_hash` as CI** — one truth, three surfaces (CLI · CI · MCP)
-- **Offline-capable** — bundle + MCP run without cloud egress
-
----
-
-**[← Docs hub](../README.md)** · **[← CI](../03-ci/README.md)** · **[Enterprise →](../07-enterprise/README.md)**

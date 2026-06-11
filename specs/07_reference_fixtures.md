@@ -1,7 +1,8 @@
 # Reference Fixtures Model
 
-**L1 · System behavior spec** — regression inputs; not adoption authority.  
-**Navigation:** [L0 · Decision Hub](00_decision_hub.md#reference-fixtures-orthogonal) · [Docs hub](README.md) · [examples/](../examples/README.md)
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [← kernel_contract_v1](06_kernel_contract_v1.md) · [Next → dgpp_parity_proof](08_dgpp_parity_proof.md)
+
+---
 
 ## Definition
 
@@ -42,6 +43,3 @@ Other `--repo` paths receive computed hashes — still deterministic for that re
 
 Enterprise deployment evaluates the bundle against customer repositories. `demo-fintech` proves determinism and surface parity on a **fixed** input — not single-domain applicability.
 
----
-
-[Docs hub](README.md) · [Decision Hub — Fixtures](00_decision_hub.md#reference-fixtures-orthogonal) · [examples/README.md](../examples/README.md)

@@ -1,25 +1,18 @@
-# Deterministic Governance Parity Proof (DGPP) — Executive Readout
+# DGPP — Deterministic Governance Parity Proof
 
-**L2 · Proof artifact — NOT documentation · NOT a product feature · NOT decision authority**
-
-DGPP verifies cross-surface parity. It does **not** influence kernel execution, policy evaluation, or adoption decisions.
-
-**See also:** [L0 · Decision Hub](../00_decision_hub.md#5a-proof-artifact-dgpp) · [Truth hierarchy](../README.md#truth-hierarchy) · Reproduce: `make dgpp`
-
-**Version:** v5.1.0 · **Fixture:** demo-fintech · **Commit binding:** `0000000000000000000000000000000000000001`  
-**Verification:** `make dgpp` · **Test:** `tests/test_dgpp_governance_parity.py`
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [← reference_fixtures](07_reference_fixtures.md)
 
 ---
 
-## 1. Executive Statement
+## Executive summary
 
-> This system demonstrates deterministic governance parity across CLI, CI, and MCP surfaces using a shared kernel execution model.
+> One governance decision from repository state and policy inputs — projected identically across CLI, CI, and MCP.
 
-Archovive materializes one governance decision from repository state and policy inputs. CLI executes, CI enforces, and MCP queries — each surface projects the same kernel truth. **MCP is a read/projection surface, not execution authority parallel to CI.** No surface computes an independent verdict.
+CLI executes, CI enforces, MCP queries. Each surface reads the same kernel `DecisionRecord`. MCP is a read/projection surface, not a parallel enforcement path.
 
 ---
 
-## 2. Proof Summary
+## Proof summary
 
 | Surface | graph_hash (prefix) | replay_hash (prefix) | decision_record_hash (prefix) | Status |
 |---------|---------------------|----------------------|-------------------------------|--------|
@@ -40,7 +33,7 @@ Verdict: **POLICY_VIOLATION** (DORA_2026 boundary crossing) · Exit code: **2**
 
 ---
 
-## 3. Core Guarantee
+## Core guarantee
 
 > **CLI == CI == MCP** under identical kernel execution conditions.
 
@@ -55,20 +48,18 @@ The only documented surface divergence is **CI process exit propagation** (enfor
 
 ---
 
-## 4. Risk Elimination Statement
+## Failure modes addressed
 
-DGPP eliminates the following governance failure modes:
-
-| Risk | Eliminated by |
+| Risk | Addressed by |
 |------|----------------|
-| **CI/CD decision drift** | Same `replay_hash` on CLI and CI paths for identical inputs |
-| **MCP observation divergence** | MCP query projection matches CLI/CI DecisionRecord hash |
-| **Hidden policy interpretation layers** | Single kernel `policy_results` checksum across surfaces |
+| **CI/CD decision drift** | Same `replay_hash` on CLI and CI for identical inputs |
+| **MCP observation divergence** | MCP projection matches CLI/CI DecisionRecord hash |
+| **Hidden policy interpretation** | Single kernel `policy_results` checksum across surfaces |
 | **Surface-specific verdict mutation** | Normalized DecisionRecord hash parity test (hard fail on divergence) |
 
 ---
 
-## 5. System Convergence Diagram
+## Convergence diagram
 
 ```
                          ┌──────────────────────────┐
@@ -96,7 +87,7 @@ DGPP eliminates the following governance failure modes:
 
 ---
 
-## 6. Reproduce
+## Reproduce
 
 ```bash
 make dgpp
@@ -104,8 +95,8 @@ make dgpp
 
 Expected: all DGPP tests **PASS**. Any hash divergence fails the build.
 
-Specification: [docs/06_kernel_contract_v1.md](../06_kernel_contract_v1.md)
+Contract: [Kernel contract v1](06_kernel_contract_v1.md)
 
 ---
 
-*Audience: CTO · CISO · Platform Engineering · Audit*
+[← README](../README.md) · [Docs index](../docs/README.md)

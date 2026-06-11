@@ -1,7 +1,8 @@
 # 01 — System Architecture
 
-**L1 · System behavior spec** — interprets kernel; not adoption authority.  
-**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← Kernel Truth Model](00_kernel_truth_model.md) · [Next: Surfaces →](02_surfaces_cli_ci_mcp.md)
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [← kernel_truth_model](00_kernel_truth_model.md) · [Next → surfaces_cli_ci_mcp](02_surfaces_cli_ci_mcp.md)
+
+---
 
 ## Layered model
 
@@ -59,6 +60,8 @@ Steps 1–3 are kernel-only. Steps 4–5 are surface/evidence layers.
 
 ## OSS vs bundle deployment
 
+See [README — OSS vs enterprise bundle](../README.md#oss-vs-enterprise-bundle) for the product summary. Technical deployment matrix:
+
 | Deployment | Kernel | Surfaces | Evidence writes |
 |------------|--------|----------|-------------------|
 | OSS repo (`make demo`) | Demo kernel in `simulate/` | CLI + CI on demo repo | JSON to stdout only |
@@ -89,11 +92,8 @@ Formatting is explicitly outside `analyze_repo()`. This preserves kernel purity 
 
 ## Related specifications
 
-- Truth model: [00_kernel_truth_model.md](00_kernel_truth_model.md)
+- Kernel truth: [00_kernel_truth_model.md](00_kernel_truth_model.md)
 - Surface execution: [02_surfaces_cli_ci_mcp.md](02_surfaces_cli_ci_mcp.md)
-- Evidence serialization: [03_evidence_model.md](03_evidence_model.md)
-- Tier constraints: [04_tier_model.md](04_tier_model.md)
+- Attestation artifacts: [03_attestation_schema.md](03_attestation_schema.md)
+- Tier constraints: [04_tier_constraints.md](04_tier_constraints.md)
 
----
-
-[Docs hub](README.md) · [← Kernel Truth Model](00_kernel_truth_model.md) · [Next: Surfaces →](02_surfaces_cli_ci_mcp.md)

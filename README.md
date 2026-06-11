@@ -1,72 +1,30 @@
-# Archovive v5.1.0 — Deterministic Governance Kernel
+# Archovive v5.1.0
 
 [![Repository Standard](https://img.shields.io/badge/repo-standard-blue)](CONTRIBUTING.md#repository-standard)
-[![DGPP](https://img.shields.io/badge/DGPP-governance%20parity%20proof-green)](docs/artifacts/dgpp_executive_report.md)
 
-**Documentation entry priority:** [L0 · Decision Hub](docs/00_decision_hub.md) (PRIMARY) · [Docs hub](docs/README.md) (SECONDARY navigation) · This README is **routing only — not a decision document**.
-
-## System Overview
-
-Archovive is a deterministic governance kernel: `f(repo, policy) → DecisionRecord`. CLI, CI, and MCP are projection surfaces over that single truth — not separate products.
-
-**Functional SLA:** same commit + same policy packs → same `replay_hash`.
-
-**Regression fixture:** `examples/demo-fintech` — pinned OSS anchor, not domain scope. → [Reference Fixtures](docs/reference_fixtures_model.md)
-
-**Truth hierarchy:** Kernel (only source of truth) → System docs (interpretation) → Decision Hub (adoption) → DGPP (verification-only). See [Decision Hub — Truth Hierarchy](docs/00_decision_hub.md#truth-hierarchy).
+Block bad architecture merges before they reach production — with a local, reproducible gate decision.
 
 ---
 
-## Decision Hub (PRIMARY)
+## The problem
 
-**Primary entry for CTO, CISO, and senior engineers evaluating integration.**
+Teams pass tests and scanners while **layer boundaries drift**. Auditors ask for proof that architecture was checked against policy — not slides. Line-level SAST and GRC checklists do not enforce **module structure** at merge time.
 
-→ **[L0 · docs/00_decision_hub.md](docs/00_decision_hub.md)**
+## The solution
 
-Adoption · integration · operational characteristics · risk model · pilot path · checklist · DGPP positioning.
-
----
-
-## Executive Proof — DGPP (L2, verification-only)
-
-> **PROOF ARTIFACT — not product documentation · not decision authority**  
-> Validates CLI ≡ CI ≡ MCP hash parity. Does not influence kernel execution.
-
-→ **[L2 · docs/artifacts/dgpp_executive_report.md](docs/artifacts/dgpp_executive_report.md)** · Reproduce: `make dgpp`
+Run Archovive in CI to get a deterministic allow/block decision on repository architecture. Inspect the same result locally before push. Enterprise bundle adds full policy depth, signed artifacts, and IDE integration on **your** repository.
 
 ---
 
-## System Specs (SECONDARY navigation)
+## Try it
 
-→ **[docs/README.md](docs/README.md)** — L1 system behavior index · operational references (ch. 01–09)
-
-<details>
-<summary><strong>Layer 1 — System behavior specifications</strong></summary>
-
-| Spec | Subject |
-|------|---------|
-| [00_kernel_truth_model](docs/00_kernel_truth_model.md) | DecisionRecord, hash chain |
-| [01_system_architecture](docs/01_system_architecture.md) | Layer model, execution flow |
-| [02_surfaces_cli_ci_mcp](docs/02_surfaces_cli_ci_mcp.md) | CLI / CI / MCP projections |
-| [03_evidence_model](docs/03_evidence_model.md) | Kernel output serialization |
-| [04_tier_model](docs/04_tier_model.md) | Projection constraints |
-| [05_invariants_and_determinism](docs/05_invariants_and_determinism.md) | SLA, verification |
-| [06_kernel_contract_v1](docs/06_kernel_contract_v1.md) | Formal `f(job)` contract |
-| [reference_fixtures_model](docs/reference_fixtures_model.md) | Regression fixtures (orthogonal) |
-
-**Operational reference (legacy surface docs):** [01-intro](docs/01-intro/README.md) · [02-simulate](docs/02-simulate/README.md) · [03-ci](docs/03-ci/README.md) · [04-governance](docs/04-governance/README.md) · [05-evidence](docs/05-evidence/README.md) · [06-airgap](docs/06-airgap/README.md) · [07-enterprise](docs/07-enterprise/README.md) · [08-pricing](docs/08-pricing/README.md) · [09-mcp](docs/09-mcp/README.md)
-
-**Schemas & tests:** [`schemas/`](schemas/) · `make test` · `make dgpp`
-
-</details>
-
----
-
-## Quick Observation (OSS demo)
+**Prerequisites:** Linux or WSL2 · bash · Python 3.10+ · `make`
 
 ```bash
 git clone https://github.com/Archovive/Archovive.git && cd Archovive && make demo
 ```
+
+Expected output:
 
 ```text
 ARCHOVIVE GATE — DORA Boundary Crossing
@@ -76,7 +34,34 @@ replay_hash: 3e700b6a…d3b9736
 Exit Code: 2
 ```
 
-CI enforcement: `make ci-demo` (process exit **2**).
+Merge blocking uses **`make ci-demo`** (process exit **2**) — not `simulate` alone. Wire-up → [Integrate: CI](docs/integrate/ch-03-ci.md).
+
+Demo runs on pinned fixture `examples/demo-fintech` — not your production repo.
+
+---
+
+## Choose your path
+
+| Role | Route |
+|------|-------|
+| **Developer** | [ch-02 Simulate](docs/integrate/ch-02-simulate.md) |
+| **CI / Platform** | [ch-03 CI](docs/integrate/ch-03-ci.md) |
+| **CTO** | [Evaluate: decision-hub](docs/evaluate/decision-hub.md) → [ch-07 Enterprise](docs/integrate/ch-07-enterprise.md) |
+| **CISO** | [Evaluate: decision-hub](docs/evaluate/decision-hub.md) → [specs: attestation](specs/03_attestation_schema.md) |
+
+Documentation index → [docs/README.md](docs/README.md)
+
+---
+
+## OSS vs enterprise bundle
+
+| | **This repo (Free)** | **Enterprise bundle** |
+|---|----------------------|------------------------|
+| Run on your code | Fixture demo only | ✓ |
+| CI merge gate pattern | ✓ (demo) | ✓ (production) |
+| MCP in IDE | — | ✓ |
+| Signed `attestation.json` | — | ✓ |
+| Get started | `make demo` | [ch-07 Enterprise](docs/integrate/ch-07-enterprise.md) · pilot@archovive.com |
 
 ---
 

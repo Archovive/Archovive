@@ -1,11 +1,8 @@
-# Chapter 03 — CI gate
+# CI — CI gate
 
-> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
-> This document describes system behavior, not adoption or integration decisions.  
-> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
-> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
+**Integrate** · [README](../../README.md) · [Docs](../README.md) · [Evaluate](../evaluate/decision-hub.md) · [← 02-simulate](ch-02-simulate.md) · [Next → 04-governance](ch-04-governance.md)
 
-**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Simulate](../02-simulate/README.md) · [Next: Governance →](../04-governance/README.md) · [MCP →](../09-mcp/README.md)
+---
 
 ## Who is this chapter for?
 
@@ -112,7 +109,7 @@ With the enterprise bundle on **your** repository:
 
 Upload artifacts (`repro.json`, `drift_matrix.json`, `attestation.json`) as pipeline artifacts → audit trail without manual export.
 
-**MCP in CI:** use CLI in pipelines; use MCP (`archovive.run_analysis`) in the IDE for the same kernel truth → [Chapter 09 — MCP](../09-mcp/README.md).
+**MCP in CI:** use CLI in pipelines; use MCP (`archovive.run_analysis`) in the IDE for the same kernel truth → [MCP](../integrate/ch-09-mcp.md).
 
 ---
 
@@ -135,8 +132,6 @@ OSS `ci check` uses simplified policy rules on the demo graph. Enterprise adds:
 - Drift vs stored baseline
 - Transparency log
 
-→ [Chapter 04 — Governance](../04-governance/README.md)
+→ [Governance — Governance](../integrate/ch-04-governance.md)
 
 ---
-
-**[← Docs hub](../README.md)** · **Next:** [04 — Governance](../04-governance/README.md)

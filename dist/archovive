@@ -31,5 +31,5 @@ if command -v python3 >/dev/null 2>&1; then
   exec python3 -m cli.cli_main "$@"
 fi
 
-echo "archovive: run dist/install.sh or install enterprise bundle — docs/02-simulate" >&2
+echo "archovive: run dist/install.sh or install enterprise bundle — docs/integrate/ch-02-simulate.md" >&2
 exit 1

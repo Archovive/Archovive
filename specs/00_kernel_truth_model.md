@@ -1,9 +1,8 @@
 # 00 — Kernel Truth Model
 
-**L1 · System behavior spec** (not L0 — see [L0 · Decision Hub](00_decision_hub.md#documentation-index-naming))  
-**File:** `00_kernel_truth_model.md` — kernel semantics documentation, not adoption entry.
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [Next → system_architecture](01_system_architecture.md)
 
-**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [L2 · DGPP](artifacts/dgpp_executive_report.md) · [Next: System Architecture →](01_system_architecture.md)
+---
 
 ## Definition
 
@@ -12,6 +11,12 @@ The Archovive **governance kernel** is a pure function from bounded inputs to a 
 ```
 Kernel : (RepoSnapshot, PolicySet, Baseline?) → DecisionRecord
 ```
+
+## Authority model
+
+The kernel is the **only** component that computes verdicts, hashes, and policy evaluation. CLI, CI, MCP, and evidence artifacts **project or serialize** kernel output — they never recompute governance truth. Surfaces may differ in format and process exit behavior; `replay_hash` must not differ for the same input tuple.
+
+Documentation describes kernel behavior. Running `archovive simulate` or reading docs does not alter kernel semantics.
 
 ## DecisionRecord
 
@@ -73,16 +78,13 @@ The frozen bundle (`archovive-enterprise-5.0.0`) ships the full kernel:
 - Baseline capture and drift matrix computation
 - Gov-tier artifact materialization (`attestation.json`, vault, transparency log)
 
-Kernel logic lives in the bundle runtime, not in this repository. This repo documents the model; the bundle executes it.
+Kernel logic lives in the bundle runtime, not in this repository. This repo documents semantics; the bundle executes it.
 
 ## What the kernel is not
 
 - Not a CLI command
 - Not a CI plugin
 - Not an MCP server
-- Not tier-aware (tiers constrain projections in Repo A — see [04_tier_model.md](04_tier_model.md))
+- Not tier-aware (tiers constrain projections in Repo A — see [04_tier_constraints.md](04_tier_constraints.md))
 - Not responsible for TTY formatting, markdown reports, or process exit propagation
 
----
-
-[Docs hub](README.md) · [Next: System Architecture →](01_system_architecture.md)

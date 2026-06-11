@@ -1,11 +1,8 @@
-# Chapter 07 — Enterprise
+# Enterprise
 
-> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
-> This document describes system behavior, not adoption or integration decisions.  
-> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
-> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
+**Integrate** · [README](../../README.md) · [Docs](../README.md) · [Evaluate](../evaluate/decision-hub.md) · [← 06-airgap](ch-06-airgap.md) · [Next → 09-mcp](ch-09-mcp.md)
 
-**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Air-gap](../06-airgap/README.md) · [Next: Pricing →](../08-pricing/README.md)
+---
 
 ## Who is this chapter for?
 
@@ -27,7 +24,7 @@
 
 **Free tier (OSS)** = evaluate determinism on the pinned regression fixture. **Production** = enterprise bundle on **your** repository.
 
-→ [Decision Hub — Enterprise Readiness](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle)
+→ [Enterprise evaluation — OSS vs bundle](../evaluate/decision-hub.md#oss-vs-bundle-readiness)
 
 ```bash
 archovive run --compact   # enterprise bundle
@@ -80,9 +77,9 @@ Engine access: **enterprise@archovive.com**
 | MCP `run_analysis` | IDE integration (Cursor, etc.) | MCP (enterprise bundle) |
 | MCP `archovive.evidence` | Auditor view in IDE | MCP |
 
-Full MCP setup → [Chapter 09 — MCP](../09-mcp/README.md).
+Full MCP setup → [MCP](../integrate/ch-09-mcp.md).
 
-Tier and capability depth → [04 Tier Model](../04_tier_model.md) · [Decision Hub §8](../00_decision_hub.md#8-enterprise-readiness--what-oss-proves-vs-bundle) · [Chapter 08 — Pricing](../08-pricing/README.md).
+Tier depth → [04 Tier constraints](../../specs/04_tier_constraints.md) · [Enterprise evaluation](../evaluate/decision-hub.md) · [08 — Pricing](../evaluate/pricing.md).
 
 ---
 
@@ -130,5 +127,3 @@ archovive audit export --bundle
 ```
 
 ---
-
-**[← Docs hub](../README.md)** · **Next:** [08 — Pricing](../08-pricing/README.md)

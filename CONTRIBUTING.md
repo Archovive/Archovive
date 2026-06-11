@@ -16,10 +16,10 @@ internal/                              ← build, releases, enterprise (not docu
 | OSS CLI | `cli/` |
 | Demo engine | `simulate/` |
 | Demo repos | `examples/` |
-| Product docs | **Layer 0:** `docs/00_decision_hub.md` · **Layer 1:** `docs/00_kernel_truth_model.md` … `docs/06_kernel_contract_v1.md` · **Layer 2:** `docs/artifacts/dgpp_executive_report.md` · **Operational:** `docs/01-intro/` … `docs/09-mcp/` |
+| Product docs | **Entry:** `README.md` · **Index:** `docs/README.md` · **Evaluate:** `docs/evaluate/decision-hub.md` · **Specs:** `specs/00_kernel_truth_model.md` … `specs/06_kernel_contract_v1.md` · **Integrate:** `docs/integrate/ch-*.md` · **DGPP:** `specs/08_dgpp_parity_proof.md` |
 | Kernel contract schemas | `schemas/` |
 | Contract tests | `tests/test_surface_parity.py`, `tests/test_kernel_determinism.py`, `tests/test_evidence_consistency.py`, `tests/test_dgpp_governance_parity.py` |
-| DGPP executive readout | `docs/artifacts/dgpp_executive_report.md` · `make dgpp` |
+| DGPP executive readout | `specs/08_dgpp_parity_proof.md` · `make dgpp` |
 | Install | `dist/install.sh` |
 | Build / releases | `internal/` only |
 
@@ -39,7 +39,7 @@ make boundary  # layout check
 
 Gate output pins live in [`simulate/format.py`](simulate/format.py) — README and CLI must match.
 
-Kernel contract: [`docs/06_kernel_contract_v1.md`](docs/06_kernel_contract_v1.md) · run `make test` (includes parity + determinism tests).
+Kernel contract: [`specs/06_kernel_contract_v1.md`](specs/06_kernel_contract_v1.md) · run `make test` (includes parity + determinism tests).
 
 ---
 

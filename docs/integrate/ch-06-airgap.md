@@ -1,11 +1,8 @@
-# Chapter 06 — Air-gap & offline
+# 06 — Air-gap & offline
 
-> **SYSTEM BEHAVIOR — not decision context (L1 operational reference)**  
-> This document describes system behavior, not adoption or integration decisions.  
-> Adoption / integration decisions → [L0 · Decision Hub](../00_decision_hub.md)  
-> Proof artifacts → [L2 · DGPP](../artifacts/dgpp_executive_report.md)
+**Integrate** · [README](../../README.md) · [Docs](../README.md) · [Evaluate](../evaluate/decision-hub.md) · [← 05-evidence](ch-05-evidence.md) · [Next → 07-enterprise](ch-07-enterprise.md)
 
-**Navigation:** [L0 · Decision Hub](../00_decision_hub.md) · [Docs hub](../README.md) · [← Evidence](../05-evidence/README.md) · [Next: Enterprise →](../07-enterprise/README.md)
+---
 
 ## Who is this chapter for?
 
@@ -61,7 +58,7 @@ source archovive.env
 archovive doctor
 ```
 
-3. Production: `/opt/archovive` via `scripts/install.sh` in the bundle — see [Chapter 07](../07-enterprise/README.md)
+3. Production: `/opt/archovive` via `scripts/install.sh` in the bundle — see [Enterprise](../integrate/ch-07-enterprise.md)
 
 ---
 
@@ -119,5 +116,3 @@ Archovive sends **nothing** to vendor servers. No telemetry. No "phone home" lic
 ```
 
 ---
-
-**[← Docs hub](../README.md)** · **Next:** [07 — Enterprise](../07-enterprise/README.md)

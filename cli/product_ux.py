@@ -39,7 +39,7 @@ Tiers: Free (this repo) · Team · Enterprise
 
 {EXIT_CODES_HELP}
 
-Docs: docs/01-intro/ · Enterprise bundle: {BUNDLE_ZIP} — docs/07-enterprise/"""
+Docs: docs/integrate/ch-01-intro.md · Enterprise bundle: {BUNDLE_ZIP} — docs/integrate/ch-07-enterprise.md"""
 
 SIMULATE_HELP = """\
 Usage:
@@ -54,20 +54,20 @@ Usage:
   archovive ci check [--repo PATH] [--json]
 
 CI gate for the demo repository. Exit 2 on policy violation (same as production gate).
-Wire into GitHub Actions — see docs/03-ci/"""
+Wire into GitHub Actions — see docs/integrate/ch-03-ci.md"""
 
 RUN_HELP = f"""\
 Usage:
   archovive run [options]
 
 Full deterministic pipeline on your repository.
-Requires enterprise bundle ({BUNDLE_DIR}/). See docs/07-enterprise/."""
+Requires enterprise bundle ({BUNDLE_DIR}/). See docs/integrate/ch-07-enterprise.md."""
 
 VERIFY_HELP = """\
 Usage:
   archovive verify [path] [--json]
 
-Requires enterprise bundle. See docs/04-governance/."""
+Requires enterprise bundle. See docs/integrate/ch-04-governance.md."""
 
 INIT_HELP = """\
 Usage:
@@ -91,13 +91,13 @@ SBOM_HELP = """\
 Usage:
   archovive sbom
 
-Requires enterprise bundle. See docs/04-governance/."""
+Requires enterprise bundle. See docs/integrate/ch-04-governance.md."""
 
 EVIDENCE_HELP = """\
 Usage:
   archovive evidence [--help]
 
-Evidence Camera — full output in enterprise bundle. See docs/04-governance/."""
+Evidence Camera — full output in enterprise bundle. See docs/integrate/ch-04-governance.md."""
 
 
 def print_top_help() -> None:

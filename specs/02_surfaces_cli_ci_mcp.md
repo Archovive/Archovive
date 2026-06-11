@@ -1,7 +1,8 @@
 # 02 — Surfaces: CLI, CI, MCP
 
-**L1 · System behavior spec** — interprets kernel; not adoption authority.  
-**Navigation:** [L0 · Decision Hub](00_decision_hub.md) · [Docs hub](README.md) · [← System Architecture](01_system_architecture.md) · [Next: Evidence Model →](03_evidence_model.md)
+**Truth layer** · [README](../README.md) · [Docs](../docs/README.md) · [← system_architecture](01_system_architecture.md) · [Next → attestation_schema](03_attestation_schema.md)
+
+---
 
 ## Definition
 
@@ -76,9 +77,9 @@ With enterprise bundle on target repository:
 
 - Kernel runs on PR commit
 - `exit_code` blocks merge
-- Evidence artifacts uploaded as pipeline artifacts (kernel serialization — see [03_evidence_model.md](03_evidence_model.md))
+- Evidence artifacts uploaded as pipeline artifacts (kernel serialization — see [03_attestation_schema.md](03_attestation_schema.md))
 
-Reference workflow: [03-ci/README.md](03-ci/README.md) (operational example; architecture semantics defined here).
+Reference workflow: [ch-03 CI](../docs/integrate/ch-03-ci.md) (operational example; architecture semantics defined here).
 
 ## MCP Surface (query projection)
 
@@ -110,7 +111,7 @@ No MCP server ships here. `archovive mcp` prints bundle configuration documentat
 
 **Parity:** MCP `run_analysis` on commit X must yield the same `replay_hash` as `archovive ci check` on commit X.
 
-Operational MCP setup: [09-mcp/README.md](09-mcp/README.md)
+Operational MCP setup: [ch-09 MCP](../docs/integrate/ch-09-mcp.md)
 
 ## Surface comparison matrix
 
@@ -129,6 +130,3 @@ Do **not** describe CLI, CI, and MCP as separate feature modules with independen
 - ❌ "Archovive has a CI feature and an MCP feature"
 - ✓ "CI and MCP are enforcement and query projections of the governance kernel"
 
----
-
-[Docs hub](README.md) · [← System Architecture](01_system_architecture.md) · [Next: Evidence Model →](03_evidence_model.md)
