@@ -25,7 +25,8 @@
     "docs/integrate/ch-05-evidence.md",
     "docs/integrate/ch-06-airgap.md",
     "docs/integrate/ch-07-enterprise.md",
-    "docs/integrate/ch-09-mcp.md"
+    "docs/integrate/ch-09-mcp.md",
+    "docs/integrate/ch-10-hardware-ki.md"
   ],
   "release_assets": [
     "internal/releases/archovive-enterprise-5.0.0.zip.sha256",

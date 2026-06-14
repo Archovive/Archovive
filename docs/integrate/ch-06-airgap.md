@@ -115,4 +115,6 @@ Archovive sends **nothing** to vendor servers. No telemetry. No "phone home" lic
 6. archovive verify attestation.json (no re-analysis)
 ```
 
+Hardware-KI appliance profile → [ch-10 Hardware-KI](ch-10-hardware-ki.md).
+
 ---

@@ -1,6 +1,6 @@
 # MCP (Model Context Protocol)
 
-**Integrate** · [README](../../README.md) · [Docs](../README.md) · [Evaluate](../evaluate/decision-hub.md) · [← 07-enterprise](ch-07-enterprise.md)
+**Integrate** · [README](../../README.md) · [Docs](../README.md) · [Evaluate](../evaluate/decision-hub.md) · [← 07-enterprise](ch-07-enterprise.md) · [Next → 10-hardware-ki](ch-10-hardware-ki.md)
 
 ---
 
@@ -77,6 +77,6 @@ Same `replay_hash` as CI on the same commit — no drift between IDE and pipelin
 | **Team** | `run_analysis` in IDE |
 | **Enterprise** | Full surface — `evidence`, `global`, offline bundle |
 
-Requires [enterprise bundle](../integrate/ch-07-enterprise.md). Readiness → [Enterprise evaluation](../evaluate/decision-hub.md#oss-vs-bundle-readiness).
+Requires [enterprise bundle](../integrate/ch-07-enterprise.md). Readiness → [Enterprise evaluation](../evaluate/decision-hub.md#oss-vs-bundle-readiness). Hardware-KI appliance → [ch-10 Hardware-KI](../integrate/ch-10-hardware-ki.md).
 
 ---
